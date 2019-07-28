@@ -38,7 +38,7 @@
 			<li><a href="indexServlet">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-			<li><a href="">カートを見る</a></li>
+			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
 		</ul>
 
 <div class="contents wrap">

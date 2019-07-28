@@ -36,11 +36,11 @@ public class ColorCategoty extends HttpServlet {
 		String Data = request.getParameter("id");
 
 
-
 		if(Data.equals("ホワイト")) {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getColorItemData(Data);
 				request.setAttribute("itemList",itemList);
+				request.setAttribute("Name",Data);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -54,6 +54,7 @@ public class ColorCategoty extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getColorItemData(Data);
 				request.setAttribute("itemList",itemList);
+				request.setAttribute("Name",Data);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -67,6 +68,7 @@ public class ColorCategoty extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getColorItemData(Data);
 				request.setAttribute("itemList",itemList);
+				request.setAttribute("Name",Data);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -80,6 +82,7 @@ public class ColorCategoty extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getColorItemData(Data);
 				request.setAttribute("itemList",itemList);
+				request.setAttribute("Name",Data);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -93,6 +96,7 @@ public class ColorCategoty extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getColorItemData(Data);
 				request.setAttribute("itemList",itemList);
+				request.setAttribute("Name",Data);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -106,6 +110,7 @@ public class ColorCategoty extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getColorItemData(Data);
 				request.setAttribute("itemList",itemList);
+				request.setAttribute("Name",Data);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);

@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ItemDataBeans;
-import dao.CategoryDAO;
+import dao.ItemDAO;
 
 /**
- * Servlet implementation class PriceCategory
+ * Servlet implementation class DetailServlet
  */
-@WebServlet("/PriceCategory")
-public class PriceCategory extends HttpServlet {
+@WebServlet("/DetailServlet")
+public class DetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PriceCategory() {
+    public DetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,19 @@ public class PriceCategory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String Date = request.getParameter("id");
-		String Name = request.getParameter("name");
+		String Data = request.getParameter("id");
 
 		try {
-			ArrayList<ItemDataBeans>itemList = CategoryDAO.getPriceItemData(Date);
-			request.setAttribute("itemList",itemList);
-			request.setAttribute("Name",Name);
+			ItemDataBeans item = ItemDAO.getItemDetail(Data);
+			request.setAttribute("item",item );
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothDetail.jsp");
 			dispatcher.forward(request, response);
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
 	}
 
 	/**

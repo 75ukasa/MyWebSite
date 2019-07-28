@@ -34,15 +34,13 @@ public class BrandCategory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Id = request.getParameter("id");
-		String Date1 = request.getParameter("No");
-		String Date2 = request.getParameter("data");
+		String Name = request.getParameter("name");
 
 		if(Id.equals("1")) {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);
 				request.setAttribute("itemList",itemList);
-				request.setAttribute("No",Date1);
-				request.setAttribute("data",Date2);
+				request.setAttribute("Name",Name);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -57,8 +55,7 @@ public class BrandCategory extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);
 				request.setAttribute("itemList",itemList);
-				request.setAttribute("No",Date1);
-				request.setAttribute("data",Date2);
+				request.setAttribute("Name",Name);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -73,8 +70,7 @@ public class BrandCategory extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);
 				request.setAttribute("itemList",itemList);
-				request.setAttribute("No",Date1);
-				request.setAttribute("data",Date2);
+				request.setAttribute("Name",Name);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -89,8 +85,7 @@ public class BrandCategory extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);
 				request.setAttribute("itemList",itemList);
-				request.setAttribute("No",Date1);
-				request.setAttribute("data",Date2);
+				request.setAttribute("Name",Name);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -105,8 +100,7 @@ public class BrandCategory extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);
 				request.setAttribute("itemList",itemList);
-				request.setAttribute("No",Date1);
-				request.setAttribute("data",Date2);
+				request.setAttribute("Name",Name);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);
@@ -121,8 +115,7 @@ public class BrandCategory extends HttpServlet {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);
 				request.setAttribute("itemList",itemList);
-				request.setAttribute("No",Date1);
-				request.setAttribute("data",Date2);
+				request.setAttribute("Name",Name);
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
 				dispatcher.forward(request, response);

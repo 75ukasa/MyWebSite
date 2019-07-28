@@ -48,7 +48,7 @@
 				<li><a href="indexServlet">HOME</a></li>
 				<li><a href="ClothServlet">シャツ一覧</a></li>
 				<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-				<li><a href="">カートを見る</a></li>
+				<li><a href="ForwardServlet?id=4">カートを見る</a></li>
 			</ul>
 		</nav>
 
@@ -68,12 +68,12 @@
 									<li>
 										<p><a class="accord" data-target="accrd01">ブランドで選ぶ</a></p>
 										<ul class="accrd01" style="display: block;">
-										<li class="canclini"><a href="BrandCategory?id=1&No=1&data=カンクリーニ" alt="オーダーシャツ生地カンクリーニ">Canclini</a></li>
-										<li class="tmason"><a href="BrandCategory?id=2?No=1?data=トーマスメイソン" alt="オーダーシャツ生地トーマスメイソン">Thomas Mason</a>
-							   			<li class="alumo"><a href="BrandCategory?id=3?No=1?data=アルモ" alt="オーダーシャツ生地アルモ">Alumo</a></li>
-										<li class="carlo"><a href="BrandCategory?id=4?No=1?data=カルロリーバ" alt="オーダーシャツ生地カルロリーバ">Carlo Riva</a></li>
-										<li class="leggiuno"><a href="BrandCategory?id=5?No=1?data=レジウノ" alt="オーダーシャツ生地レジウノ">leggiuno</a></li>
-										<li class="giza"><a href="BrandCategory?id=6?No=1?data=ギザ" alt="エジプト綿GIZA">Giza</a></li>
+										<li class="canclini"><a href="BrandCategory?id=1&No=1&name=カンクリーニ" alt="オーダーシャツ生地カンクリーニ">Canclini</a></li>
+										<li class="tmason"><a href="BrandCategory?id=2&No=1&name=トーマスメイソン" alt="オーダーシャツ生地トーマスメイソン">Thomas Mason</a>
+							   			<li class="alumo"><a href="BrandCategory?id=3&No=1&name=アルモ" alt="オーダーシャツ生地アルモ">Alumo</a></li>
+										<li class="carlo"><a href="BrandCategory?id=4&No=1&name=カルロリーバ" alt="オーダーシャツ生地カルロリーバ">Carlo Riva</a></li>
+										<li class="leggiuno"><a href="BrandCategory&id=5?No=1&name=レジウノ" alt="オーダーシャツ生地レジウノ">leggiuno</a></li>
+										<li class="giza"><a href="BrandCategory?id=6&No=1&name=ギザ" alt="エジプト綿GIZA">Giza</a></li>
 									</ul>
 								</li>
 
@@ -90,10 +90,10 @@
 								<li>
 									<p><a class="accord" data-target="accrd04">価格帯で選ぶ</a></p>
 									<ul class="accrd04" style="display: block;">
-											<li><a href="PriceCategory?id=1" alt="オーダーシャツ生地18,000円まで"><b>18,000</b>+税　まで</a></li>
-											<li><a href="PriceCategory?id=2" alt="オーダーシャツ生地20,000円まで"><b>20,000</b>+税　まで</a></li>
-											<li><a href="PriceCategory?id=3" alt="オーダーシャツ生地25,000円まで"><b>25,000</b>+税　まで</a></li>
-											<li><a href="PriceCategory?id=4" alt="オーダーシャツ生地26,000円まで"><b>26,000</b>+税　以上</a></li>
+											<li><a href="PriceCategory?id=2&name=￥18,000までの" alt="オーダーシャツ生地18,000円まで"><b>18,000</b>+税　まで</a></li>
+											<li><a href="PriceCategory?id=2&name=￥20,000までの" alt="オーダーシャツ生地20,000円まで"><b>20,000</b>+税　まで</a></li>
+											<li><a href="PriceCategory?id=3&name=￥25,000までの" alt="オーダーシャツ生地25,000円まで"><b>25,000</b>+税　まで</a></li>
+											<li><a href="PriceCategory?id=4&name=￥26,000以上の" alt="オーダーシャツ生地26,000円まで"><b>26,000</b>+税　以上</a></li>
 								 		</ul>
 								 	</li>
 								 </ul>

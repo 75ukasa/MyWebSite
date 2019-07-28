@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -38,14 +40,18 @@
 			<li><a href="indexServlet">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-			<li><a href="">カートを見る</a></li>
+			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
 		</ul>
 </nav>
 <div class="contents wrap">
 <div class="clearfix">
 
 <article class="newkiji">
-<h2 align="center">新着生地一覧</h2>
+
+
+
+<h2 align="center">${Name}生地一覧</h2>
+
 
 <aside>
 <div>
@@ -53,7 +59,7 @@
 <c:forEach var="item" items="${itemList}" varStatus="status">
 
 <dl>
-<dt><a href="detail.php?sh_no=1149">
+<dt><a href="DetailServlet?id=${item.id}">
 <figure><img src="./img/cloth/${item.fileName1}" alt=""></figure>
 </a>
 </dt>

@@ -41,6 +41,9 @@ public class ForwardServlet extends HttpServlet {
 		}else if(Date.equals("3")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/size2.jsp");
 			dispatcher.forward(request,response);
+		}else if(Date.equals("4")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
+			dispatcher.forward(request,response);
 		}else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 			dispatcher.forward(request,response);
