@@ -36,6 +36,7 @@ public class BrandCategory extends HttpServlet {
 		String Id = request.getParameter("id");
 		String Name = request.getParameter("name");
 
+           //一致したブランドIDのデータを取得。
 		if(Id.equals("1")) {
 			try {
 				ArrayList<ItemDataBeans>itemList = CategoryDAO.getBrandItemData(Id);

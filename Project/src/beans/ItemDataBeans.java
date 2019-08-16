@@ -13,7 +13,7 @@ public class ItemDataBeans {
 	private String fileName1;
 	private String fileName2;
 
-	// 結合
+	// ブランドBeansと結合
 	private brandDataBeans brandDataBeans;
 
 

@@ -43,8 +43,9 @@ public class CartServlet extends HttpServlet {
 		try {
 			ItemDataBeans item = ItemDAO.getItemCart("id");
 			request.setAttribute("item",item );
-
 		}
+
+
 
 
 

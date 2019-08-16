@@ -12,18 +12,21 @@ import beans.brandDataBeans;
 
 public class CategoryDAO {
 
+	  //選択されたブランドの情報を取得するDAO。
 	public static ArrayList<ItemDataBeans> getBrandItemData(String Date) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
+
+			  //ブランドIDに紐づく情報を検索。
 			st = con.prepareStatement("SELECT * FROM item"
 									+ " JOIN brand"
 									+ " ON item.brand_id = brand.id"
 									+ " WHERE brand.id = ?");
-
 			st.setString(1,Date);
 
+              //検索した情報の取得。
 			ResultSet rs = st.executeQuery();
 			ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();
 
