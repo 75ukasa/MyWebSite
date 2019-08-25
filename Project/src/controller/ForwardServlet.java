@@ -33,19 +33,22 @@ public class ForwardServlet extends HttpServlet {
 		String Date = request.getParameter("id");
 
 		if(Date.equals("1")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/design.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/design.jsp");
 			dispatcher.forward(request,response);
 		}else if(Date.equals("2")){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/size1.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/size1.jsp");
 			dispatcher.forward(request,response);
 		}else if(Date.equals("3")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/size2.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/size2.jsp");
 			dispatcher.forward(request,response);
 		}else if(Date.equals("4")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+			dispatcher.forward(request,response);
+		}else if(Date.equals("5")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/order.jsp");
 			dispatcher.forward(request,response);
 		}else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/home.jsp");
 			dispatcher.forward(request,response);
 		}
 

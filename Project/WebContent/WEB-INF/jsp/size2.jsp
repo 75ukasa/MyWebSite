@@ -8,9 +8,9 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-<link rel="stylesheet" href="./css/common.css" media="all">
-<link rel="stylesheet" href="./css/sub.css" media="all">
-<link rel="stylesheet" href="./css/layout.css" media="all">
+<link rel="stylesheet" href="css/common.css" media="all">
+<link rel="stylesheet" href="css/sub.css" media="all">
+<link rel="stylesheet" href="css/layout.css" media="all">
 </head>
 <body>
 
@@ -18,20 +18,20 @@
 		<!--wrap-->
 		<!--head-->
 		<figure>
-			<img src="./img/PageTop/topimg (1).jpg">
+			<img src="img/PageTop/topimg (1).jpg">
 		</figure>
 
 		<div class="topimg">
 			<ul>
 				<li><a href="http://www.kinkodo.jp/shirting/cart.php"> <img
-						src="./img/cart.png" alt="cart">
+						src="img/cart.png" alt="cart">
 				</a></li>
 			</ul>
 		</div>
 	</header>
 	<nav class="gmenu">
 		<ul id="menu">
-			<li><a href="indexServlet">HOME</a></li>
+			<li><a href="IndexServlet">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
 			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
@@ -44,7 +44,7 @@
 			<table class="table1 fixed v_top wid800">
 				<tbody>
 					<tr>
-						<td><img src="./img/size/title_kubi.jpg" border="0"
+						<td><img src="img/size/title_kubi.jpg" border="0"
 							align="top"><br> <br> 首周り（ネックサイズ）の採寸です。<br>
 							<br>
 							シャツの首元を大きく開けて頂いてから採寸をお願いできればと思います。計測箇所はボタンが付いている糸から、ボタンホールの中央までです。<br>
@@ -56,26 +56,26 @@
 					</tr>
 
 					<tr>
-						<td valign="top"><img src="./img/size/title_katahaba.jpg"
+						<td valign="top"><img src="img/size/title_katahaba.jpg"
 							border="0"><br> <br>
 							お気に入りのシャツの肩巾の採寸方法です。片側の肩先から衿の後ろの中心までを計り、更にもう片一方も衿の後ろから肩先にかけて計って下さい。それを足したものが肩幅になります。<br>
 							<br> 採寸の際には肩の縫い代は肩巾に加えて頂ければと思います。<br> <br>
 							右の写真やその下に貼ってあります。Youtubeの動画を確認頂きましてお計り頂ければと思います。<br> <br>
 							ご着用のシャツの肩巾が狭いと感じた場合はこのサイズにプラスして頂ければと思いますが、あまり肩巾が広いと逆に袖が上がりにくくなる場合もございます。<br>
 						<br>ご着用になった際に肩先の先端の骨の所にシャツの肩巾がきていればそのシャツはジャストサイズと言えると思います。</td>
-						<td><img src="./img/size/katahaba1.jpg" border="0"
+						<td><img src="img/size/katahaba1.jpg" border="0"
 							align="top"><br>
-						<img src="./img/size/katahaba2.jpg" border="0"><br></td>
+						<img src="img/size/katahaba2.jpg" border="0"><br></td>
 					</tr>
 
 					<tr>
-						<td valign="top"><img src="./img/size/title_yukitake.jpg"
+						<td valign="top"><img src="img/size/title_yukitake.jpg"
 							border="0"><br> <br>
 							（衿の真後ろ、ヨークの中心、肩幅の半分）より肩先を通してカフスの先まで計ります。<br> <br>
 							基本的に５ミリ単位です。左右の長さが違う人が当店の経験上半数くらいはいらっしゃいますので、左右をお計り下さい。<br>
 							<br> ジャストサイズのシャツをご着用の場合はカフスの先までお計り頂ければと思います。<br> <br>
 							袖ははしっかりと伸ばしてお計り下さい。</td>
-						<td><img src="./img/size/sodetake.jpg" border="0" align="top"><br></td>
+						<td><img src="img/size/sodetake.jpg" border="0" align="top"><br></td>
 					</tr>
 
 					<tr>

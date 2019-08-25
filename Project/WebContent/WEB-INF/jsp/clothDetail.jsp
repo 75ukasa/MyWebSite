@@ -8,9 +8,9 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-<link rel="stylesheet" href="./css/common.css" media="all">
-<link rel="stylesheet" href="./css/sub.css" media="all">
-<link rel="stylesheet" href="./css/layout.css" media="all">
+<link rel="stylesheet" href="css/common.css" media="all">
+<link rel="stylesheet" href="css/sub.css" media="all">
+<link rel="stylesheet" href="css/layout.css" media="all">
 
 </head>
 
@@ -20,14 +20,14 @@
 		<!--wrap-->
 		<!--head-->
 		<figure>
-			<img src="./img/PageTop/RoyalCaribbeanCotton3.jpg" width="750px"
+			<img src="img/PageTop/RoyalCaribbeanCotton3.jpg" width="750px"
 				height="420px">
 		</figure>
 
 		<div class="topimg">
 			<ul>
 				<li><a href="http://www.kinkodo.jp/shirting/cart.php"> <img
-						src="./img/cart.png" alt="cart">
+						src="img/cart.png" alt="cart">
 				</a></li>
 			</ul>
 		</div>
@@ -35,7 +35,7 @@
 	</header>
 	<nav class="gmenu">
 		<ul id="menu">
-			<li><a href="indexServlet">HOME</a></li>
+			<li><a href="IndexServlet">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
 			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
@@ -50,8 +50,8 @@
 					${item.brandDataBeans.bName} ${item.remark}</h2>
 				<div class="box">
 					<figure align="center">
-						<img src="./img/cloth/${item.fileName1}">
-						<img src="./img/cloth/${item.fileName2}">
+						<img src="img/cloth/${item.fileName1}">
+						<img src="img/cloth/${item.fileName2}">
 					</figure>
 
 				</div>
@@ -118,20 +118,20 @@
 
 
 
-				<form action="CartServlet" method="POST">
+				<form action="ItemAdd" method="POST">
+				<input type="hidden" name="id" value="${item.id}">
 					<div class="cartbox">
 
 						<p class="t_c">
-							カートに追加する枚数 <input type="text" name="num" size="3"> 枚
+							カートに追加する枚数 <input type="text" name="num" size="2"> 枚
 						</p>
 						<ul>
 							<li><button type="submit">
 									<span>この生地を</span>カートに入れる
 								</button></li>
-							<li><a href="ForwardServlet?id=4">カートの中身を見る</a></li>
+							<li><a href="ItemAdd">カートの中身を見る</a></li>
 						</ul>
 					</div>
-					<input type="hidden" name="id" value="${item.id}">
 
 				</form>
 			</article>

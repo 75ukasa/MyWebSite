@@ -257,6 +257,7 @@ article h2:before {
 .newkiji dt {
 	position: relative;
 	line-height: 0;
+
 }
 
 .newkiji dt span {
@@ -319,6 +320,10 @@ article.cart h2 {
 	border-bottom: 1px #CCC solid;
 }
 
+article.cart h1 {
+	text-align: center;
+}
+
 dl.kijilist {
 	width: 100%;
 	margin: 0 auto;
@@ -327,7 +332,7 @@ dl.kijilist {
 .kijilist dt {
 	color: #FFF;
 	background: #333;
-	padding: 1em 1em 1em 5em;
+	padding: 1em 1em 1em 10em;
 	position: relative;
 }
 

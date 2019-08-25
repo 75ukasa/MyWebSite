@@ -56,8 +56,8 @@ public class ItemDAO {
 
 
 
-
-	public static ItemDataBeans  getItemDetail(String id) throws SQLException{
+		//IDと一致するitemの情報を全て取得
+	public static ItemDataBeans  getItemDetail(int data) throws SQLException{
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -66,7 +66,7 @@ public class ItemDAO {
 									+ " JOIN brand"
 									+ " ON item.brand_id = brand.id"
 									+ " WHERE item.id = ?");
-			st.setString(1, id);
+			st.setInt(1, data);
 
 			ResultSet rs = st.executeQuery();
 			ItemDataBeans item = new ItemDataBeans();

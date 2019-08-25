@@ -1,15 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.ItemDataBeans;
-import dao.ItemDAO;
 
 /**
  * Servlet implementation class CartServlet
@@ -37,18 +38,24 @@ public class CartServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String num = request.getParameter("num");
-		String Data = request.getParameter("id");
 
-		try {
-			ItemDataBeans item = ItemDAO.getItemCart("id");
-			request.setAttribute("item",item );
+		HttpSession session = request.getSession();
+
+	try {
+		ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
+
+		//セッションにカートがない場合カートを作成
+		if(cart==null) {
+			cart = new ArrayList<ItemDataBeans>();
+			session.setAttribute("cart", cart);
 		}
 
-
-
-
-
 	}
+
+	 catch (Exception e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
 
 }

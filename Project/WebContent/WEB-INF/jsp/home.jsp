@@ -8,10 +8,10 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-<link rel="stylesheet" href="./css/common.css" media="all">
-<link rel="stylesheet" href="./css/top.css" media="all">
-<link rel="stylesheet" href="./css/layout.css" media="all">
-<link rel="stylesheet" href="./css/marker.css" media="all">
+<link rel="stylesheet" href="css/common.css" media="all">
+<link rel="stylesheet" href="css/top.css" media="all">
+<link rel="stylesheet" href="css/layout.css" media="all">
+<link rel="stylesheet" href="css/marker.css" media="all">
 </head>
 
 <body>
@@ -32,12 +32,12 @@
 		<!--wrap-->
 		<!--head-->
 		<figure>
-			<img src="./img/PageTop/1486370887.jpg">
+			<img src="img/PageTop/1486370887.jpg">
 		</figure>
 
 		<div class="topimg">
 			<ul>
-				<li><a href=""> <img src="./img/cart.png" alt="cart">
+				<li><a href=""> <img src="img/cart.png" alt="cart">
 				</a></li>
 			</ul>
 		</div>
@@ -45,7 +45,7 @@
 	</header>
 	<nav class="gmenu">
 		<ul id="menu">
-			<li><a href="indexServlet">HOME</a></li>
+			<li><a href="IndexServlet">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
 			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
@@ -59,7 +59,7 @@
 			</span>通り用意いたしました。
 		</h2>
 		<p align="center">
-			<img src="./img/click.jpg" width="60" height="80" border="0"
+			<img src="img/click.jpg" width="60" height="80" border="0"
 				class="example3" alt="3通りのオーダーシャツ通販の方法">それぞれの↓バナーをクリックして頂ければ、速やかにお好みの生地にたどり着けます。
 		</p>
 		<div class="tside">

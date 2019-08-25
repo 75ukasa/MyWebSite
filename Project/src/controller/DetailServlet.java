@@ -32,13 +32,18 @@ public class DetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String Data = request.getParameter("id");
 
+		//選択された商品をint型に変換し利用
+		int Data = Integer.parseInt(request.getParameter("id"));
 		try {
+			//選択されたアイテムの情報を取得
 			ItemDataBeans item = ItemDAO.getItemDetail(Data);
+
+			//商品をリクエストパラメータにセット
 			request.setAttribute("item",item );
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothDetail.jsp");
+				//取得したアイテム情報をjspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/clothDetail.jsp");
 			dispatcher.forward(request, response);
 
 		} catch (SQLException e) {
