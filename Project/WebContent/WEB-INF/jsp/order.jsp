@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,6 +13,7 @@
 <link rel="stylesheet" href="css/order.css" media="all">
 <link rel="stylesheet" href="css/layout.css" media="all">
 
+<script src="js/jquery-3.4.1.min.js"></script>
 
 </head>
 
@@ -34,15 +36,24 @@
 		</ul>
 	</nav>
 	<div class="contents wrap">
-		<form method="post" action="order01_confirm.php">
+		<form method="post" action="OderServlet">
 			<article>
+				<h1><c:forEach var="message" items="${ActionMessage}" ><br>
+					${message}
+
+				 </c:forEach>
+
+				</h1>
 				<h2>ショッピングカート内の生地</h2>
 				<p>生地のページでショッピングカートに追加された生地と枚数です。</p>
 
 				<div class="t_c">
 					<ol class="kijilist">
-						<li>NO-９５２５３８２ グレーの変わり織りチェック イタリア CANCLINI カンクリーニ社 綿１００％<span>1
-								枚</span></li>
+						<c:forEach var="item" items="${cart}" varStatus="status">
+
+							<li>NO-${item.id}   ■${item.cloth}   ■${item.brandDataBeans.bName}   ■${item.material}<span>1枚</span></li>
+
+						</c:forEach>
 					</ol>
 				</div>
 			</article>
@@ -57,76 +68,76 @@
 					<tbody>
 						<tr>
 							<th><label for="b1">首周り</label></th>
-							<td><input name="kubimawari" value="10" type="text"
+							<td><input name="size" value="1" type="text"
 								size="15" id="b1"><label for="b1">センチ(０．５CM単位で)<br>
 									０．５センチ単位で記入が可能です。既製品のサイズではちょっと大きい、ちょっと小さいと思われた方は5ミリの単位でサイズの調整が可能です。例えば(41.5)<span
 									class="red">首周りは仕上がり(出来上がり）寸法でご記入下さい。</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b2">肩幅</label></th>
-							<td><input name="katahaba" value="１２" type="text" size="15"
+							<td><input name="size" value="2" type="text" size="15"
 								id="b2"><label for="b2">センチ（1CM単位で）<span
 									class="red">（出来上がり寸法）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b3">アームホール</label></th>
-							<td><input name="armhole" value="12" type="text" size="15"
+							<td><input name="size" value="3" type="text" size="15"
 								id="b3"><label for="b3">センチ（1CM単位で）<span
 									class="red">（実寸）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b4">裄丈右</label></th>
-							<td><input name="yukimigi" value="１２" type="text" size="15"
+							<td><input name="size" value="4" type="text" size="15"
 								id="b4"><label for="b4">センチ（0.5CM単位で）<span
 									class="red">（出来上がり寸法）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b5">裄丈左</label></th>
-							<td><input name="yukihidari" value="１２" type="text"
+							<td><input name="size" value="5" type="text"
 								size="15" id="b5"><label for="b5">センチ（0.5CM単位で）<span
 									class="red">（出来上がり寸法）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b6">上胴（バスト）</label></th>
-							<td><input name="basuto" value="１２" type="text" size="15"
+							<td><input name="size" value="6" type="text" size="15"
 								id="b6"><label for="b6">センチ（1CM単位で）<span
 									class="red">（実寸）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b7">中胴（ウエスト）</label></th>
-							<td><input name="uesuto" value="１２" type="text" size="15"
+							<td><input name="size" value="7" type="text" size="15"
 								id="b7"><label for="b7">センチ（1CM単位で）<span
 									class="red">（実寸）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b8">下胴（ヒップ）</label></th>
-							<td><input name="hippu" value="１２" type="text" size="15"
+							<td><input name="size" value="8" type="text" size="15"
 								id="b8"><label for="b8">センチ（1CM単位で）<span
 									class="red">（実寸）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b9">着丈</label></th>
-							<td><input name="kitake" value="１２" type="text" size="15"
+							<td><input name="size" value="9" type="text" size="15"
 								id="b9"><label for="b9">センチ（1CM単位で）<span
 									class="red">（出来上がり寸法）</span></label></td>
 						</tr>
 						<tr>
 							<th><label for="b10">カフス周り右</label></th>
-							<td><input name="kafusumigi" value="１２" type="text"
+							<td><input name="size" value="10" type="text"
 								size="15" id="b10"><label for="b10">センチ（1CM単位で）<span
 									class="red">（実寸）</span>※仕上がりサイズは実寸プラス７センチを想定しております。
 							</label></td>
 						</tr>
 						<tr>
 							<th><label for="b11">カフス周り左</label></th>
-							<td><input name="kafusuhidari" value="１２" type="text"
+							<td><input name="size" value="11" type="text"
 								size="15" id="b11"><label for="b11">センチ（1CM単位で）<span
 									class="red">（実寸）</span>※仕上がりサイズは実寸プラス７センチを想定しております。
 							</label></td>
 						</tr>
 						<tr>
 							<th><label for="b12">ご身長</label></th>
-							<td><input name="sincho" value="１２" type="text" size="15"
+							<td><input name="size" value="12" type="text" size="15"
 								id="b12"><label for="b12">センチ（1CM単位で）</label></td>
 						</tr>
 					</tbody>
@@ -150,7 +161,7 @@
 								</figure>
 						</label>
 							<p>
-								<input type="radio" value="1" name="shirtsill" id="c1">
+								<input type="radio" value="1" name="style" id="c1" checked="">
 							</p></li>
 
 
@@ -166,7 +177,7 @@
 								</figure>
 						</label>
 							<p>
-								<input type="radio" value="2" checked="" name="shirtsill"
+								<input type="radio" value="2" name="style"
 									id="c2">
 							</p></li>
 
@@ -181,7 +192,7 @@
 								</figure>
 						</label>
 							<p>
-								<input type="radio" value="3" name="shirtsill" id="c3">
+								<input type="radio" value="3" name="style" id="c3">
 							</p></li>
 
 
@@ -195,7 +206,7 @@
 								</figure>
 						</label>
 							<p>
-								<input type="radio" value="4" name="shirtsill" id="c4">
+								<input type="radio" value="4" name="style" id="c4">
 							</p></li>
 					</ul>
 				</div>
@@ -204,7 +215,6 @@
 
 			<article>
 				<h2>襟のデザイン</h2>
-				<p>写真をクリックすると大きな写真と詳細が表示されます。</p>
 				<p>２４の衿型がございます。その中からお好みのデザインをセレクトして下さい。またデザインページでも以下の衿型にないものも掲載してあります。また下記の衿型を基本として、衿の長さや高さも調整可能です。</p>
 				<ul class="zoom">
 					<li><img src="img/oderForm/oderSlectCollar/cs1.jpg"><br>
@@ -364,13 +374,11 @@
 						</p>
 						<p>２６）カッタウエイカラー（２）</p></li>
 				</ul>
-				１）～２６）までに当てはまらないデザインやより凝ったデザインを上記のページからお選び頂いた場合は上記のメニューから２７）を選択して、この下の空欄にサイト上のデザイン番号をご記入下さい。サイト上には衿の大きさや長さ、そしてクレリックの仕様まで様々なデザインがございます。<br>
-				ここは衿型のデザインをお選び頂く箇所ですので、サイト上からお好きな衿型をお選び下さい。デザインによっては通常料金以外に別途特殊加工賃がかかる衿型もございます。
-				</p>
+				<br><br><br><br>
 				<div class="t_c">
-					<select name="eridesign" size="1">
-						<option value="">こちらから衿のデザインをお選び下さい。</option>
-						<option value="1" selected="">１）レギュラーカラー</option>
+					<select name="collar" size="1">
+						<option value="" selected="">こちらから衿のデザインをお選び下さい。</option>
+						<option value="1">１）レギュラーカラー</option>
 						<option value="2">２）ショートカラー</option>
 						<option value="3">３）ロングポイント</option>
 						<option value="4">４）ボタンダウン</option>
@@ -404,8 +412,8 @@
 				<h3>衿デザインのご要望</h3>
 				<div class="wid60">
 					<p>
-						衿型のスタイルは画像をクリックするとポップアップウィンドウで詳細が出てきますが、更に細かい注文も可能です。<br>
-						【例えば】<br> <span class="red">◆レギュラーカラーの剣先（衿の長さ）を9センチにしてほしい。<br>
+						 更に細かい注文も可能です。<br>
+						【例】<br> <span class="red">◆レギュラーカラーの剣先（衿の長さ）を9センチにしてほしい。<br>
 							◆ドゥエボットーニでボタンダウンにしてほしい。
 						</span>
 					</p>
@@ -413,7 +421,7 @@
 						変更が可能かどうかはご注文確認のメールをお送りする際にご連絡を致します。</p>
 				</div>
 				<div class="t_c">
-					<textarea name="eridesignyobo" rows="7" cols="70"></textarea>
+					<textarea name="collarRequest" rows="7" cols="70"></textarea>
 				</div>
 			</article>
 
@@ -455,25 +463,25 @@
 						カフスにボタンを2個付けたデザインです。カフス巾が若干長くなります。カフス巾<b>7.5センチ</b><br>
 						<p>その他カフスの先が角落としのものもございます。</p>
 						<p>６）ボタン2個付き ラウンド</p></li>
-					<li><img src="img/oderForm/oderSlectCuffs/ks8.jpg"><br>
+					<li><img src="img/oderForm/oderSlectCuffs/ks7.jpg"><br>
 						<p>
 							カフスを折り曲げて二重にしたデザインです。カフスボタンを必ず使います。カフス巾<b>７．０センチ</b><br>
 							折り返しが直角になったデザインもあります。">
 						</p>
 						<p>７）ダブルカフス 折り返しラウンド</p></li>
-					<li>７<img src="img/oderForm/oderSlectCuffs/ks9.jpg"><br>
+					<li>７<img src="img/oderForm/oderSlectCuffs/ks8.jpg"><br>
 						<p>
 							カフスを折り曲げて二重にしたデザインです。カフスボタンを必ず使います。カフス巾<b>７．０センチ</b><br>
 							折り返しが丸になったデザインもあります。">
 						</p>
-						<p>８）ダブルカウス 折り返し直角</p>
+						<p>８）ダブルカフス 折り返し直角</p>
 					</li>
-					<li><img src="img/oderForm/oderSlectCuffs/ks12.jpg"><br>
+					<li><img src="img/oderForm/oderSlectCuffs/ks9.jpg"><br>
 						<p>
 							Wカフスのように折り返しになりますが、カフスボタンではなくて通常のボタン止めです。<br>カフス巾<b>7.0センチ</b><br>
 						</p>
 						<p>９）ターンナップカフス ボタン1個</p></li>
-					<li><img src="img/oderForm/oderSlectCuffs/ks11.jpg"><br>
+					<li><img src="img/oderForm/oderSlectCuffs/ks10.jpg"><br>
 						<p>
 							Wカフスのように折り返しになりますが、カフスボタンではなくて通常のボタン止めです。こちらはボタン2個のタイプ。カフス巾<b>7.0センチ</b><br>
 						</p>
@@ -481,10 +489,10 @@
 				</ul>
 				<br>
 				<div class="t_c">
-					<select name="kafusudesign" size="1">
+					<select name="cuffsDesing" size="1">
 						<option value="" selected="">こちらからカフスのデザインをお選び下さい。</option>
 						<option value="1">１）スタンダードカフス</option>
-						<option value="2" selected="">２）ラウンドカフス（中丸）</option>
+						<option value="2">２）ラウンドカフス（中丸）</option>
 						<option value="3">３）ラウンドカフス(大丸)</option>
 						<option value="4">４）スクエア角落とし</option>
 						<option value="5">５）直角（本カフス）</option>
@@ -515,8 +523,8 @@
 								<label for="h2"><img src="img/oderForm/oderSlectCuffs/single.jpg"></label>
 							</figure>
 							<p>
-								<input type="radio" name="kafusuconvertible" value="1"
-									checked="" id="h2"><label for="h2">シングルボタン止め</label>
+								<input type="radio" value="1" name="cuffsButton" id="h2" checked="">
+								<label for="h2">シングルボタン止め</label>
 							</p>
 						</li>
 
@@ -526,8 +534,8 @@
 								<label for="h3"><img src="img/oderForm/oderSlectCuffs/con1.jpg"></label>
 							</figure>
 							<p>
-								<input type="radio" name="kafusuconvertible" value="2" id="h3"><label
-									for="h3">カフスもできるコンバーチブル仕様</label>
+								<input type="radio" name="cuffsButton" value="2" id="h3">
+								<label for="h3">カフスもできるコンバーチブル仕様</label>
 							</p>
 						</li>
 
@@ -537,7 +545,7 @@
 								<label for="h4"><img src="img/oderForm/oderSlectCuffs/con2.jpg"></label>
 							</figure>
 							<p>
-								<input type="radio" name="kafusuconvertible" value="3" id="h4"><label
+								<input type="radio" name="cuffsButton" value="3" id="h4"><label
 									for="h4">ボタン無しの仕様（ダブルカフスはこちらを選択）</label>
 							</p>
 						</li>
@@ -559,21 +567,21 @@
 						</tr>
 						<tr>
 							<td>左カフス</td>
-							<td rowspan="2"><input type="radio" name="kafusutokei"
+							<td rowspan="2"><input type="radio" name="cuffsWatch"
 								value="1" checked="" id="i1"><label for="i1">左右差無し</label></td>
 
-							<td><input type="radio" name="kafusutokei" value="2" id="i2"><label
+							<td><input type="radio" name="cuffsWatch" value="2" id="i2"><label
 								for="i2">左カフス＋０．５ｃｍ</label></td>
 
-							<td><input type="radio" name="kafusutokei" value="3" id="i3"><label
+							<td><input type="radio" name="cuffsWatch" value="3" id="i3"><label
 								for="i3">左カフス＋１．０ｃｍ</label></td>
 						</tr>
 						<tr>
 							<td>右カフス（右に時計をされる方）</td>
-							<td><input type="radio" name="kafusutokei" value="4" id="i4"><label
+							<td><input type="radio" name="cuffsWatch" value="4" id="i4"><label
 								for="i4">右カフス＋０．５ｃｍ</label></td>
 
-							<td><input type="radio" name="kafusutokei" value="5" id="i5"><label
+							<td><input type="radio" name="cuffsWatch" value="5" id="i5"><label
 								for="i5">右カフス＋１．０ｃｍ</label></td>
 						</tr>
 					</tbody>
@@ -595,7 +603,7 @@
 				<h3>カフスデザインのご要望</h3>
 				<p>当店のシャツは1枚1枚手作りですので、上記のアイテムを選択するだけではなく更に詳細にオーダーができます。更に細かい注文も可能です。</p>
 				<p>
-					【例えば】<br> <span class="red">
+					【例】<br> <span class="red">
 						◆２）ラウンドカフスでカフスの長さを８センチにして欲しい。<br>
 						◆１０）のデザインページの番号のカフスよりも更に１センチ、カフスの巾を長くしてほしい。
 					</span>
@@ -603,7 +611,7 @@
 
 				<p>上記の◆のようにご用意したカフスのスタイルの変更を求められる場合は下記の覧にご記入頂けますでしょうか。作業が困難なものもあるかも知れませんができるだけご要望にお答えできればと考えております。</p>
 				<div class="t_c">
-					<textarea rows="7" cols="70" name="kafusudesignyobo"></textarea>
+					<textarea rows="7" cols="70" name="cuffsRequest"></textarea>
 				</div>
 
 				<h2>ポケットのデザイン</h2>
@@ -665,44 +673,44 @@
 						<tr>
 							<td>■ ノーマルポケット</td>
 
-							<th><input type="radio" name="pocketdesign" value="1"
+							<th><input type="radio" name="pocket" value="1"
 								checked=""></th>
 
-							<th><input type="radio" name="pocketdesign" value="2"></th>
+							<th><input type="radio" name="pocket" value="2"></th>
 						</tr>
 						<tr>
 							<td>■ ペンタゴン</td>
 
-							<th><input type="radio" name="pocketdesign" value="3"></th>
+							<th><input type="radio" name="pocket" value="3"></th>
 
-							<th><input type="radio" name="pocketdesign" value="4"></th>
+							<th><input type="radio" name="pocket" value="4"></th>
 						</tr>
 						<tr>
 							<td>■ ボタン付き</td>
 
-							<th><input type="radio" name="pocketdesign" value="5"></th>
+							<th><input type="radio" name="pocket" value="5"></th>
 
-							<th><input type="radio" name="pocketdesign" value="6"></th>
+							<th><input type="radio" name="pocket" value="6"></th>
 						</tr>
 						<tr>
 							<td>■ フラップ付き</td>
 
-							<th><input type="radio" name="pocketdesign" value="7"></th>
+							<th><input type="radio" name="pocket" value="7"></th>
 
-							<th><input type="radio" name="pocketdesign" value="8"></th>
+							<th><input type="radio" name="pocket" value="8"></th>
 						</tr>
 						<tr>
 							<td>■ フラップのボタン付き</td>
 
-							<th><input type="radio" name="pocketdesign" value="9"></th>
+							<th><input type="radio" name="pocket" value="9"></th>
 
-							<th><input type="radio" name="pocketdesign" value="10"><br>
+							<th><input type="radio" name="pocket" value="10"><br>
 								オプション<br> ￥１，５００＋税</th>
 						</tr>
 						<tr>
 							<td>■ ポケット無し</td>
 
-							<th><input type="radio" name="pocketdesign" value="11">
+							<th><input type="radio" name="pocket" value="11">
 							</th>
 							<td></td>
 						</tr>
@@ -712,19 +720,21 @@
 				<h3>ポケットデザインのご要望</h3>
 				<p>当店のシャツは1枚1枚手作りですので、上記のアイテムを選択するだけではなく更に詳細にオーダーができます。</p>
 				<p>
-					【例えば】<br> <span class="red">◆縦○○センチ横幅○○センチにしてほしい。など。<br>
+					【例】<br> <span class="red">◆縦○○センチ横幅○○センチにしてほしい。など。<br>
 						◆裾を水平にしてほしい。などなど
 					</span>
 				</p>
 				<p>上記の◆のようにご用意したスタイルの変更を求められる場合は下記の覧にご記入頂けますでしょうか。作業が困難なものもあるかも知れませんができるだけご要望にお答えできればと考えております。
 					変更が可能かどうかはご注文確認のメールをお送りする際にご連絡を致します。</p>
 				<div class="t_c">
-					<textarea rows="7" cols="70" name="pocketdesignyobo"></textarea>
+					<textarea rows="7" cols="70" name="pocketRequest"></textarea>
 				</div>
 
 
 				<br>
 				<br>
+
+				<script src="js/oder.js"></script>
 
 				<article>
 					<h2 id="names">ネーム</h2>
@@ -740,13 +750,14 @@
 					</div>
 
 					<div class="bdbox wid70">
-						<input type="radio" name="name_ire" value="1" checked="" id="m1">
+						<input type="radio" name="nameDo_Not" value="1" checked="" id="m1">
 						<label for="m1">ネームは入れない（こちらにチェックをされた方は<a href="#button">次の<b>「ボタンの選択」</b></a>にお進み下さい）
-						</label><br> <input type="radio" name="name_ire" value="2" id="m2">
+						</label><br> <input type="radio" name="nameDo_Not" value="2" id="m2">
 						<label for="m2">ネームを入れる方はこちらにチェック</label>
 					</div>
 					<p class="t_c">入れるにチェックされた方はネームの種類をお選び下さい。</p>
 
+					<div class="nametbl">
 					<div class="tblbox">
 						<ul class="col4">
 							<li>
@@ -838,7 +849,7 @@
 
 					<div class="t_c">
 						<p>それではネームの種類を下記の欄からお選び下さい。</p>
-						<select size="1" name="name_shurui1">
+						<select size="1" name="nameDesing">
 							<option value="">ネームの種類をお選び下さい</option>
 
 							<option value="1">１）ドイツ文字（プラス￥５５０＋税）</option>
@@ -857,7 +868,7 @@
 							先ずはお入れになるイニシャルを記載下さい <br>例：鈴木 太郎の場合は「T.S」<br>１０）筆記体
 							綴り文字を選択された方は「T.Suzuki」(例)
 						</p>
-						<textarea rows="4" cols="30" name="name_initial"></textarea>
+						<textarea rows="4" cols="30" name="nameInitial"></textarea>
 
 						<p>次にネームのカラーです。</p>
 
@@ -869,11 +880,10 @@
 					<table class="bdnon wid40">
 						<tbody>
 							<tr>
-								<td class="t_l">（１９）シルバー光沢<br> 重ね文字やモチーフ柄の刺繍<br>
-									には使えませんが、通常の<br> イニシャルには使えます。<br> 通常￥５５０＋税のイニシャルが<br>
+								<td class="t_l">（１９）シルバー光沢<br>  通常￥５５０＋税のイニシャルが<br>
 									プラス￥３００＋税の￥８５０＋税となります。
 								</td>
-								<td><img src="img/oderForm/oderSlectName/silver.jpg" width="200"
+ 								<td><img src="img/oderForm/oderSlectName/silver.jpg" width="200"
 									height="129" border="0"></td>
 							</tr>
 						</tbody>
@@ -918,8 +928,8 @@
 						<span class="lgreen">１）～１０）</span>までの刺繍の方は以下のフォーマットから色をお選び下さい。
 					</p>
 					<div class="t_c">
-						<select size="1" name="name_color1">
-							<option value="">ネームの色をお選び下さい。</option>
+						<select size="1" name="nameColor1">
+							<option value="" selected="">ネームの色をお選び下さい。</option>
 							<option value="1">１）ブラック</option>
 							<option value="2">２）ネイビー</option>
 							<option value="3">３）サックスブルー</option>
@@ -945,7 +955,7 @@
 						<span class="lgreen">６）７）８）</span>の重ね文字の方はもう一色選択して下さい。
 					</p>
 					<div class="t_c">
-						<select size="1" name="name_color2">
+						<select size="1" name="nameColor2">
 							<option value="">ネームの色をお選び下さい。</option>
 							<option value="1">１）ブラック</option>
 							<option value="2">２）ネイビー</option>
@@ -965,6 +975,7 @@
 							<option value="16">１６）ピンク</option>
 							<option value="17">１７）パープル</option>
 							<option value="18">１８）ホワイト</option>
+							<option value="19">１９）シルバー光沢</option>
 							<option value="20">２０）重ね文字でも上の色と同色</option>
 						</select>
 					</div>
@@ -1012,7 +1023,7 @@
 
 					<p>（下記のプルダウンメニューより上記の１）～６）までもしくは７）の左袖８）の直接ボディを選択して下さい）</p>
 					<div class="t_c">
-						<select name="name_basho">
+						<select name="namePosition">
 							<option value="">ネームの場所を選択して下さい。</option>
 							<option value="1">１）ポケットの上中央</option>
 							<option value="2">２）左ポケットの上ボディ中央より</option>
@@ -1023,6 +1034,7 @@
 							<option value="7">７）左袖</option>
 							<option value="8">８）直接ボディに</option>
 						</select>
+					</div>
 					</div>
 				</article>
 
@@ -1187,7 +1199,7 @@
 										<figcaption>ネイビープラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="19" id="o14">
+									<input type="radio" name="botan" value="18" id="o14">
 								</p></li>
 
 							<li><label for="o15"><figure>
@@ -1195,7 +1207,7 @@
 										<figcaption>ブループラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="20" id="o15">
+									<input type="radio" name="botan" value="19" id="o15">
 								</p></li>
 
 							<li><label for="o16"><figure>
@@ -1203,7 +1215,7 @@
 										<figcaption>ピンクプラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="21" id="o16">
+									<input type="radio" name="botan" value="20" id="o16">
 								</p></li>
 
 							<li><label for="o17"><figure>
@@ -1211,7 +1223,7 @@
 										<figcaption>ワインプラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="22" id="o17">
+									<input type="radio" name="botan" value="21" id="o17">
 								</p></li>
 
 							<li><label for="o18"><figure>
@@ -1219,7 +1231,7 @@
 										<figcaption>グレープラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="23" id="o18">
+									<input type="radio" name="botan" value="22" id="o18">
 								</p></li>
 
 						</ul>
@@ -1405,7 +1417,7 @@
 						</tr>
 						<tr>
 							<td><label for="t01"><span class="lgreen">■</span>郵便番号</label></td>
-							<td><input name="zip" value="166-0004" type="text"
+							<td><input name="zip" type="text"
 								maxlength="8" id="t01"></td>
 						</tr>
 						<tr>
@@ -1423,7 +1435,7 @@
 									<option value="10">群馬県</option>
 									<option value="11">埼玉県</option>
 									<option value="12">千葉県</option>
-									<option value="13" selected="">東京都</option>
+									<option value="13">東京都</option>
 									<option value="14">神奈川県</option>
 									<option value="15">新潟県</option>
 									<option value="16">富山県</option>
@@ -1463,33 +1475,33 @@
 						</tr>
 						<tr>
 							<td><label for="t02"><span class="lgreen">■</span>市町村、番地</label></td>
-							<td><input name="address" value="１３４" type="text" size="83"
+							<td><input name="address" type="text" size="83"
 								id="t02"></td>
 						</tr>
 						<tr>
 							<td><label for="t03"><span class="lgreen">■</span>お名前</label></td>
-							<td><input name="name" value="あ" type="text" size="45"
+							<td><input name="name" type="text" size="45"
 								id="t03"></td>
 						</tr>
 						<tr>
 							<td><label for="t04"><span class="lgreen">■</span>ふりがな</label></td>
-							<td><input name="kana" value="あ" type="text" size="45"
+							<td><input name="kana" type="text" size="45"
 								id="t04"></td>
 						</tr>
 						<tr>
 							<td><label for="t05"><span class="lgreen">■</span>お電話番号</label></td>
-							<td><input name="tel" value="09022340156" type="text"
+							<td><input name="tel" type="text"
 								size="45" id="t05"><label for="t05">お電話番号は<span
 									class="st">（ハイフン）無し半角にてご記入下さい。</span></label></td>
 						</tr>
 						<tr>
 							<td><label for="t06">■年齢</label></td>
-							<td><input type="text" name="age" value="１２" id="t06">
+							<td><input type="text" name="age" id="t06">
 								才</td>
 						</tr>
 						<tr>
 							<td>■性別</td>
-							<td><input type="radio" name="sex" value="1" checked=""
+							<td><input type="radio" name="sex" value="1"  checked=""
 								id="t07"><label for="t07">男性</label>&nbsp; <input
 								type="radio" name="sex" value="2" id="t07"><label
 								for="t07">女性</label>&nbsp;</td>

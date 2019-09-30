@@ -40,7 +40,7 @@
 			<li><a href="IndexServlet">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
+			<li><a href="CartServlet">カートを見る</a></li>
 		</ul>
 	</nav>
 <body>
@@ -75,15 +75,15 @@
 				</dl>
 
 				<p class="contbtn">
-					<button type="button" onclick="location.href='IndexServlet.java'">買い物を続ける</button>
+					<button type="button" onclick="location.href='IndexServlet'">買い物を続ける</button>
 				</p>
 
 				<h2>注文方法を選ぶ</h2>
 				<div align="center">
 
-					<a href="ForwardServlet?id=5"><img src="./img/saisun_1.jpg"
+					<a href="Buy"><img src="./img/saisun_1.jpg"
 						alt="オーダー(1)お身体を採寸してのご注文"></a>
-					</li> <a href="ForwardServlet?id=5"><img src="./img//saisun_2.jpg"
+					</li> <a href="Buy"><img src="./img//saisun_2.jpg"
 						alt="オーダー(2)シャツを採寸してのご注文"></a>
 					</li>
 

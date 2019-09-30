@@ -1,6 +1,8 @@
 package beans;
 
-public class ItemDataBeans {
+import java.io.Serializable;
+
+public class ItemDataBeans implements Serializable{
 	private int id;
 	private int brandId;
 	private String material;
@@ -12,7 +14,6 @@ public class ItemDataBeans {
 	private String detail;
 	private String fileName1;
 	private String fileName2;
-
 	// ブランドDataBeansと結合
 	private brandDataBeans brandDataBeans;
 

@@ -20,6 +20,9 @@ INSERT INTO `brand` (`id`, `b_name`, `c_name`) VALUES
 	(6,'GIZA(ギザ)社製','日本');
 
 
+
+
+
 CREATE TABLE `item` (
 	`id` int(11) PRIMARY KEY,
 	`brand_id` int(11) NOT NULL,
@@ -79,4 +82,360 @@ INSERT INTO `item` (`id`,`brand_id`,`material`,`price`,`color`,`remark`,`depth`,
 	(26,6,'綿１００％',16000,'ピンク','１００番手双糸シャンブレー',3,'淡い色合いのピンクのシャンブレー生地','シャンブレーとは縦糸に色糸、横糸に白糸、もしくは縦糸と違う色糸を使用した生地のことをいい。生地に立体感が出て、平織りのベタ無地に比べると高級感増す生地になります。','image1 (25)','image4 (24)'),
 	(27,6,'綿１００％',16000,'グレー','１００番手双糸シャンブレー',3,'グレーのシャンブレー生地','シャンブレーとは縦糸に色糸、横糸に白糸、もしくは縦糸と違う色糸を使用した生地のことをいい。生地に立体感が出て、平織りのベタ無地に比べると高級感増す生地になります。<br>こちらの生地はグレーといっても、沈み込むような暗いグレーではなく、少し赤みの入ったブルーがかったグレーです。','image1 (26)','image4 (25)'),
 	(28,6,'綿１００％',17000,'ブラック','エジプト綿１２０番手双糸',3,'黒の細ロンドンストライプ生地','勿論素材はエジプト綿。糸番手は120番双糸の高級番手です。触りもかなりしなやか上品なドレスシャツにはぴったりな感じです。色柄とそして素材の高級さとバランスのとれたシャツ生地です。 黒と白のストライプですから、全体的には濃いグレーに見えると思います。','image1 (27)','image4 (26)');
+
+
+
+
+
+CREATE TABLE `silhouette_oder` (
+  `id` int(11) NOT NULL,
+  `style` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `silhouette_oder` (`id`,`style`,`file`) VALUES
+	(1,'モードスタイル','style1.jpg'),
+	(2,'イタリアンスタイ','style2.jpg'),
+	(3,'セミソフトスタイル','style3.jpg'),
+	(4,'ソフトスタイル','style4.jpg');
+
+
+
+
+
+CREATE TABLE `collar_oder` (
+  `id` int(11) NOT NULL,
+  `type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `file` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+
+INSERT INTO `cuffs_oder` (`id`,`type`,`file`) VALUES
+	(1,'レギュラーカラー','cs1.jpg'),
+	(2,'ショートカラー','cs2.jpg'),
+	(3,'ロングポイント','cs3.jpg'),
+	(4,'ボタンダウン','cs4.jpg'),
+	(5,'クラッシコボタンダウン','cs5.jpg'),
+	(6,'マイタカラーのボタンダウン','cs6.jpg'),
+	(7,'スナップダウン','cs7.jpg'),
+	(8,'イタリンラウンド','cs8.jpg'),
+	(9,'ゲーブルカラーショートワイルド','cs9.jpg'),
+	(10,'クラッシコワイルド','cs10.jpg'),
+	(11,'セミワイド','cs11.jpg'),
+	(12,'ワイド','cs12.jpg'),
+	(13,'ホリゾンタルワイド','cs13.jpg'),
+	(14,'ドゥエボットーニ','cs14.jpg'),
+	(15,'ドゥエボットーニのボタンダウン','cs15.jpg'),
+	(16,'ドゥエボットーニのワイルドカラー','cs16.jpg'),
+	(17,'ラウンドカラー','cs17.jpg'),
+	(18,'ナローカラー','cs18.jpg'),
+	(19,'タブラカー','cs19.jpg'),
+	(20,'ピンホール','cs20.jpg'),
+	(21,'スタンドのボタンダウン','cs21.jpg'),
+	(22,'スタンドカラー','cs22.jpg'),
+	(23,'二段のスタンドカラー','cs23.jpg'),
+	(24,'ウィングカラー','cs24.jpg'),
+	(25,'カッタウエイカラー(1)','cs25.jpg'),
+	(26,'カッタウエイカラー(2)','cs26.jpg');
+
+
+
+
+
+CREATE TABLE `cuffs_oder` (
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `cuffs_oder` (`id`,`type`,`file`) VALUES
+	(1,'スタンダードカフス','ks1.jpg'),
+	(2,'ラウンドカフス(中丸)','ks2.jpg'),
+	(3,'ラウンドカフス(大丸)','ks3.jpg'),
+	(4,'スクエア　角落し','ks4.jpg'),
+	(5,'直角(本カフス)','ks5.jpg'),
+	(6,'ラウンド　ボタン2個付き','ks6.jpg'),
+	(7,'ダブルカフス　折り返しラウンド','ks7.jpg'),
+	(8,'ダブルカフス　折り返し直角','ks8.jpg'),
+	(9,'ターンナップカフス　ボタン1個','ks9.jpg'),
+	(10,'ターンナップカフス　ボタン2個','ks10.jpg')
+
+
+
+
+
+CREATE TABLE `cuffs_button`(
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256)  utf8_unicode_ci NOT NULL,
+	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `cuffs_button` (`id`,`type`,`file`) VALUES
+	(1,'シングルボタン止め','single.jpg'),
+	(2,'カフスもできるコンバーチブル仕様','con1.jpg'),
+	(3,'ボタン無し仕様(ダブルカカフスはこちら)','con2.jpg');
+
+
+
+
+
+CREATE TABLE `cuffs_watch`(
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `cuffs_watch` (`id`,`type`) VALUES
+	(1,'左右差無し'),
+	(2,'左カフス+0.5㎝'),
+	(3,'左カフス+1.0㎝'),
+	(4,'右カフス+0.5㎝'),
+	(5,'右カフス+1.0㎝');
+
+
+
+
+
+CREATE TABLE `pocket_oder`(
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`price` int(11) NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `pocket_oder` (`id`,`type`,`price`) VALUES
+	(1,'ノーマルポケット(片ポケット)','0'),
+	(2,'ノーマルポケット(両ポケット)','0'),
+	(3,'ペンタゴン(片ポケット)','0'),
+	(4,'ペンタゴン(両ポケット)','0'),
+	(5,'ボタン付き(片ポケット)','0'),
+	(6,'ボタン付き(両ポケット)','0'),
+	(7,'フラップ付き(片ポッケット)','0'),
+	(8,'フラップ付き(両ポケット)','0'),
+	(9,'フラップのボタン付き(片ポケット)','0'),
+	(10,'フラップのボタン付き(両ポケット)','1500'),
+	(11,'ポケット無し','0');
+
+
+
+
+
+CREATE TABLE `name_desing` (
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`price` int(11) NOT NULL,
+	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `name_desing` (`id`,`type`,`price`,`file`) VALUES
+	(1,'ドイツ文字','550','doitsu.jpg'),
+	(2,'イタリック','550','italic.jpg'),
+	(3,'ゴシック体','550','goshic.jpg'),
+	(4,'活字体','550','rome.jpg'),
+	(5,'筆記体','550','hikkitai.jpg'),
+	(6,'筆記体重ね','550','hikkitai_kasane.jpg'),
+	(7,'ドイツ文字重ね','550','doitsu_kasane.jpg'),
+	(8,'活字体重ね','550','rome_kasane.jpg'),
+	(9,'漢字','550','japanese.jpg'),
+	(10,'筆記体　綴り文字','550','tuzurimoji.jpg');
+
+
+
+
+
+CREATE TABLE `name_color` (
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`price` int(11) NOT NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `name_color` (`id`,`type`,`price`) VALUES
+	(1,'ブラック',0),
+	(2,'ネイビー',0),
+	(3,'サックスブルー',0),
+	(4,'シルバー',0),
+	(5,'シルバーグレー',0),
+	(6,'グレー',0),
+	(7,'ライトブラウン',0),
+	(8,'ブラウン',0),
+	(9,'ダークブラウン',0),
+	(10,'レッド',0),
+	(11,'ワイン',0),
+	(12,'オレンジ',0),
+	(13,'イエロー',0),
+	(14,'エメラルドグリーン',0),
+	(15,'グリーン',0),
+	(16,'ピンク',0),
+	(17,'パープル',0),
+	(18,'ホワイト',0),
+	(19,'シルバー光沢',300);
+
+
+
+
+
+CREATE TABLE `name_position`(
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`file` varchar(256) COLLATE utf8_unicode_ci
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `name_position` (`id`,`type`,`file`) VALUES
+	(1,'ポケット上中央','pocket_ue.jpg'),
+	(2,'左ポケット上ボディ中央','pocket_ue_hidari.jpg'),
+	(3,'左ポケット下ボディ中央','pocket_under.jpg'),
+	(4,'ポケット真ん中','pocket_center.jpg'),
+	(5,'カフス斜め','cuffs_naname.jpg'),
+	(6,'カフス中央','cuffs_center.jpg'),
+	(7,'左袖',''),
+	(8,'ボディ直接','');
+
+
+
+
+
+CREATE TABLE `button_desing` (
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`price` int(11) NOT NULL,
+	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `button_desing` (`id`,`type`,`price`,`file`) VALUES
+	(1,'プラスチック　ホワイト　２つ穴ボタン',0,'PRS.jpg'),
+	(2,'プラスチック　ホワイト　４つ穴ボタン(２㎜厚)',0,'P2S.jpg'),
+	(3,'プラスチック　ホワイト　４つ穴ボタン(２．５㎜厚)',0,'P3S.jpg'),
+	(4,'プラスチック　ブラック　４つ穴ボタン',0,'P2SBLACK.jpg'),
+	(5,'プラスチック　ブラウン　４つ穴ボタン',0,'P2SbrOWN.jpg'),
+	(6,'白蝶貝４つ穴２㎜厚',1000,'W2S.jpg'),
+	(7,'白蝶貝４つ穴３㎜厚',1300,'W3S.jpg'),
+	(8,'白蝶貝４つ穴４㎜厚',1500,'W4S.jpg'),
+	(9,'四角の白蝶貝４つ穴４㎜厚',2000,'SS.jpg'),
+	(10,'黒蝶貝４つ穴２㎜厚',1000,'B2S.jpg'),
+	(11,'黒蝶貝４つ穴３㎜厚',1300,'B3S.jpg'),
+	(12,'茶蝶貝４つ穴２㎜厚',1000,'br2S.jpg'),
+	(13,'下半分アクアブルー２．５㎜厚',800,'upgreen.jpg'),
+	(14,'下半分ブルー２．５㎜厚',800,'upblue.jpg'),
+	(15,'下半分グレー２．５㎜厚',800,'upgrey.jpg'),
+	(16,'下半分オレンジ２．５㎜厚',800,'uporange.jpg'),
+	(17,'下半分レッド２．５㎜厚',800,'upred.jpg'),
+	(18,'ネイビープラボタン２．５㎜厚',500,'pb2.jpg'),
+	(19,'ブループラボタン２．５㎜厚',500,'ps2.jpg'),
+	(20,'ピンクプラボタン２．５㎜厚',500,'pp2.jpg'),
+	(21,'ワインプラボタン２．５㎜厚',500,'pw2.jpg'),
+	(22,'グレープラボタン２．５㎜厚',500,'pg2.jpg');
+
+
+
+
+
+CREATE TABLE `button_thread` (
+	`id`  int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `button_thread` (`id`,`type`) VALUES
+	(0,'白'),
+	(1,'ブラック'),
+	(2,'ネイビー'),
+	(3,'サックスブルー'),
+	(4,'シルバー'),
+	(5,'シルバーグレー'),
+	(6,'グレー'),
+	(7,'ライトブラウン'),
+	(8,'ブラウン'),
+	(9,'ダークブラウン'),
+	(10,'レッド'),
+	(11,'ワイン'),
+	(12,'オレンジ'),
+	(13,'イエロー'),
+	(14,'エメラルドグリーン'),
+	(15,'グリーン'),
+	(16,'ピンク'),
+	(17,'パープル'),
+	(18,'ホワイト');
+
+
+
+
+
+CREATE TABLE `button_position` (
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `button_position` (`id`,`type`,`file`) VALUES
+	(1,'第二ボタン５．５㎝','55.jpg'),
+	(2,'第二ボタン７㎝','7.jpg'),
+	(3,'第二ボタン９㎝','9.jpg')
+
+
+
+
+
+CREATE TABLE `pref_select`(
+	`id` int(11) PRIMARY KEY NOT NULL,
+	`name` varchar(256) COLLATE utf8_unicode_ci
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `pref_select` (`id`,`name`) VALUES
+	(1,'北海道'),
+	(2,'青森県'),
+	(3,'岩手県'),
+	(4,'宮城県'),
+	(5,'秋田県'),
+	(6,'山形県'),
+	(7,'福島県'),
+	(8,'茨城県'),
+	(9,'栃木県'),
+	(10,'群馬県'),
+	(11,'埼玉県'),
+	(12,'千葉県'),
+	(13,'東京都'),
+	(14,'神奈川県'),
+	(15,'新潟県'),
+	(16,'富山県'),
+	(17,'石川県'),
+	(18,'福井県'),
+	(19,'山梨県'),
+	(20,'長野県'),
+	(21,'岐阜県'),
+	(22,'静岡県'),
+	(23,'愛知県'),
+	(24,'三重県'),
+	(25,'滋賀県'),
+	(26,'京都府'),
+	(27,'大阪府'),
+	(28,'兵庫県'),
+	(29,'奈良県'),
+	(30,'和歌山県'),
+	(31,'鳥取県'),
+	(32,'島根県'),
+	(33,'岡山県'),
+	(34,'広島県'),
+	(35,'山口県'),
+	(36,'徳島県'),
+	(37,'香川県'),
+	(38,'愛媛県'),
+	(39,'高知県'),
+	(40,'福岡県'),
+	(41,'佐賀県'),
+	(42,'長崎県'),
+	(43,'熊本県'),
+	(44,'大分県'),
+	(45,'宮崎県'),
+	(46,'鹿児島県'),
+	(47,'沖縄県');
 

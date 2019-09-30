@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
@@ -56,6 +56,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 					<dd>500円＋税</dd>
 				</dl>
 
+				<h3>オプション料</h3>
+				<dl class="kijilist clearfix">
+					<c:if test = "${oderData.pocketBeans.poketPrice > 0}">
+						<dd>ポケット【${oderData.pocketBeans.pocketType}】 : ${oderData.pocketBeans.poketPrice}円＋税</dd>
+					</c:if>
+
+					<c:if test = "${oderData.nameDsingBeans.desingType != null}">
+						<dd>ネームの種類【${oderData.nameDsingBeans.desingType}】 : ${oderData.nameDsingBeans.desingPrice}円＋税</dd>
+					</c:if>
+				</dl>
+
 				<h3>合計金額</h3>
 				<dl class="kijilist clearfix">
 					<dd>18,500円＋税（仕様決定後に金額が変わる場合がございます）</dd>
@@ -66,64 +77,81 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 				<div>
 					<h3>ご注文内容</h3>
 					<dl class="orderlist">
-						<c:forEach var="size" items="${oderSize}" varStatus="status">
+
 							<dt>項目名</dt>
 							<dd>&nbsp;</dd>
 							<dt>首周り</dt>
-							<dd>${size.neck} センチ</dd>
+							<dd> ${oderData.sizeBeanse.neck} センチ</dd>
 
 							<dt>肩幅</dt>
-							<dd>${size.shoulder} センチ</dd>
+							<dd>${oderData.sizeBeanse.shoulder} センチ</dd>
 
 							<dt>アームホール</dt>
-							<dd>${size.arm} センチ</dd>
+							<dd>${oderData.sizeBeanse.arm} センチ</dd>
 
 							<dt>裄丈右</dt>
-							<dd>${size.sleeveRigt} センチ</dd>
+							<dd>${oderData.sizeBeanse.sleeveRigt} センチ</dd>
 
 							<dt>裄丈左</dt>
-							<dd>${size.} センチ</dd>
+							<dd>${oderData.sizeBeanse.sleeveLeft} センチ</dd>
 
 							<dt>上胴（バスト）</dt>
-							<dd>${size.bust} センチ</dd>
+							<dd>${oderData.sizeBeanse.bust} センチ</dd>
 
 							<dt>中胴（ウエスト）</dt>
-							<dd>${size.waist} センチ</dd>
+							<dd>${oderData.sizeBeanse.waist}  センチ</dd>
 
 							<dt>下胴（ヒップ）</dt>
-							<dd>１２ センチ</dd>
+							<dd>${oderData.sizeBeanse.hips} センチ</dd>
 
 							<dt>着丈</dt>
-							<dd>１２ センチ</dd>
+							<dd>${oderData.sizeBeanse.length} センチ</dd>
 
 							<dt>カフス周り右</dt>
-							<dd>１２ センチ</dd>
+							<dd>${oderData.sizeBeanse.cuffsRigt} センチ</dd>
 
 							<dt>カフス周り左</dt>
-							<dd>１２ センチ</dd>
+							<dd>${oderData.sizeBeanse.cuffsLeft} センチ</dd>
 
 							<dt>ご身長</dt>
-							<dd>１２ センチ</dd>
+							<dd>${oderData.sizeBeanse.height} センチ</dd>
+
+
 							<dt>シャツのシルエット</dt>
-							<dd>イタリアンスタイル</dd>
+							<dd>${oderData.silhouetteType}</dd>
+
 							<dt>衿のデザイン</dt>
-							<dd>１）レギュラーカラー&nbsp;</dd>
+							<dd>${oderData.collarType}</dd>
+
 							<dt>衿デザインのご要望</dt>
-							<dd></dd>
+							<dd>${oderData.requestBeans.collarRequest}</dd>
+
 							<dt>カフスのデザイン</dt>
-							<dd>２）ラウンドカフス（中丸）&nbsp;</dd>
+							<dd>${oderData.cuffsDesingType}</dd>
+
 							<dt>カフスのコンバーチブル仕様</dt>
-							<dd>シングルボタン止め</dd>
+							<dd>${oderData.cuffsButtonType}</dd>
+
 							<dt>カフスの時計仕様</dt>
-							<dd>左右差無し</dd>
+							<dd>${oderData.cuffsWatchType}</dd>
+
 							<dt>カフスデザインのご要望</dt>
-							<dd></dd>
+							<dd>${oderData.requestBeans.cuffsRequest}</dd>
+
 							<dt>ポケットのデザイン</dt>
-							<dd>ノーマルポケット（片ポケット）</dd>
+							<dd>${oderData.pocketBeans.pocketType}</dd>
+
 							<dt>ポケットデザインのご要望</dt>
-							<dd></dd>
+							<dd>${oderData.requestBeans.pocketRequest}</dd>
+
 							<dt>ネームの有無</dt>
-							<dd>ネームは入れない</dd>
+							<dd>${oderData.nameMessage}</dd>
+							<c:if test = "${oderData.nameMessage == 'ネームを入いれる'}">
+								<dt>ネームの種類</dt>
+								<dd>${oderData.nameDsingBeans.desingType}</dd>
+
+
+							</c:if>
 							<dt>ボタンの選択</dt>
 							<dd>プラスチック ホワイト 二穴ボタン ミシン付け</dd>
 							<dt>ボタン付け糸</dt>
@@ -134,7 +162,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 							<dd>通常の位置 （第二ボタン衿台より５．５センチ）</dd>
 							<dt>その他のご要望</dt>
 							<dd></dd>
-						</c:forEach>
+
 					</dl>
 
 				</div>

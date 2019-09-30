@@ -129,7 +129,7 @@
 							<li><button type="submit">
 									<span>この生地を</span>カートに入れる
 								</button></li>
-							<li><a href="ItemAdd">カートの中身を見る</a></li>
+							<li><a href="CartServlet">カートの中身を見る</a></li>
 						</ul>
 					</div>
 

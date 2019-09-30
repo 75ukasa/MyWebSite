@@ -30,6 +30,8 @@ public class ForwardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
+
 		String Date = request.getParameter("id");
 
 		if(Date.equals("1")) {
