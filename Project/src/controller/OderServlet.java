@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +15,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import beans.CartBeans;
 import beans.OderBeans;
+import beans.OderButtonDesingBeans;
+import beans.OderNameColorBeans;
 import beans.OderNameDsingBeans;
 import beans.OderPocketBeans;
 import beans.OderRequestBeans;
 import beans.OderSizeBeanse;
+import beans.UserDataBeans;
 import dao.OderDAO;
 
 
@@ -56,15 +61,25 @@ public class OderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
-			//エラーメッセージ用
-			List<String> ActionMessage = new ArrayList<String>();
-			//その他の要望用
-			OderRequestBeans oderRequest = new OderRequestBeans();
+			List<Integer> price = new ArrayList<Integer>();
+			//カートアイテムの取得
+			List<CartBeans> cart = (ArrayList<CartBeans>) session.getAttribute("cart");
+			if(!CollectionUtils.isEmpty(cart)) {
+				//カートアイテムの値段を取得
+				price = cart.stream().map(item -> item.getSubPrice()).collect(Collectors.toList());
 
-			/* ==  == *///サイズ情報の処理
-			OderSizeBeanse oderSize = new OderSizeBeanse();
-			//サイズの値をまとめて取得
-			String[] size = request.getParameterValues("size");
+				//各オーダー情報用beans
+				OderBeans oderData = new OderBeans();
+				//エラーメッセージ用
+				List<String> ActionMessage = new ArrayList<String>();
+				//その他の要望用
+				OderRequestBeans oderRequest = new OderRequestBeans();
+
+				/* == サイズ情報の処理  == */
+				//各サイズ用beans
+				OderSizeBeanse oderSize = new OderSizeBeanse();
+				//サイズの値をまとめて取得
+				String[] size = request.getParameterValues("size");
 				for(int i = 0 ; i < size.length; i++) {
 					//nullチェック
 					if(!StringUtils.isBlank(size[i])) {
@@ -96,11 +111,13 @@ public class OderServlet extends HttpServlet {
 							}else if(i == 11) {
 								oderSize.setHeight(size[i]);
 							}
-
 						}else {
 							//パラメータが数値以外の場合
 							ActionMessage.add("サイズは数字で記入してください");
+							break;
 						}
+						//サイズ情報をオーダーbeansにセット
+						oderData.setSizeBeanse(oderSize);
 					}else {
 						//パラメータがnullもしくは空白の場合
 						ActionMessage.add("サイズ記入欄を埋めてください");
@@ -111,16 +128,17 @@ public class OderServlet extends HttpServlet {
 
 				/* == シルエット情報の取得 == */
 				int silhouetteId = Integer.parseInt(request.getParameter("style"));
-				String silhouetteType = OderDAO.getOderSilhouette(silhouetteId);
+				//シルエット情報をオーダーbeansにセット
+				oderData.setSilhouetteType(OderDAO.getOderSilhouette(silhouetteId));
 
 
 				/* == 襟情報の取得 == */
 				CharSequence collarId = request.getParameter("collar");
 				oderRequest.setCollarRequest(request.getParameter("collarRequest"));
 
-				String collarType = "";
 				if(!StringUtils.isBlank(collarId)) {
-					 collarType = OderDAO.getOderColler(collarId);
+					//シルエット情報をオーダーbeansにセット
+					oderData.setCollarType(OderDAO.getOderColler(collarId));
 				}else {
 					ActionMessage.add("襟のデザインを選択してください");
 				}
@@ -129,10 +147,10 @@ public class OderServlet extends HttpServlet {
 				/* == カフスデザイン情報の取得 == */
 				CharSequence cuffsDesingId= request.getParameter("cuffsDesing");
 				oderRequest.setCuffsRequest(request.getParameter("cuffsRequest"));
-				String cuffsDesingType = "";
 
 				if(!StringUtils.isBlank(cuffsDesingId)) {
-					cuffsDesingType = OderDAO.getOderCuffsDesing(cuffsDesingId);
+					//カフスデザイン情報をオーダーbeansにセット
+					oderData.setCuffsDesingType(OderDAO.getOderCuffsDesing(cuffsDesingId));
 				}else {
 					ActionMessage.add("カフスのデザインを選択してください");
 				}
@@ -140,10 +158,10 @@ public class OderServlet extends HttpServlet {
 
 				/* == カフスボタン情報の取得 == */
 				CharSequence cuffsButtonId= request.getParameter("cuffsButton");
-				String cuffsButtonType = "";
 
 				if(!StringUtils.isBlank(cuffsButtonId)) {
-					cuffsButtonType = OderDAO.getOderCuffsButton(cuffsButtonId);
+					//カフスボタン情報をオーダーbeansにセット
+					oderData.setCuffsButtonType(OderDAO.getOderCuffsButton(cuffsButtonId));
 				}else {
 					ActionMessage.add("カフスのコンバーチブル仕様を選択してください");
 				}
@@ -151,10 +169,10 @@ public class OderServlet extends HttpServlet {
 
 				/* == カフス時計情報の取得 == */
 				CharSequence cuffWatchId= request.getParameter("cuffsWatch");
-				String cuffsWatchType = "";
 
-				if(!StringUtils.isBlank(cuffsButtonId)) {
-					cuffsWatchType = OderDAO.getOderCuffsWatch(cuffWatchId);
+				if(!StringUtils.isBlank(cuffWatchId)) {
+					//カフス時計情報をオーダーbeansにセット
+					oderData.setCuffsWatchType(OderDAO.getOderCuffsWatch(cuffWatchId));
 				}else {
 					ActionMessage.add("カフスの時計仕様を選択してください");
 				}
@@ -163,79 +181,210 @@ public class OderServlet extends HttpServlet {
 				/* == ポケットデザイン情報の取得 == */
 				CharSequence pocketId = request.getParameter("pocket");
 				oderRequest.setPocketRequest(request.getParameter("pocketRequest"));
-				OderPocketBeans oderPocket = new OderPocketBeans();
 
 				if(!StringUtils.isBlank(pocketId)) {
-					oderPocket = OderDAO.getOderPocket(pocketId);
+					OderPocketBeans oderPocket = OderDAO.getOderPocket(pocketId);
+					//ポケットのオプション料金をpriceListに追加
+					price.add(oderPocket.getPoketPrice());
+					//ポケットデザイン情報をオーダーbeansにセット
+					oderData.setPocketBeans(oderPocket);
 				}else {
 					ActionMessage.add("ポケット情報を入力してください");
 				}
 
 
 				/* == ネーム情報の取得 == */
-				int name = Integer.parseInt(request.getParameter("nameDo_Not"));
+				int doName = Integer.parseInt(request.getParameter("nameDo_Not"));
 				String nameDesingId = request.getParameter("nameDesing");
 				String nameInitial = request.getParameter("nameInitial");
 				String nameColorId1 = request.getParameter("nameColor1");
 				String nameColorId2 = request.getParameter("nameColor2");
 				String namePosition = request.getParameter("namePosition");
 
-				OderNameDsingBeans nameDsing = new OderNameDsingBeans();
-				String nameMessage = "";
+
 
 				//ネームを入れない場合
-				if(name == 1) {
+				if(doName == 1) {
 					if(!nameDesingId.isEmpty() || !nameColorId1.isEmpty() || !nameColorId2.isEmpty() || !namePosition.isEmpty()) {
 						ActionMessage.add("ネームを入れる場合は[ネームを入れる]を選択してください");
 					}else {
-						nameMessage = "ネームは入れない";
+						oderData.setNameMessage("ネームは入れない");
 					}
 
 				//ネームを入れる場合
-				}else if(name == 2) {
-					nameMessage = "ネームを入いれる";
-					//デザイン情報の取得
+				}else if(doName == 2) {
+					oderData.setNameMessage("ネームを入いれる");
+					//ネームデザイン情報の取得
 					if(!nameDesingId.isEmpty()) {
-						nameDsing = OderDAO.getOderNameDesing(nameDesingId);
+						OderNameDsingBeans nameDsing = OderDAO.getOderNameDesing(nameDesingId);
+						//ネームデザインのオプション料金をpriceListに追加
+						price.add(nameDsing.getDesingPrice());
+						//ネームデザイン情報をオーダーbeansにセット
+						oderData.setNameDsingBeans(nameDsing);
 					}else {
 						ActionMessage.add("ネームの種類を選択してください");
 					}
 
-					//イニシャル情報処理
-					if(!StringUtils.isBlank(nameInitial)) {
 
+					//--イニシャル情報処理--
+					if(!StringUtils.isBlank(nameInitial)) {
+						oderData.setNameSpelling(nameInitial);
+					}else {
+						ActionMessage.add("ネームのイニシャルを記入してください");
 					}
 
+
+					//--ネームカラー情報処理--
+					if(nameDesingId.equals("1") || nameDesingId.equals("2") || nameDesingId.equals("3") || nameDesingId.equals("4") || nameDesingId.equals("5") || nameDesingId.equals("9") || nameDesingId.equals("10")) {
+						//ネームカラーが１種類の場合
+						if(!nameColorId1.isEmpty()) {
+							OderNameColorBeans nameColor1 = OderDAO.getOderNameColor(nameColorId1);
+							//ネームカラーのオプション料金をpriceListに追加
+							price.add(nameColor1.getColorPrice());
+							oderData.setNameColorBeans1(nameColor1);
+						}else {
+							ActionMessage.add("ネームのカラーを選択してください");
+						}
+
+
+					}else if(nameDesingId.equals("6") || nameDesingId.equals("7") || nameDesingId.equals("8")) {
+						//ネームカラーが２種類の場合
+						if(!nameColorId1.isEmpty() && !nameColorId2.isEmpty()) {
+							OderNameColorBeans nameColor1 = OderDAO.getOderNameColor(nameColorId1);
+							//ネームカラーのオプション料金をpriceListに追加
+							price.add(nameColor1.getColorPrice());
+							oderData.setNameColorBeans1(nameColor1);
+
+							OderNameColorBeans nameColor2 = OderDAO.getOderNameColor(nameColorId2);
+							//ネームカラーのオプション料金をpriceListに追加
+							price.add(nameColor2.getColorPrice());
+							oderData.setNameColorBeans2(nameColor2);
+						}else {
+							ActionMessage.add("ネームの種類 6) 7) 8)を選択された方はカラーを2種類選択してください");
+						}
+					}
+
+					//--ネーム場所情報処理--
+					if(!StringUtils.isBlank(namePosition)) {
+						//ネーム場所情報をオーダーbeansにセット
+						oderData.setNamePosition(OderDAO.getOderNamePosition(namePosition));
+					}else {
+						ActionMessage.add("ネームの場所を選択してください");
+					}
 				}
 
-				//各オーダー情報をbeansにセット
-				OderBeans oderData = new OderBeans();
-				oderData.setSizeBeanse(oderSize);
-				oderData.setSilhouetteType(silhouetteType);
-				oderData.setCollarType(collarType);
-				oderData.setCuffsDesingType(cuffsDesingType);
-				oderData.setCuffsButtonType(cuffsButtonType);
-				oderData.setCuffsWatchType(cuffsWatchType);
+
+				/* == ボタン情報の取得 == */
+				//--ボタンデザイン情報処理--
+				int buttonDesindId = Integer.parseInt(request.getParameter("button"));
+				OderButtonDesingBeans buttonDesing = OderDAO.getOderButtonDesing(buttonDesindId);
+				//ボタンデザインのオプション料金をpriceListに追加
+				price.add(buttonDesing.getButtonPrice());
+				oderData.setButtonDesingBeans(buttonDesing);
+
+				//--ボタン糸情報処理--
+				int buttonThreadId1 = Integer.parseInt(request.getParameter("buttonThread"));
+				int buttonThreadId2 = Integer.parseInt(request.getParameter("buttonHole"));
+
+				oderData.setButtonThread1(OderDAO.getOderButtonThread(buttonThreadId1));
+				oderData.setButtonThread2(OderDAO.getOderButtonThread(buttonThreadId2));
+
+				/* == その他の要望 == */
+				oderRequest.setOtherRequest(request.getParameter("otherRequest"));
+
+				//各種の要望メッセージをOderBeansにセット
 				oderData.setRequestBeans(oderRequest);
-				oderData.setPocketBeans(oderPocket);
-				oderData.setNameMessage(nameMessage);
-				oderData.setNameDsingBeans(nameDsing);
 
 
+				/* == 個人情報の取得 == */
+				String zip = request.getParameter("zip");
+				String pref = request.getParameter("pref");
+				String address = request.getParameter("address");
+				String name = request.getParameter("name");
+				String kana = request.getParameter("kana");
+				String tel = request.getParameter("tel");
 
+				UserDataBeans UserData = new UserDataBeans();
+
+				//郵便番号処理
+				if(!StringUtils.isBlank(zip)) {
+					if(Helper.inputZipValidasion(zip)) {
+						UserData.setZip(zip);
+					}else {
+						ActionMessage.add("郵便番号を正しく入力してください");
+					}
+				}else {
+					ActionMessage.add("郵便番号を記入してください");
+				}
+
+				//都道府県処理
+				if(!StringUtils.isBlank(pref)) {
+					UserData.setPref(OderDAO.getOderPref(pref));
+				}else {
+					ActionMessage.add("都道府県を記入してください");
+				}
+
+				//市町村処理
+				if(!StringUtils.isBlank(address)) {
+					UserData.setAddress(address);
+				}else {
+					ActionMessage.add("市町村を記入してください");
+				}
+
+				//名前処理
+				if(!StringUtils.isBlank(name)) {
+					UserData.setName(name);
+				}else {
+					ActionMessage.add("名前を記入してください");
+				}
+
+				//ふりがな処理
+				if(!StringUtils.isBlank(kana)) {
+					if(Helper.inputKanaValidasion(kana)) {
+						UserData.setKana(kana);
+					}else {
+						ActionMessage.add("ふりがなを正しく記入してください");
+					}
+
+				}else {
+					ActionMessage.add("ふりがなを記入してください");
+				}
+
+				//電話番号処理
+				if(!StringUtils.isBlank(tel)) {
+					if(Helper.inputTelValidasion(tel)) {
+						UserData.setTel(tel);
+					}else {
+						ActionMessage.add("電話番号を正しく記入してください");
+					}
+				}else {
+					ActionMessage.add("電話番号を記入してください");
+				}
+				//ユーザー情報をOderBeansにセット
+				oderData.setUserDataBeans(UserData);
+
+				//合計金額
+				oderData.setPrice(Helper.getTotalPrice(price));
 
 
 
 
 				//エラーメッセージの確認
 				if(!CollectionUtils.isEmpty(ActionMessage)){
-					//エラーメッセージを確認した場合はカートへフォワード
+					//エラーメッセージを確認した場合はオーダーフォームへフォワード
 					request.setAttribute("ActionMessage", ActionMessage);
 					request.getRequestDispatcher("WEB-INF/jsp/order.jsp").forward(request, response);
 				}else {
 					session.setAttribute("oderData",oderData);
 					request.getRequestDispatcher("WEB-INF/jsp/buy.jsp").forward(request, response);
 				}
+			}else {
+				//カートのセッションが無かった場合
+				String cartActionMessage = "カートに商品はありません";
+				request.setAttribute("cartActionMessage", cartActionMessage);
+				//セッションが存在しない場合はカートへフォワード
+				request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);
+			}
 
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -11,14 +11,28 @@ public class OderBeans implements Serializable{
 	private String pocketDesing;
 	private String nameMessage;
 	private String nameSpelling;
+	private String namePosition;
+	private String buttonThread1;
+	private String buttonThread2;
 	//OderSizeBeanseと結合
 	private OderSizeBeanse sizeBeanse;
 	//OderRequestBeansと結合
 	private OderRequestBeans requestBeans;
 	// OderPocketBeansと結合
 	private OderPocketBeans pocketBeans;
-	//OderNameDsingBeansと結合
+	//OderNameDesingBeansと結合
 	private OderNameDsingBeans nameDsingBeans;
+	//OderNameColorBeans
+	private OderNameColorBeans nameColorBeans1;
+	//OderNameColorBeans
+	private OderNameColorBeans nameColorBeans2;
+	//OderButtonDesingと結合
+	private OderButtonDesingBeans buttonDesingBeans;
+	//UserDataBeansと結合
+	private UserDataBeans userDataBeans;
+	//OderPriceBeansと結合
+	private OderPriceBeans price;
+
 
 
 
@@ -72,6 +86,46 @@ public class OderBeans implements Serializable{
 	}
 
 
+	public String getNameMessage() {
+		return nameMessage;
+	}
+	public void setNameMessage(String nameMessage) {
+		this.nameMessage = nameMessage;
+	}
+
+
+	public String getNameSpelling() {
+		return nameSpelling;
+	}
+	public void setNameSpelling(String nameSpelling) {
+		this.nameSpelling = nameSpelling;
+	}
+
+
+	public String getNamePosition() {
+		return namePosition;
+	}
+	public void setNamePosition(String namePosition) {
+		this.namePosition = namePosition;
+	}
+
+
+	public String getButtonThread1() {
+		return buttonThread1;
+	}
+	public void setButtonThread1(String buttonThread1) {
+		this.buttonThread1 = buttonThread1;
+	}
+
+
+	public String getButtonThread2() {
+		return buttonThread2;
+	}
+	public void setButtonThread2(String buttonThread2) {
+		this.buttonThread2 = buttonThread2;
+	}
+
+
 	public OderSizeBeanse getSizeBeanse() {
 		return sizeBeanse;
 	}
@@ -104,19 +158,42 @@ public class OderBeans implements Serializable{
 	}
 
 
-	public String getNameMessage() {
-		return nameMessage;
+	public OderNameColorBeans getNameColorBeans1() {
+		return nameColorBeans1;
 	}
-	public void setNameMessage(String nameMessage) {
-		this.nameMessage = nameMessage;
+	public void setNameColorBeans1(OderNameColorBeans nameColorBeans1) {
+		this.nameColorBeans1 = nameColorBeans1;
 	}
 
 
-	public String getNameSpelling() {
-		return nameSpelling;
+	public OderNameColorBeans getNameColorBeans2() {
+		return nameColorBeans2;
 	}
-	public void setNameSpelling(String nameSpelling) {
-		this.nameSpelling = nameSpelling;
+	public void setNameColorBeans2(OderNameColorBeans nameColorBeans2) {
+		this.nameColorBeans2 = nameColorBeans2;
+	}
+
+
+	public OderButtonDesingBeans getButtonDesingBeans() {
+		return buttonDesingBeans;
+	}
+	public void setButtonDesingBeans(OderButtonDesingBeans buttonDesingBeans) {
+		this.buttonDesingBeans = buttonDesingBeans;
+	}
+
+
+	public UserDataBeans getUserDataBeans() {
+		return userDataBeans;
+	}
+	public void setUserDataBeans(UserDataBeans userDataBeans) {
+		this.userDataBeans = userDataBeans;
+	}
+
+
+	public OderPriceBeans getPrice() {
+		return price;
+	}
+	public void setPrice(OderPriceBeans price) {
+		this.price = price;
 	}
 }
-

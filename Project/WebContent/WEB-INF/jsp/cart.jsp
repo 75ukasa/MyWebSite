@@ -56,22 +56,21 @@
 				</dl>
 
 				<dl class="kijilist clearfix">
-					<form action="ItemDelete" method="POST">
-						<c:forEach var="item" items="${cart}" varStatus="status">
+					<c:forEach var="item" items="${cart}" varStatus="status">
+						<form action="ItemDelete" method="POST">
 							<dt>
 								No.${item.id}   ■${item.cloth}   ■${item.remark}   ■${item.brandDataBeans.bName}   ■${item.material}<br>
-
-								<button type="submit" name="delete_id" value="${item.id}" >削除</button>
+								<input type="hidden" name="delete_id" value="${item.id}">
+								<button  name="id" value="1" >削除</button>
 							</dt>
-							<dd>
-								<input name="change_num" type="text" size="3" value="1">
-								枚
-								<button type="submit">枚数変更</button>
-							</dd>
-							<input type="hidden" name="s-sh_no" value="1158">
-						</c:forEach>
 
-					</form>
+							<dd>
+								<input type="hidden" name="Change_id" value="${item.id}">
+								<input name="num" type="text" size="3" value="${item.num}">枚
+								<button type="submit" name="id" value="2">枚数変更</button>
+							</dd>
+						</form>
+					</c:forEach>
 				</dl>
 
 				<p class="contbtn">

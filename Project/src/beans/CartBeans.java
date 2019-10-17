@@ -2,18 +2,15 @@ package beans;
 
 import java.io.Serializable;
 
-public class ItemDataBeans implements Serializable{
+public class CartBeans implements Serializable{
 	private int id;
 	private int brandId;
 	private String material;
-	private int price;
-	private String color;
 	private String remark;
-	private String depth;
 	private String cloth;
-	private String detail;
-	private String fileName1;
-	private String fileName2;
+	private int num;
+	private int unitPrice;
+	private int subPrice;
 	// brandDataBeansと結合
 	private brandDataBeans brandDataBeans;
 
@@ -44,35 +41,11 @@ public class ItemDataBeans implements Serializable{
 	}
 
 
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-
 	public String getRemark() {
 		return remark;
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-
-	public String getDepth() {
-		return depth;
-	}
-	public void setDepth(String depth) {
-		this.depth = depth;
 	}
 
 
@@ -84,27 +57,27 @@ public class ItemDataBeans implements Serializable{
 	}
 
 
-	public String getDetail() {
-		return detail;
+	public int getNum() {
+		return num;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-
-
-	public String getFileName1() {
-		return fileName1;
-	}
-	public void setFileName1(String fileName1) {
-		this.fileName1 = fileName1;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 
-	public String getFileName2() {
-		return fileName2;
+	public int getUnitPrice() {
+		return unitPrice;
 	}
-	public void setFileName2(String fileName2) {
-		this.fileName2 = fileName2;
+	public void setUnitPrice(int unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+
+	public int getSubPrice() {
+		return subPrice;
+	}
+	public void setSubPrice(int subPrice) {
+		this.subPrice = subPrice;
 	}
 
 
@@ -114,5 +87,4 @@ public class ItemDataBeans implements Serializable{
 	public void setBrandDataBeans(brandDataBeans brandDataBeans) {
 		this.brandDataBeans = brandDataBeans;
 	}
-
 }

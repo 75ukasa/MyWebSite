@@ -28,7 +28,8 @@
 
 
 	</header>
-	<script type="text/javascript" src="../js/gmenu.js"></script>
+	<script type="text/javascript" src="../js/gm
+	enu.js"></script>
 	<nav class="gmenu"></nav>
 <body>
 
@@ -45,8 +46,8 @@
 				<dl class="kijilist clearfix">
 
 					<c:forEach var="item" items="${cart}" varStatus="status">
-						<dt>NO-${item.id}  グレーの変わり織りチェック イタリア CANCLINI カンクリーニ社 綿１００％</dt>
-						<dd>単価：18,000円&nbsp;&nbsp;&nbsp;1枚&nbsp;&nbsp;&nbsp;小計：18,000円</dd>
+						<dt>NO-${item.id}  ■${item.cloth}   ■${item.remark}   ■${item.brandDataBeans.bName}   ■${item.material}</dt>
+						<dd>単価：${item.unitPrice}円&nbsp;&nbsp;&nbsp;${item.num}枚&nbsp;&nbsp;&nbsp;小計：${item.subPrice}円＋税</dd>
 					</c:forEach>
 				</dl>
 
@@ -59,17 +60,42 @@
 				<h3>オプション料</h3>
 				<dl class="kijilist clearfix">
 					<c:if test = "${oderData.pocketBeans.poketPrice > 0}">
-						<dd>ポケット【${oderData.pocketBeans.pocketType}】 : ${oderData.pocketBeans.poketPrice}円＋税</dd>
+						<dt>ポケットの種類   : 【${oderData.pocketBeans.pocketType}】</dt>
+						<dd>小計  :   ${oderData.pocketBeans.poketPrice}円＋税</dd>
 					</c:if>
 
 					<c:if test = "${oderData.nameDsingBeans.desingType != null}">
-						<dd>ネームの種類【${oderData.nameDsingBeans.desingType}】 : ${oderData.nameDsingBeans.desingPrice}円＋税</dd>
+						<dt>ネームの種類   : 【${oderData.nameDsingBeans.desingType}】</dt>
+						<dd>小計  :   ${oderData.nameDsingBeans.desingPrice}円＋税</dd>
 					</c:if>
+
+					<c:if test = "${oderData.nameColorBeans1.colorType != null}">
+						<c:if test = "${oderData.nameColorBeans1.colorPrice > 0}">
+							<dt>ネームカラー   : 【${oderData.nameColorBeans1.colorType}】</dt>
+							<dd>小計  :   ${oderData.nameColorBeans1.colorPrice}円＋税</dd>
+						</c:if>
+					</c:if>
+
+					<c:if test = "${oderData.nameColorBeans2.colorType != null}">
+						<c:if test = "${oderData.nameColorBeans2.colorPrice > 0}">
+							<dt>ネームカラー重ね字   : 【${oderData.nameColorBeans2.colorType}】</dt>
+							<dd>小計  :   ${oderData.nameColorBeans2.colorPrice}円＋税</dd>
+						</c:if>
+					</c:if>
+
+					<c:if test = "${oderData. buttonDesingBeans.buttonPrice > 0}">
+						<dt>ボタンの種類   : 【${oderData. buttonDesingBeans.buttonTyupe}】</dt>
+						<dd>小計  :  ${oderData. buttonDesingBeans.buttonPrice}円＋税</dd>
+					</c:if>
+
 				</dl>
 
 				<h3>合計金額</h3>
 				<dl class="kijilist clearfix">
-					<dd>18,500円＋税（仕様決定後に金額が変わる場合がございます）</dd>
+					<dd>
+						小計（税抜き）  :  ${oderData.price.subtotal}円<br>
+						合計（税込み）  :  ${oderData.price.total}円
+					</dd>
 				</dl>
 
 			</div>
@@ -147,21 +173,38 @@
 							<dt>ネームの有無</dt>
 							<dd>${oderData.nameMessage}</dd>
 							<c:if test = "${oderData.nameMessage == 'ネームを入いれる'}">
+
 								<dt>ネームの種類</dt>
 								<dd>${oderData.nameDsingBeans.desingType}</dd>
 
+								<dt>ネームのイニシャル</dt>
+								<dd>${oderData.nameSpelling}</dd>
 
+								<dt>ネームカラー</dt>
+								<c:if test = "${oderData.nameColorBeans1.colorType != null}">
+									<dd>${oderData.nameColorBeans1.colorType}</dd>
+								</c:if>
+
+								<c:if test = "${oderData.nameColorBeans2.colorType != null}">
+									<dt>ネームカラー重ね時</dt>
+									<dd>${oderData.nameColorBeans2.colorType}</dd>
+								</c:if>
+
+								<dt>ネームの場所</dt>
+								<dd>${oderData.namePosition}</dd>
 							</c:if>
+
 							<dt>ボタンの選択</dt>
-							<dd>プラスチック ホワイト 二穴ボタン ミシン付け</dd>
+							<dd>${oderData. buttonDesingBeans.buttonTyupe}</dd>
+
 							<dt>ボタン付け糸</dt>
-							<dd>１）ブラック</dd>
+							<dd>>${oderData. buttonThread1}</dd>
+
 							<dt>ボタンホール糸</dt>
-							<dd>１）ブラック</dd>
-							<dt>ボタン位置</dt>
-							<dd>通常の位置 （第二ボタン衿台より５．５センチ）</dd>
+							<dd>${oderData. buttonThread2}</dd>
+
 							<dt>その他のご要望</dt>
-							<dd></dd>
+							<dd>${oderData.requestBeans.otherRequest}</dd>
 
 					</dl>
 
@@ -171,24 +214,29 @@
 					<h3>お客様情報</h3>
 					<dl class="orderlist">
 						<dt>郵便番号</dt>
-						<dd>166-0004</dd>
+						<dd>${oderData.userDataBeans.zip}</dd>
 						<dt>ご住所都道府県</dt>
-						<dd>東京都</dd>
+						<dd>${oderData.userDataBeans.pref}</dd>
 						<dt>市町村、番地</dt>
-						<dd>１３４</dd>
+						<dd>${oderData.userDataBeans.address}</dd>
 						<dt>お名前</dt>
-						<dd>あ</dd>
+						<dd>${oderData.userDataBeans.name}</dd>
 						<dt>ふりがな</dt>
-						<dd>あ</dd>
+						<dd>${oderData.userDataBeans.kana}</dd>
 						<dt>お電話番号</dt>
-						<dd>09022340156</dd>
-						<dt>年齢</dt>
-						<dd>１２</dd>
+						<dd>${oderData.userDataBeans.tel}</dd>
 						<dt>性別</dt>
 						<dd>男性</dd>
 						<dt>配送金額</dt>
 						<dd>全国一律\500+税とさせて頂きます。</dd>
 					</dl>
+				</div>
+
+				<div>
+					<ul class="conbtn">
+					<p class="t_c">お客様が入力された内容を登録すると、次回のご注文がスムーズになります。</p>
+						<li><button type="submit">登録</button></li>
+					</ul>
 				</div>
 
 				<div class="note">
@@ -198,8 +246,7 @@
 
 				<div>
 					<ul class="conbtn">
-						<li><button type="button"
-								onclick="location.href='order01.php'">ご注文内容の修正</button></li>
+						<li><button type="button" onclick="window.history.back()">ご注文内容の修正</button></li>
 						<li><button type="submit">ご注文完了</button></li>
 					</ul>
 				</div>

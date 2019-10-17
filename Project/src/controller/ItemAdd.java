@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.ItemDataBeans;
+import beans.CartBeans;
 import dao.ItemDAO;
 
 /**
@@ -50,35 +49,34 @@ public class ItemAdd extends HttpServlet {
 
 		try {
 			//選択された商品の数量
-			//int num = Integer.parseInt(request.getParameter("num"));
+			String num = request.getParameter("num");
 			//選択された商品のID
 			int Data = Integer.parseInt(request.getParameter("id"));
 
 			//アイテム情報の取得
-			ItemDataBeans item = ItemDAO.getItemDetail(Data);
+			CartBeans cartItem = ItemDAO.getCartItemDetail(Data,Integer.parseInt(num));
 
 			//アイテム情報をリクエストパラメータにセット
-			request.setAttribute("item",item );
+			request.setAttribute("item",cartItem );
 			//カートを取得
-			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
+			ArrayList<CartBeans> cart = (ArrayList<CartBeans>) session.getAttribute("cart");
 
 			//セッションにカートが無い場合カートを作成
 			if(cart == null) {
-				cart = new ArrayList<ItemDataBeans>();
+				cart = new ArrayList<CartBeans>();
 			}
 
 			//カートにアイテムを追加
-			cart.add(item);
+			cart.add(cartItem);
 
 			//カート情報更新
 			session.setAttribute("cart", cart);
-			//session.setAttribute("num", num);
 
 			//更新メッセージ
 			request.setAttribute("cartActionMessage", "商品を追加しました");
 			//フォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);;
+
 		}
 		catch (Exception e){
 			e.printStackTrace();

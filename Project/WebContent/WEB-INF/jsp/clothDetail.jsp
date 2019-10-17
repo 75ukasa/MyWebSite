@@ -121,9 +121,15 @@
 				<form action="ItemAdd" method="POST">
 				<input type="hidden" name="id" value="${item.id}">
 					<div class="cartbox">
-
 						<p class="t_c">
-							カートに追加する枚数 <input type="text" name="num" size="2"> 枚
+							カートに追加する枚数
+							<select  name="num" >
+								<option value="1">１</option>
+								<option value="2">２</option>
+								<option value="3">３</option>
+								<option value="4">４</option>
+								<option value="5">５</option>
+							</select>枚
 						</p>
 						<ul>
 							<li><button type="submit">

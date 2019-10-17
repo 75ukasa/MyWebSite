@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.ItemDataBeans;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import beans.CartBeans;
 
 /**
  * Servlet implementation class ItemDelete
@@ -37,29 +40,67 @@ public class ItemDelete extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * カートアイテムの変更
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
 		try {
-			int DeleteItemID = Integer.parseInt(request.getParameter("delete_id"));
-			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
+			ArrayList<CartBeans> cart = (ArrayList<CartBeans>) session.getAttribute("cart");
+			//nullチェック
+			if(!CollectionUtils.isEmpty(cart)) {
+				int Id  = Integer.parseInt(request.getParameter("id"));
+				String cartActionMessage = "";
 
-			String cartActionMessage = "";
-			for(ItemDataBeans cartItem : cart) {
-				if(cartItem.getId() == DeleteItemID) {
-					cart.remove(cartItem);
-					break;
+				if(Id == 1) {
+					//カートアイテムの消去
+					int DeleteItemID = Integer.parseInt(request.getParameter("delete_id"));
+					for(CartBeans cartItem : cart) {
+						if(cartItem.getId() == DeleteItemID) {
+							cart.remove(cartItem);
+							break;
+						}
+					}
+					cartActionMessage = "消去しました";
+					request.setAttribute("cartActionMessage", cartActionMessage);
+					//フォワード
+					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+					dispatcher.forward(request, response);
+
+				}else if(Id == 2) {
+					//カートアイテムの数量変更
+					//nullチェック
+					if(!StringUtils.isBlank(request.getParameter("num"))){
+						int num = Integer.parseInt(request.getParameter("num"));
+						int ChangeItemID = Integer.parseInt(request.getParameter("Change_id"));
+
+						for(CartBeans cartItem : cart) {
+							if(cartItem.getId() == ChangeItemID) {
+								cartItem.setNum(num);
+								break;
+							}
+						}
+						cartActionMessage = "枚数を変更しました";
+						request.setAttribute("cartActionMessage", cartActionMessage);
+						//フォワード
+						RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+						dispatcher.forward(request, response);
+					}else{
+						cartActionMessage = "枚数を記入してください";
+						request.setAttribute("cartActionMessage", cartActionMessage);
+						//フォワード
+						RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+						dispatcher.forward(request, response);
+					}
 				}
+			}else {
+				//カートのセッションが無かった場合
+				String cartActionMessage = "カートに商品はありません";
+				request.setAttribute("cartActionMessage", cartActionMessage);
+				//セッションが存在しない場合はカートへフォワード
+				request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);
 			}
-			cartActionMessage = "消去しました";
-
-			request.setAttribute("cartActionMessage", cartActionMessage);
-			//フォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
-			dispatcher.forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();

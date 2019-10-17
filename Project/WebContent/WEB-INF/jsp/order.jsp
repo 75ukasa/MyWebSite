@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/layout.css" media="all">
 
 <script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/oder.js"></script>
 
 </head>
 
@@ -39,10 +40,8 @@
 		<form method="post" action="OderServlet">
 			<article>
 				<h1><c:forEach var="message" items="${ActionMessage}" ><br>
-					${message}
-
-				 </c:forEach>
-
+						<span class="red">${message}</span>
+					</c:forEach>
 				</h1>
 				<h2>ショッピングカート内の生地</h2>
 				<p>生地のページでショッピングカートに追加された生地と枚数です。</p>
@@ -51,7 +50,7 @@
 					<ol class="kijilist">
 						<c:forEach var="item" items="${cart}" varStatus="status">
 
-							<li>NO-${item.id}   ■${item.cloth}   ■${item.brandDataBeans.bName}   ■${item.material}<span>1枚</span></li>
+							<li>NO-${item.id}   ■${item.cloth}   ■${item.brandDataBeans.bName}   ■${item.material}<span>${item.num}枚</span></li>
 
 						</c:forEach>
 					</ol>
@@ -734,7 +733,7 @@
 				<br>
 				<br>
 
-				<script src="js/oder.js"></script>
+
 
 				<article>
 					<h2 id="names">ネーム</h2>
@@ -751,290 +750,296 @@
 
 					<div class="bdbox wid70">
 						<input type="radio" name="nameDo_Not" value="1" checked="" id="m1">
-						<label for="m1">ネームは入れない（こちらにチェックをされた方は<a href="#button">次の<b>「ボタンの選択」</b></a>にお進み下さい）
-						</label><br> <input type="radio" name="nameDo_Not" value="2" id="m2">
+						<label for="m1">ネームは入れない（こちらにチェックをされた方は<a href="#button">次の<b>「ボタンの選択」</b></a>にお進み下さい）</label><br>
+
+						<input type="radio" name="nameDo_Not" value="2" id="m2">
 						<label for="m2">ネームを入れる方はこちらにチェック</label>
 					</div>
-					<p class="t_c">入れるにチェックされた方はネームの種類をお選び下さい。</p>
 
-					<div class="nametbl">
-					<div class="tblbox">
-						<ul class="col4">
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/doitsu.jpg">
-									<figcaption>
-										１）ドイツ文字<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/italic.jpg">
-									<figcaption>
-										２）イタリック<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/goshic.jpg">
-									<figcaption>
-										３）ゴシック体<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/rome.jpg">
-									<figcaption>
-										４）活字体<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/hikkitai.jpg">
-									<figcaption>
-										５）筆記体 <br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/hikkitai_kasane.jpg">
-									<figcaption>
-										６）筆記体重ね<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/doitsu_kasane.jpg">
-									<figcaption>
-										７）ドイツ文字重ね<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/rome_kasane.jpg">
-									<figcaption>
-										８）活字体重ね<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/japanese.jpg">
-									<figcaption>
-										９）漢字<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure>
-									<img src="img/oderForm/oderSlectName/tuzurimoji.jpg">
-									<figcaption>
-										１０）筆記体 綴り文字<br>￥５５０＋税
-									</figcaption>
-								</figure>
-							</li>
-						</ul>
-					</div>
-
-
-					<p class="lgreen">※記載のネームの大きさはイニシャルの大きさは含みません</p>
+					<div class="nametbl" style="display:none";  >
+						<div class="tblbox">
+						<p class="t_c">ネームを入れるにチェックされた方はネームの種類をお選び下さい。</p>
+							<ul class="col4">
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/doitsu.jpg">
+										<figcaption>
+											１）ドイツ文字<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/italic.jpg">
+										<figcaption>
+											２）イタリック<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/goshic.jpg">
+										<figcaption>
+											３）ゴシック体<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/rome.jpg">
+										<figcaption>
+											４）活字体<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/hikkitai.jpg">
+										<figcaption>
+											５）筆記体 <br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/hikkitai_kasane.jpg">
+										<figcaption>
+											６）筆記体重ね<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/doitsu_kasane.jpg">
+										<figcaption>
+											７）ドイツ文字重ね<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/rome_kasane.jpg">
+										<figcaption>
+											８）活字体重ね<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/japanese.jpg">
+										<figcaption>
+											９）漢字<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+								<li>
+									<figure>
+										<img src="img/oderForm/oderSlectName/tuzurimoji.jpg">
+										<figcaption>
+											１０）筆記体 綴り文字<br>￥５５０＋税
+										</figcaption>
+									</figure>
+								</li>
+							</ul>
+						</div>
 
 
-					<div class="t_c">
-						<p>それではネームの種類を下記の欄からお選び下さい。</p>
-						<select size="1" name="nameDesing">
-							<option value="">ネームの種類をお選び下さい</option>
+						<div class="t_c">
+							<p>それではネームの種類を下記の欄からお選び下さい。</p>
+							<select size="1" name="nameDesing">
+								<option value="">ネームの種類をお選び下さい</option>
 
-							<option value="1">１）ドイツ文字（プラス￥５５０＋税）</option>
-							<option value="2">２）イタリック（プラス￥５５０＋税）</option>
-							<option value="3">３）ゴシック体（プラス￥５５０＋税）</option>
-							<option value="4">４）活字体（プラス￥５５０＋税）</option>
-							<option value="5">５）筆記体（プラス￥５５０＋税）</option>
-							<option value="6">６）筆記体重ね（プラス￥５５０＋税）</option>
-							<option value="7">７）ドイツ文字重ね（プラス￥５５０＋税）</option>
-							<option value="8">８）活字体重ね（プラス￥５５０＋税）</option>
-							<option value="9">９）漢字（プラス￥５５０＋税）</option>
-							<option value="10">１０）筆記体綴り文字（プラス￥５５０＋税）</option>
-						</select>
+								<option value="1">１）ドイツ文字（プラス￥５５０＋税）</option>
+								<option value="2">２）イタリック（プラス￥５５０＋税）</option>
+								<option value="3">３）ゴシック体（プラス￥５５０＋税）</option>
+								<option value="4">４）活字体（プラス￥５５０＋税）</option>
+								<option value="5">５）筆記体（プラス￥５５０＋税）</option>
+								<option value="6">６）筆記体重ね（プラス￥５５０＋税）</option>
+								<option value="7">７）ドイツ文字重ね（プラス￥５５０＋税）</option>
+								<option value="8">８）活字体重ね（プラス￥５５０＋税）</option>
+								<option value="9">９）漢字（プラス￥５５０＋税）</option>
+								<option value="10">１０）筆記体綴り文字（プラス￥５５０＋税）</option>
+							</select>
+						</div>
 
-						<p>
-							先ずはお入れになるイニシャルを記載下さい <br>例：鈴木 太郎の場合は「T.S」<br>１０）筆記体
-							綴り文字を選択された方は「T.Suzuki」(例)
-						</p>
-						<textarea rows="4" cols="30" name="nameInitial"></textarea>
+						<div class="t_c" id=nameColorC style="display:none">
+							<p>
+								先ずはお入れになるイニシャルを記載下さい <br>例：鈴木 太郎の場合は「T.S」<br>１０）筆記体
+								綴り文字を選択された方は「T.Suzuki」(例)
+							</p>
+							<textarea rows="4" cols="30" name="nameInitial"></textarea>
 
-						<p>次にネームのカラーです。</p>
 
-						<figure>
-							<img src="img/oderForm/oderSlectName/name_color.jpg" width="600"
-								height="100" border="0">
-						</figure>
-					</div>
-					<table class="bdnon wid40">
-						<tbody>
-							<tr>
-								<td class="t_l">（１９）シルバー光沢<br>  通常￥５５０＋税のイニシャルが<br>
-									プラス￥３００＋税の￥８５０＋税となります。
-								</td>
- 								<td><img src="img/oderForm/oderSlectName/silver.jpg" width="200"
-									height="129" border="0"></td>
-							</tr>
+							<p>次にネームのカラーです。</p>
+
+							<figure>
+								<img src="img/oderForm/oderSlectName/name_color.jpg" width="600"
+									height="100" border="0">
+							</figure>
+
+							<table class="bdnon wid40">
+								<tbody>
+									<tr>
+										<td class="t_l">（１９）シルバー光沢<br>  通常￥５５０＋税のイニシャルが<br>
+											プラス￥３００＋税の￥８５０＋税となります。
+										</td>
+											<td><img src="img/oderForm/oderSlectName/silver.jpg" width="200"
+											height="129" border="0"></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<table class="tbl1 wid70">
+								<tbody>
+									<tr>
+										<td>（１）ブラック</td>
+										<td>（２）ネイビー</td>
+										<td>（３）サックスブルー</td>
+										<td>（４）シルバー</td>
+									</tr>
+									<tr>
+										<td>（５）シルバーグレー</td>
+										<td>（６）グレー</td>
+										<td>（７）ライトブラウン</td>
+										<td>（８）ブラウン</td>
+									</tr>
+									<tr>
+										<td>（９）ダークブラウン</td>
+										<td>（１０）レッド</td>
+										<td>（１１）ワイン</td>
+										<td>（１２）オレンジ</td>
+									</tr>
+									<tr>
+										<td>（１３）イエロー</td>
+										<td>（１４）エメラルドグリーン</td>
+										<td>（１５）グリーン</td>
+										<td>（１６）ピンク</td>
+									</tr>
+									<tr>
+										<td>（１７）パープル</td>
+										<td>（１８）ホワイト</td>
+										<td>（１９）シルバー光沢<br>通常価格プラス￥３００＋税
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="nameColorC1" style="display:none">
+							<p>
+								<span class="lgreen">１）～１０）</span>までの刺繍の方は以下のフォーマットから色をお選び下さい。
+							</p>
+							<div class="t_c">
+								<select size="1" id=nc1  name="nameColor1">
+									<option value="" selected="">ネームの色をお選び下さい。</option>
+									<option value="1">１）ブラック</option>
+									<option value="2">２）ネイビー</option>
+									<option value="3">３）サックスブルー</option>
+									<option value="4">４）シルバー</option>
+									<option value="5">５）シルバーグレー</option>
+									<option value="6">６）グレー</option>
+									<option value="7">７）ライトブラウン</option>
+									<option value="8">８）ブラウン</option>
+									<option value="9">９）ダークブラウン</option>
+									<option value="10">１０）レッド</option>
+									<option value="11">１１）ワイン</option>
+									<option value="12">１２）オレンジ</option>
+									<option value="13">１３）イエロー</option>
+									<option value="14">１４）エメラルドグリーン</option>
+									<option value="15">１５）グリーン</option>
+									<option value="16">１６）ピンク</option>
+									<option value="17">１７）パープル</option>
+									<option value="18">１８）ホワイト</option>
+									<option value="19">１９）シルバー光沢</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="nameColorC2" style="display:none">
+							<p>
+								<span class="lgreen">６）７）８）</span>の重ね文字の方はもう一色選択して下さい。
+							</p>
+							<div class="t_c">
+								<select size="1" name="nameColor2">
+									<option value="">ネームの色をお選び下さい。</option>
+									<option value="1">１）ブラック</option>
+									<option value="2">２）ネイビー</option>
+									<option value="3">３）サックスブルー</option>
+									<option value="4">４）シルバー</option>
+									<option value="5">５）シルバーグレー</option>
+									<option value="6">６）グレー</option>
+									<option value="7">７）ライトブラウン</option>
+									<option value="8">８）ブラウン</option>
+									<option value="9">９）ダークブラウン</option>
+									<option value="10">１０）レッド</option>
+									<option value="11">１１）ワイン</option>
+									<option value="12">１２）オレンジ</option>
+									<option value="13">１３）イエロー</option>
+									<option value="14">１４）エメラルドグリーン</option>
+									<option value="15">１５）グリーン</option>
+									<option value="16">１６）ピンク</option>
+									<option value="17">１７）パープル</option>
+									<option value="18">１８）ホワイト</option>
+									<option value="19">１９）シルバー光沢</option>
+								</select>
+							</div>
+						</div>
+
 						</tbody>
-					</table>
 
-					<table class="tbl1 wid70">
-						<tbody>
-							<tr>
-								<td>（１）ブラック</td>
-								<td>（２）ネイビー</td>
-								<td>（３）サックスブルー</td>
-								<td>（４）シルバー</td>
-							</tr>
-							<tr>
-								<td>（５）シルバーグレー</td>
-								<td>（６）グレー</td>
-								<td>（７）ライトブラウン</td>
-								<td>（８）ブラウン</td>
-							</tr>
-							<tr>
-								<td>（９）ダークブラウン</td>
-								<td>（１０）レッド</td>
-								<td>（１１）ワイン</td>
-								<td>（１２）オレンジ</td>
-							</tr>
-							<tr>
-								<td>（１３）イエロー</td>
-								<td>（１４）エメラルドグリーン</td>
-								<td>（１５）グリーン</td>
-								<td>（１６）ピンク</td>
-							</tr>
-							<tr>
-								<td>（１７）パープル</td>
-								<td>（１８）ホワイト</td>
-								<td>（１９）シルバー光沢<br>通常価格プラス￥３００＋税
-								</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-					<p>
-						<span class="lgreen">１）～１０）</span>までの刺繍の方は以下のフォーマットから色をお選び下さい。
-					</p>
-					<div class="t_c">
-						<select size="1" name="nameColor1">
-							<option value="" selected="">ネームの色をお選び下さい。</option>
-							<option value="1">１）ブラック</option>
-							<option value="2">２）ネイビー</option>
-							<option value="3">３）サックスブルー</option>
-							<option value="4">４）シルバー</option>
-							<option value="5">５）シルバーグレー</option>
-							<option value="6">６）グレー</option>
-							<option value="7">７）ライトブラウン</option>
-							<option value="8">８）ブラウン</option>
-							<option value="9">９）ダークブラウン</option>
-							<option value="10">１０）レッド</option>
-							<option value="11">１１）ワイン</option>
-							<option value="12">１２）オレンジ</option>
-							<option value="13">１３）イエロー</option>
-							<option value="14">１４）エメラルドグリーン</option>
-							<option value="15">１５）グリーン</option>
-							<option value="16">１６）ピンク</option>
-							<option value="17">１７）パープル</option>
-							<option value="18">１８）ホワイト</option>
-							<option value="19">１９）シルバー光沢</option>
-						</select>
-					</div>
-					<p>
-						<span class="lgreen">６）７）８）</span>の重ね文字の方はもう一色選択して下さい。
-					</p>
-					<div class="t_c">
-						<select size="1" name="nameColor2">
-							<option value="">ネームの色をお選び下さい。</option>
-							<option value="1">１）ブラック</option>
-							<option value="2">２）ネイビー</option>
-							<option value="3">３）サックスブルー</option>
-							<option value="4">４）シルバー</option>
-							<option value="5">５）シルバーグレー</option>
-							<option value="6">６）グレー</option>
-							<option value="7">７）ライトブラウン</option>
-							<option value="8">８）ブラウン</option>
-							<option value="9">９）ダークブラウン</option>
-							<option value="10">１０）レッド</option>
-							<option value="11">１１）ワイン</option>
-							<option value="12">１２）オレンジ</option>
-							<option value="13">１３）イエロー</option>
-							<option value="14">１４）エメラルドグリーン</option>
-							<option value="15">１５）グリーン</option>
-							<option value="16">１６）ピンク</option>
-							<option value="17">１７）パープル</option>
-							<option value="18">１８）ホワイト</option>
-							<option value="19">１９）シルバー光沢</option>
-							<option value="20">２０）重ね文字でも上の色と同色</option>
-						</select>
-					</div>
+						<h3>ネームの場所</h3>
+						<p class="t_c">下記の箇所からネームを入れる位置を選択できます。</p>
 
-					</tbody>
+						<div class="tblbox">
+							<ul class="col2 nameplace">
+								<li><img src="img/oderForm/oderSlectName/pocket_place.jpg"></li>
+								<li>
+									<table class="bdnon">
+										<tbody>
+											<tr class="v_m">
+												<td><img src="img/oderForm/oderSlectName/pocket_ue.jpg"
+													width="200" height="208" border="0">
+												<p>1)ポケットの上中央</p></td>
+												<td><img src="img/oderForm/oderSlectName/pocket_ue_hidari.jpg"
+													width="200" height="208" border="0">
+												<p>２）左ポケットの上ボディ中央より</p></td>
+											</tr>
+											<tr>
+												<td><img src="img/oderForm/oderSlectName/pocket_under.jpg"
+													width="200" height="208" border="0">
+												<p>３）左ポケット下ボディ中央より</p></td>
+												<td><img src="img/oderForm/oderSlectName/pocket_center.jpg"
+													width="200" height="208" border="0">
+												<p>４）ポケットの真ん中に</p></td>
+											</tr>
+											<tr>
+												<td><img src="img/oderForm/oderSlectName/cuffs_naname.jpg"
+													width="200" height="134" border="0">
+												<p>５）カフスに斜めに</p></td>
+												<td><img src="img/oderForm/oderSlectName/cuffs_center.jpg"
+													width="200" height="134" border="0">
+												<p>６）カフスの中央に</p></td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+							</ul>
+						</div>
 
-					<h3>ネームの場所</h3>
-					<p class="t_c">下記の箇所からネームを入れる位置を選択できます。</p>
-
-					<div class="tblbox">
-						<ul class="col2 nameplace">
-							<li><img src="img/oderForm/oderSlectName/pocket_place.jpg"></li>
-							<li>
-								<table class="bdnon">
-									<tbody>
-										<tr class="v_m">
-											<td><img src="img/oderForm/oderSlectName/pocket_ue.jpg"
-												width="200" height="208" border="0">
-											<p>1)ポケットの上中央</p></td>
-											<td><img src="img/oderForm/oderSlectName/pocket_ue_hidari.jpg"
-												width="200" height="208" border="0">
-											<p>２）左ポケットの上ボディ中央より</p></td>
-										</tr>
-										<tr>
-											<td><img src="img/oderForm/oderSlectName/pocket_under.jpg"
-												width="200" height="208" border="0">
-											<p>３）左ポケット下ボディ中央より</p></td>
-											<td><img src="img/oderForm/oderSlectName/pocket_center.jpg"
-												width="200" height="208" border="0">
-											<p>４）ポケットの真ん中に</p></td>
-										</tr>
-										<tr>
-											<td><img src="img/oderForm/oderSlectName/cuffs_naname.jpg"
-												width="200" height="134" border="0">
-											<p>５）カフスに斜めに</p></td>
-											<td><img src="img/oderForm/oderSlectName/cuffs_center.jpg"
-												width="200" height="134" border="0">
-											<p>６）カフスの中央に</p></td>
-										</tr>
-									</tbody>
-								</table>
-							</li>
-						</ul>
-					</div>
-
-					<p>（下記のプルダウンメニューより上記の１）～６）までもしくは７）の左袖８）の直接ボディを選択して下さい）</p>
-					<div class="t_c">
-						<select name="namePosition">
-							<option value="">ネームの場所を選択して下さい。</option>
-							<option value="1">１）ポケットの上中央</option>
-							<option value="2">２）左ポケットの上ボディ中央より</option>
-							<option value="3">３）左ポケット下ボディ中央より</option>
-							<option value="4">４）ポケットの真ん中に</option>
-							<option value="5">５）カフスに斜めに</option>
-							<option value="6">６）カフスの中央に</option>
-							<option value="7">７）左袖</option>
-							<option value="8">８）直接ボディに</option>
-						</select>
-					</div>
+						<p>（下記のプルダウンメニューより上記の１）～６）までもしくは７）の左袖８）の直接ボディを選択して下さい）</p>
+						<div class="t_c">
+							<select name="namePosition">
+								<option value="">ネームの場所を選択して下さい。</option>
+								<option value="1">１）ポケットの上中央</option>
+								<option value="2">２）左ポケットの上ボディ中央より</option>
+								<option value="3">３）左ポケット下ボディ中央より</option>
+								<option value="4">４）ポケットの真ん中に</option>
+								<option value="5">５）カフスに斜めに</option>
+								<option value="6">６）カフスの中央に</option>
+								<option value="7">７）左袖</option>
+								<option value="8">８）直接ボディに</option>
+							</select>
+						</div>
 					</div>
 				</article>
 
@@ -1045,10 +1050,6 @@
 						ボタンは貝ボタンになるとオプション扱いで価格が高くなりますが、貝ボタンでも高瀬貝ではなく、最高級の白蝶貝を使用しております。<br>
 						また貝釦とプラスチックボタンの半分色付きに関しては全て手付けにて作業を行わせて頂きますのでご理解を頂ければと思います。
 					</p>
-					<p>
-						ボタンの詳細は<a href="http://www.kinkodo.co.jp/button/" target="_blank">こちらからご覧になって頂けます。</a>
-					</p>
-
 					<h4 class="t_c">フリー（無料）ボタン</h4>
 					<div class="tblbox">
 						<ul class="col4 optbtn">
@@ -1057,7 +1058,7 @@
 										<figcaption>プラスチック ホワイト 二穴ボタン ミシン付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="1" checked="" id="n1">
+									<input type="radio" name="button" value="1" checked="" id="n1">
 								</p></li>
 
 							<li><label for="n2"><figure>
@@ -1065,7 +1066,7 @@
 										<figcaption>プラスチック ホワイト 四穴ボタン ２ミリ厚 ミシン付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="2" id="n2">
+									<input type="radio" name="button" value="2" id="n2">
 								</p></li>
 
 							<li><label for="n3"><figure>
@@ -1073,7 +1074,7 @@
 										<figcaption>プラスチック ホワイト 四穴ボタン ２．５ミリ厚 ミシン付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="3" id="n3">
+									<input type="radio" name="button" value="3" id="n3">
 								</p></li>
 
 							<li><label for="n4"><figure>
@@ -1081,7 +1082,7 @@
 										<figcaption>プラスチック ブラック 四穴ボタン ミシン付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="4" id="n4">
+									<input type="radio" name="button" value="4" id="n4">
 								</p></li>
 
 							<li><label for="n5"><figure>
@@ -1089,7 +1090,7 @@
 										<figcaption>プラスチック ブラウン 四穴ボタン ミシン付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="5" id="n5">
+									<input type="radio" name="button" value="5" id="n5">
 								</p></li>
 						</ul>
 					</div>
@@ -1102,7 +1103,7 @@
 										<figcaption>白蝶貝４つ穴２ミリ厚 オプション価格￥１，０００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="6" id="o1">
+									<input type="radio" name="button" value="6" id="o1">
 								</p></li>
 
 							<li><label for="o2"><figure>
@@ -1110,7 +1111,7 @@
 										<figcaption>白蝶貝４つ穴３ミリ厚 オプション価格￥１，３００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="7" id="o2">
+									<input type="radio" name="button" value="7" id="o2">
 								</p></li>
 
 							<li><label for="o3"><figure>
@@ -1118,7 +1119,7 @@
 										<figcaption>白蝶貝４つ穴４ミリ厚 オプション価格￥１，５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="8" id="o3">
+									<input type="radio" name="button" value="8" id="o3">
 								</p></li>
 
 							<li><label for="o4"><figure>
@@ -1126,7 +1127,7 @@
 										<figcaption>四角の白蝶貝４つ穴４ミリ厚 オプション価格￥２，０００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="9" id="o4">
+									<input type="radio" name="button" value="9" id="o4">
 								</p></li>
 
 							<li><label for="o5"><figure>
@@ -1134,7 +1135,7 @@
 										<figcaption>黒蝶貝４つ穴２ミリ厚 オプション価格￥１，０００＋税 手付</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="10" id="o5">
+									<input type="radio" name="button" value="10" id="o5">
 								</p></li>
 
 							<li><label for="o6"><figure>
@@ -1142,7 +1143,7 @@
 										<figcaption>黒蝶貝４つ穴３ミリ厚 オプション価格￥１，３００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="11" id="o6">
+									<input type="radio" name="button" value="11" id="o6">
 								</p></li>
 
 							<li><label for="o7"><figure>
@@ -1150,7 +1151,7 @@
 										<figcaption>茶蝶貝４つ穴２ミリ厚 オプション価格￥１，０００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="12" id="o7">
+									<input type="radio" name="button" value="12" id="o7">
 								</p></li>
 
 							<li><label for="o8"><figure>
@@ -1158,7 +1159,7 @@
 										<figcaption>下半分アクアブルー2.5ミリ厚 オプション価格￥８００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="13" id="o8">
+									<input type="radio" name="button" value="13" id="o8">
 								</p></li>
 
 							<li><label for="o9"><figure>
@@ -1166,7 +1167,7 @@
 										<figcaption>下半分ブルー2.5ミリ厚 オプション価格￥８００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="14" id="o9">
+									<input type="radio" name="button" value="14" id="o9">
 								</p></li>
 
 							<li><label for="o10"><figure>
@@ -1174,7 +1175,7 @@
 										<figcaption>下半分グレー2.5ミリ厚 オプション価格￥８００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="15" id="o10">
+									<input type="radio" name="button" value="15" id="o10">
 								</p></li>
 
 							<li><label for="o11"><figure>
@@ -1182,7 +1183,7 @@
 										<figcaption>下半分オレンジ2.5ミリ厚 オプション価格￥８００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="16" id="o11">
+									<input type="radio" name="button" value="16" id="o11">
 								</p></li>
 
 							<li><label for="o12"><figure>
@@ -1190,7 +1191,7 @@
 										<figcaption>下半分レッド2.5ミリ厚 オプション価格￥８００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="17" id="o12">
+									<input type="radio" name="button" value="17" id="o12">
 								</p></li>
 
 
@@ -1199,7 +1200,7 @@
 										<figcaption>ネイビープラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="18" id="o14">
+									<input type="radio" name="button" value="18" id="o14">
 								</p></li>
 
 							<li><label for="o15"><figure>
@@ -1207,7 +1208,7 @@
 										<figcaption>ブループラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="19" id="o15">
+									<input type="radio" name="button" value="19" id="o15">
 								</p></li>
 
 							<li><label for="o16"><figure>
@@ -1215,7 +1216,7 @@
 										<figcaption>ピンクプラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="20" id="o16">
+									<input type="radio" name="button" value="20" id="o16">
 								</p></li>
 
 							<li><label for="o17"><figure>
@@ -1223,7 +1224,7 @@
 										<figcaption>ワインプラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="21" id="o17">
+									<input type="radio" name="button" value="21" id="o17">
 								</p></li>
 
 							<li><label for="o18"><figure>
@@ -1231,7 +1232,7 @@
 										<figcaption>グレープラボタン２．５ミリ厚 オプション価格￥５００＋税 手付け</figcaption>
 									</figure></label>
 								<p>
-									<input type="radio" name="botan" value="22" id="o18">
+									<input type="radio" name="button" value="22" id="o18">
 								</p></li>
 
 						</ul>
@@ -1296,9 +1297,9 @@
 						<tbody>
 							<tr>
 								<td>ボタン付け糸</td>
-								<th><select size="1" name="botan_tsukeito">
-										<option value="0">白(特に指定のない場合は白）</option>
-										<option value="1" selected="">１）ブラック</option>
+								<th><select size="1" name="buttonThread">
+										<option value="0" selected="">白(特に指定のない場合は白）</option>
+										<option value="1">１）ブラック</option>
 										<option value="2">２）ネイビー</option>
 										<option value="3">３）サックスブルー</option>
 										<option value="4">４）シルバー</option>
@@ -1320,9 +1321,9 @@
 							</tr>
 							<tr>
 								<td>ボタンホール糸（濃色の生地には縫い糸を使わせて頂きます）</td>
-								<th><select size="1" name="botan_horuito">
-										<option value="0">白(特に指定のない場合は白、濃色の生地には縫い糸を使わせて頂きます）</option>
-										<option value="1" selected="">１）ブラック</option>
+								<th><select size="1" name="buttonHole">
+										<option value="0" selected="">白(特に指定のない場合は白、濃色の生地には縫い糸を使わせて頂きます）</option>
+										<option value="1">１）ブラック</option>
 										<option value="2">２）ネイビー</option>
 										<option value="3">３）サックスブルー</option>
 										<option value="4">４）シルバー</option>
@@ -1345,56 +1346,7 @@
 						</tbody>
 					</table>
 
-
-					<h3>ボタン位置</h3>
-					<p>クールビズの浸透により、ネクタイを外して着用するようなシャツが増えてきました。その際に第１ボタンを外しますが、第２ボタンまで外すとだらしなくなって見える。逆に第１ボタンだけ開けただけでは衿の開きが狭すぎる。というご要望がございました。</p>
-					<p>当店では通常衿台の下より５．５センチの所に第２を付けますが、その位置を多少下げることによって、だらしなくも見えずそして開き具合を広く見せるような方法も取っております。ご要望がございましたらお知らせ頂ければと思います。</p>
-					<p>
-						【この仕様に関しては同文を<a
-							href="http://www.kinkodo.co.jp/front_design/index.html"
-							target="_BLANK">フロントのデザイン</a>の所にも記載させて頂いております】
-					</p>
-
-					<div class="tblbox">
-						<ul class="col3 btnichi">
-
-							<li><label for="q2"><figure>
-										<figcaption>
-											【通常の位置】<br>衿台の下より５．５センチの所に第２ボタン<br>以下９センチ間隔
-										</figcaption>
-										<img src="img/oderForm/oderSlectButton/55.jpg">
-									</figure></label>
-								<p>
-									<input type="radio" name="botan_ichi" value="1" checked=""
-										id="q2"><label for="q2">通常の位置
-										（第二ボタン衿台より５．５センチ）</label>
-								</p></li>
-
-							<li><label for="q3"><figure>
-										<figcaption>
-											【第２ボタン７センチ】<br>衿台の下より７．０センチの所に第２ボタン<br>以下９センチ間隔
-										</figcaption>
-										<img src="img/oderForm/oderSlectButton/7.jpg">
-									</figure></label>
-								<p>
-									<input type="radio" name="botan_ichi" value="2" id="q3"><label
-										for="q3">少し低めの位置 （第二ボタン衿台より７．０センチ）</label>
-								</p></li>
-
-							<li><label for="q4"><figure>
-										<figcaption>
-											【第２ボタン９センチ】<br>衿台の下より９．０センチの所に第２ボタン<br>以下９センチ間隔
-										</figcaption>
-										<img src="img/oderForm/oderSlectButton/9.jpg">
-									</figure></label>
-								<p>
-									<input type="radio" name="botan_ichi" value="3" id="q4"><label
-										for="q4">低めの位置 （第二ボタン衿台より９．０センチ）</label>
-								</p></li>
-						</ul>
-					</div>
 				</article>
-
 
 				<h3>その他のご要望</h3>
 				<p>
@@ -1402,7 +1354,7 @@
 					その他のご要望がございましたら、こちらにご記入下さい。作業が困難なものもあるかも知れませんができるだけご要望にお答えできればと考えております。<br>変更が可能かどうかはご注文確認のメールをお送りする際にご連絡を致します。
 				</p>
 				<div class="t_c">
-					<textarea rows="7" cols="70" name="yobo"></textarea>
+					<textarea rows="7" cols="70" name="otherRequest"></textarea>
 				</div>
 			</article>
 
@@ -1417,8 +1369,10 @@
 						</tr>
 						<tr>
 							<td><label for="t01"><span class="lgreen">■</span>郵便番号</label></td>
-							<td><input name="zip" type="text"
-								maxlength="8" id="t01"></td>
+							<td>
+								<input name="zip" type="text" maxlength="8" id="t01"><br>
+								<span class="red" id="zip_error"></span>
+							</td>
 						</tr>
 						<tr>
 							<td><span class="lgreen">■</span>ご住所都道府県</td>
@@ -1470,34 +1424,36 @@
 									<option value="45">宮崎県</option>
 									<option value="46">鹿児島県</option>
 									<option value="47">沖縄県</option>
-									<option value="200">前回と同じ</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td><label for="t02"><span class="lgreen">■</span>市町村、番地</label></td>
-							<td><input name="address" type="text" size="83"
-								id="t02"></td>
+							<td>
+								<input name="address" type="text" size="83"id="t02"><br>
+								<span class="red" id="address_error"></span>
+							</td>
 						</tr>
 						<tr>
 							<td><label for="t03"><span class="lgreen">■</span>お名前</label></td>
-							<td><input name="name" type="text" size="45"
-								id="t03"></td>
+							<td>
+								<input name="name" type="text" size="45"id="t03"><br>
+								<span class="red" id="name_error"></span>
+							</td>
 						</tr>
 						<tr>
 							<td><label for="t04"><span class="lgreen">■</span>ふりがな</label></td>
-							<td><input name="kana" type="text" size="45"
-								id="t04"></td>
+							<td>
+								<input name="kana" type="text" size="45" id="t04"><br>
+								<span class="red" id="kana_error"></span>
+							</td>
 						</tr>
 						<tr>
 							<td><label for="t05"><span class="lgreen">■</span>お電話番号</label></td>
-							<td><input name="tel" type="text"
-								size="45" id="t05"><label for="t05">お電話番号は<span
-									class="st">（ハイフン）無し半角にてご記入下さい。</span></label></td>
-						</tr>
-						<tr>
-							<td><label for="t06">■年齢</label></td>
-							<td><input type="text" name="age" id="t06">
-								才</td>
+							<td>
+								<input name="tel" type="text" size="45" id="t05">
+								<label for="t05">お電話番号は<span class="st">（ハイフン）無し半角にてご記入下さい。</span></label><br>
+								<span class="red" id="tel_error"></span>
+							</td>
 						</tr>
 						<tr>
 							<td>■性別</td>

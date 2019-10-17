@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import base.DBManager;
+import beans.CartBeans;
 import beans.ItemDataBeans;
 import beans.brandDataBeans;
 
@@ -107,7 +108,7 @@ public class ItemDAO {
 
 
 
-	public static ItemDataBeans  getItemCart(String id) throws SQLException{
+	public static CartBeans getCartItemDetail(int id, int num) throws SQLException{
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -116,28 +117,30 @@ public class ItemDAO {
 									+ " JOIN brand"
 									+ " ON item.brand_id = brand.id"
 									+ " WHERE item.id = ?");
-			st.setString(1, id);
+			st.setInt(1, id);
 
 			ResultSet rs = st.executeQuery();
-			ItemDataBeans item = new ItemDataBeans();
+			CartBeans cartItem = new CartBeans();
 
 			if (rs.next()) {
-				item.setId(rs.getInt("id"));
-				item.setBrandId(rs.getInt("brand_id"));
-				item.setMaterial(rs.getString("material"));
-				item.setPrice(rs.getInt("price"));
-				item.setRemark(rs.getString("remark"));
-				item.setCloth(rs.getString("cloth"));
+				cartItem.setId(rs.getInt("id"));
+				cartItem.setBrandId(rs.getInt("brand_id"));
+				cartItem.setMaterial(rs.getString("material"));
+				cartItem.setRemark(rs.getString("remark"));
+				cartItem.setCloth(rs.getString("cloth"));
+				cartItem.setNum(num);
+				cartItem.setUnitPrice(rs.getInt("price"));
+				cartItem.setSubPrice(cartItem.getUnitPrice() * num);
 
 				brandDataBeans brandDataBeans = new brandDataBeans();
 				brandDataBeans.setbName(rs.getString("b_name"));
-				item.setBrandDataBeans(brandDataBeans);
+				cartItem.setBrandDataBeans(brandDataBeans);
 
 
 
 			}
 			System.out.println("get Items by itemName has been completed");
-			return item;
+			return cartItem;
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -148,5 +151,4 @@ public class ItemDAO {
 			}
 		}
 	}
-
 }
