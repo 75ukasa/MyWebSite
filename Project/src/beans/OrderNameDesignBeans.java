@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderNameDsingBeans implements Serializable{
+public class OrderNameDesignBeans implements Serializable{
 	private int desingId;
 	private String desingType;
 	private int desingPrice;

@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderRequestBeans implements Serializable{
+public class OrderRequestBeans implements Serializable{
 	private String collarRequest;
 	private String cuffsRequest;
 	private String pocketRequest;

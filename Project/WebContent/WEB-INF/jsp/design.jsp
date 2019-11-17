@@ -33,13 +33,7 @@
 		</div>
 	</header>
 
-	<nav class="gmenu">
-		<ul id="menu">
-			<li><a href="IndexServlet">HOME</a></li>
-			<li><a href="ClothServlet">シャツ一覧</a></li>
-			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
-		</ul>
+	<jsp:include page="/baselayout/header.jsp"/>
 
 		<div class="contents wrap">
 			<div class="confirm">
@@ -161,10 +155,9 @@
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
 		</div>
 		<p class="gotop wrap">
 			<a href="#">PAGETOP</a>
-</body>
+	</body>
 </html>

@@ -57,7 +57,7 @@ public class ItemDelete extends HttpServlet {
 					//カートアイテムの消去
 					int DeleteItemID = Integer.parseInt(request.getParameter("delete_id"));
 					for(CartBeans cartItem : cart) {
-						if(cartItem.getId() == DeleteItemID) {
+						if(cartItem.getItemId() == DeleteItemID) {
 							cart.remove(cartItem);
 							break;
 						}
@@ -65,7 +65,7 @@ public class ItemDelete extends HttpServlet {
 					cartActionMessage = "消去しました";
 					request.setAttribute("cartActionMessage", cartActionMessage);
 					//フォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.CART_PAGE);
 					dispatcher.forward(request, response);
 
 				}else if(Id == 2) {
@@ -76,7 +76,7 @@ public class ItemDelete extends HttpServlet {
 						int ChangeItemID = Integer.parseInt(request.getParameter("Change_id"));
 
 						for(CartBeans cartItem : cart) {
-							if(cartItem.getId() == ChangeItemID) {
+							if(cartItem.getItemId() == ChangeItemID) {
 								cartItem.setNum(num);
 								break;
 							}
@@ -84,13 +84,13 @@ public class ItemDelete extends HttpServlet {
 						cartActionMessage = "枚数を変更しました";
 						request.setAttribute("cartActionMessage", cartActionMessage);
 						//フォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.CART_PAGE);
 						dispatcher.forward(request, response);
 					}else{
 						cartActionMessage = "枚数を記入してください";
 						request.setAttribute("cartActionMessage", cartActionMessage);
 						//フォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.CART_PAGE);
 						dispatcher.forward(request, response);
 					}
 				}
@@ -99,7 +99,7 @@ public class ItemDelete extends HttpServlet {
 				String cartActionMessage = "カートに商品はありません";
 				request.setAttribute("cartActionMessage", cartActionMessage);
 				//セッションが存在しない場合はカートへフォワード
-				request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);
+				request.getRequestDispatcher(Forward.CART_PAGE).forward(request, response);
 			}
 
 		} catch (Exception e) {

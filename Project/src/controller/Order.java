@@ -14,14 +14,14 @@ import beans.ItemDataBeans;
 /**
  * Servlet implementation class Buy
  */
-@WebServlet("/Buy")
-public class Buy extends HttpServlet {
+@WebServlet("/Order")
+public class Order extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Buy() {
+    public Order() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,10 +48,10 @@ public class Buy extends HttpServlet {
 
 			//カートの中身を確認
 			if(cart.size() != 0) {
-				request.getRequestDispatcher("WEB-INF/jsp/order.jsp").forward(request, response);
+				request.getRequestDispatcher(Forward.ORDER_PAGE).forward(request, response);
 			}else {
 				request.setAttribute("cartActionMessage", "購入する商品がありません");
-				request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);
+				request.getRequestDispatcher(Forward.CART_PAGE).forward(request, response);
 			}
 
 		}catch (Exception e) {

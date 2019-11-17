@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderNameColorBeans implements Serializable{
+public class OrderNameColorBeans implements Serializable{
 	private String colorType;
 	private int colorPrice;
 

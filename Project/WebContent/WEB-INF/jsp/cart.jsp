@@ -37,7 +37,7 @@
 	</header>
 	<nav class="gmenu">
 		<ul id="menu">
-			<li><a href="IndexServlet">HOME</a></li>
+			<li><a href="Index">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
 			<li><a href="CartServlet">カートを見る</a></li>
@@ -51,6 +51,7 @@
 
 			<article class="cart">
 				<h2>ショッピングカート</h2>
+
 				<h1>	${cartActionMessage}</h2>
 				<dl class="kijilist clearfix">
 				</dl>
@@ -59,30 +60,37 @@
 					<c:forEach var="item" items="${cart}" varStatus="status">
 						<form action="ItemDelete" method="POST">
 							<dt>
-								No.${item.id}   ■${item.cloth}   ■${item.remark}   ■${item.brandDataBeans.bName}   ■${item.material}<br>
-								<input type="hidden" name="delete_id" value="${item.id}">
+								No.${item.itemId}   ■${item.cloth}   ■${item.remark}   ■${item.brandDataBeans.bName}   ■${item.material}<br>
+								<input type="hidden" name="delete_id" value="${item.itemId}">
 								<button  name="id" value="1" >削除</button>
 							</dt>
 
 							<dd>
-								<input type="hidden" name="Change_id" value="${item.id}">
-								<input name="num" type="text" size="3" value="${item.num}">枚
+								<input type="hidden" name="Change_id" value="${item.itemId}">
+								<select  name="num" size="1">
+								<option value="1" ${item.num == 1?"selected":""}>１</option>
+								<option value="2" ${item.num == 2?"selected":""}>２</option>
+								<option value="3" ${item.num == 3?"selected":""}>３</option>
+								<option value="4" ${item.num == 4?"selected":""}>４</option>
+								<option value="5" ${item.num == 5?"selected":""}>５</option>
+							</select>枚
 								<button type="submit" name="id" value="2">枚数変更</button>
+
 							</dd>
 						</form>
 					</c:forEach>
 				</dl>
 
 				<p class="contbtn">
-					<button type="button" onclick="location.href='IndexServlet'">買い物を続ける</button>
+					<button type="button" onclick="location.href='Index'">買い物を続ける</button>
 				</p>
 
 				<h2>注文方法を選ぶ</h2>
 				<div align="center">
 
-					<a href="Buy"><img src="./img/saisun_1.jpg"
+					<a href="Order"><img src="./img/saisun_1.jpg"
 						alt="オーダー(1)お身体を採寸してのご注文"></a>
-					</li> <a href="Buy"><img src="./img//saisun_2.jpg"
+					</li> <a href="Order"><img src="./img//saisun_2.jpg"
 						alt="オーダー(2)シャツを採寸してのご注文"></a>
 					</li>
 

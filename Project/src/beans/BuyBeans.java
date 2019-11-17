@@ -2,40 +2,48 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderBeans implements Serializable{
+public class BuyBeans implements Serializable{
+	private int userId;
 	private String silhouetteType;
 	private String collarType;
-	private String cuffsDesingType;
+	private String cuffsDesignType;
 	private String cuffsButtonType;
 	private String cuffsWatchType;
-	private String pocketDesing;
+	private String pocketDesign;
 	private String nameMessage;
 	private String nameSpelling;
 	private String namePosition;
 	private String buttonThread1;
 	private String buttonThread2;
 	//OderSizeBeanseと結合
-	private OderSizeBeanse sizeBeanse;
+	private OrderSizeBeanse sizeBeanse;
 	//OderRequestBeansと結合
-	private OderRequestBeans requestBeans;
+	private OrderRequestBeans requestBeans;
 	// OderPocketBeansと結合
-	private OderPocketBeans pocketBeans;
+	private OrderPocketBeans pocketBeans;
 	//OderNameDesingBeansと結合
-	private OderNameDsingBeans nameDsingBeans;
+	private OrderNameDesignBeans nameDesignBeans;
 	//OderNameColorBeans
-	private OderNameColorBeans nameColorBeans1;
+	private OrderNameColorBeans nameColorBeans1;
 	//OderNameColorBeans
-	private OderNameColorBeans nameColorBeans2;
+	private OrderNameColorBeans nameColorBeans2;
 	//OderButtonDesingと結合
-	private OderButtonDesingBeans buttonDesingBeans;
+	private OrderButtonDesignBeans buttonDesingBeans;
 	//UserDataBeansと結合
 	private UserDataBeans userDataBeans;
 	//OderPriceBeansと結合
-	private OderPriceBeans price;
+	private OrderPriceBeans price;
 
 
 
 
+
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 
 	public String getSilhouetteType() {
@@ -54,11 +62,11 @@ public class OderBeans implements Serializable{
 	}
 
 
-	public String getCuffsDesingType() {
-		return cuffsDesingType;
+	public String getCuffsDesignType() {
+		return cuffsDesignType;
 	}
-	public void setCuffsDesingType(String cuffsDesingType) {
-		this.cuffsDesingType = cuffsDesingType;
+	public void setCuffsDesingType(String cuffsDesignType) {
+		this.cuffsDesignType = cuffsDesignType;
 	}
 
 
@@ -78,11 +86,11 @@ public class OderBeans implements Serializable{
 	}
 
 
-	public String getPocketDesing() {
-		return pocketDesing;
+	public String getPocketDesign() {
+		return pocketDesign;
 	}
-	public void setPocketDesing(String pocketDesing) {
-		this.pocketDesing = pocketDesing;
+	public void setPocketDesing(String pocketDesign) {
+		this.pocketDesign = pocketDesign;
 	}
 
 
@@ -126,58 +134,58 @@ public class OderBeans implements Serializable{
 	}
 
 
-	public OderSizeBeanse getSizeBeanse() {
+	public OrderSizeBeanse getSizeBeanse() {
 		return sizeBeanse;
 	}
-	public void setSizeBeanse(OderSizeBeanse sizeBeanse) {
+	public void setSizeBeanse(OrderSizeBeanse sizeBeanse) {
 		this.sizeBeanse = sizeBeanse;
 	}
 
 
-	public OderRequestBeans getRequestBeans() {
+	public OrderRequestBeans getRequestBeans() {
 		return requestBeans;
 	}
-	public void setRequestBeans(OderRequestBeans requestBeans) {
+	public void setRequestBeans(OrderRequestBeans requestBeans) {
 		this.requestBeans = requestBeans;
 	}
 
 
-	public OderPocketBeans getPocketBeans() {
+	public OrderPocketBeans getPocketBeans() {
 		return pocketBeans;
 	}
-	public void setPocketBeans(OderPocketBeans pocketBeans) {
+	public void setPocketBeans(OrderPocketBeans pocketBeans) {
 		this.pocketBeans = pocketBeans;
 	}
 
 
-	public OderNameDsingBeans getNameDsingBeans() {
-		return nameDsingBeans;
+	public OrderNameDesignBeans getNameDesignBeans() {
+		return nameDesignBeans;
 	}
-	public void setNameDsingBeans(OderNameDsingBeans nameDsingBeans) {
-		this.nameDsingBeans = nameDsingBeans;
+	public void setNameDesignBeans(OrderNameDesignBeans nameDesignBeans) {
+		this.nameDesignBeans = nameDesignBeans;
 	}
 
 
-	public OderNameColorBeans getNameColorBeans1() {
+	public OrderNameColorBeans getNameColorBeans1() {
 		return nameColorBeans1;
 	}
-	public void setNameColorBeans1(OderNameColorBeans nameColorBeans1) {
+	public void setNameColorBeans1(OrderNameColorBeans nameColorBeans1) {
 		this.nameColorBeans1 = nameColorBeans1;
 	}
 
 
-	public OderNameColorBeans getNameColorBeans2() {
+	public OrderNameColorBeans getNameColorBeans2() {
 		return nameColorBeans2;
 	}
-	public void setNameColorBeans2(OderNameColorBeans nameColorBeans2) {
+	public void setNameColorBeans2(OrderNameColorBeans nameColorBeans2) {
 		this.nameColorBeans2 = nameColorBeans2;
 	}
 
 
-	public OderButtonDesingBeans getButtonDesingBeans() {
+	public OrderButtonDesignBeans getButtonDesingBeans() {
 		return buttonDesingBeans;
 	}
-	public void setButtonDesingBeans(OderButtonDesingBeans buttonDesingBeans) {
+	public void setButtonDesingBeans(OrderButtonDesignBeans buttonDesingBeans) {
 		this.buttonDesingBeans = buttonDesingBeans;
 	}
 
@@ -190,10 +198,10 @@ public class OderBeans implements Serializable{
 	}
 
 
-	public OderPriceBeans getPrice() {
+	public OrderPriceBeans getPrice() {
 		return price;
 	}
-	public void setPrice(OderPriceBeans price) {
+	public void setPrice(OrderPriceBeans price) {
 		this.price = price;
 	}
 }

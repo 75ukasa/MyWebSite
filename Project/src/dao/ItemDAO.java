@@ -123,7 +123,7 @@ public class ItemDAO {
 			CartBeans cartItem = new CartBeans();
 
 			if (rs.next()) {
-				cartItem.setId(rs.getInt("id"));
+				cartItem.setItemId(rs.getInt("id"));
 				cartItem.setBrandId(rs.getInt("brand_id"));
 				cartItem.setMaterial(rs.getString("material"));
 				cartItem.setRemark(rs.getString("remark"));

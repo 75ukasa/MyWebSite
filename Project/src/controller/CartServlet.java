@@ -50,7 +50,7 @@ public class CartServlet extends HttpServlet {
 			}
 
 			request.setAttribute("cartActionMessage", cartActionMessage);
-			request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);
+			request.getRequestDispatcher(Forward.CART_PAGE).forward(request, response);
 
 		}
 		 catch (Exception e) {

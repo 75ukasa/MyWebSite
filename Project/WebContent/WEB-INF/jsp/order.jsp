@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/layout.css" media="all">
 
 <script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/ajaxzip3-source.js"></script>
 <script src="js/oder.js"></script>
 
 </head>
@@ -30,14 +31,14 @@
 	</header>
 	<nav class="gmenu">
 		<ul id="menu">
-			<li><a href="IndexServlet">HOME</a></li>
+			<li><a href="Index">HOME</a></li>
 			<li><a href="ClothServlet">シャツ一覧</a></li>
 			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
 			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
 		</ul>
 	</nav>
 	<div class="contents wrap">
-		<form method="post" action="OderServlet">
+		<form method="post" action="BuyConfirm">
 			<article>
 				<h1><c:forEach var="message" items="${ActionMessage}" ><br>
 						<span class="red">${message}</span>
@@ -50,7 +51,7 @@
 					<ol class="kijilist">
 						<c:forEach var="item" items="${cart}" varStatus="status">
 
-							<li>NO-${item.id}   ■${item.cloth}   ■${item.brandDataBeans.bName}   ■${item.material}<span>${item.num}枚</span></li>
+							<li>NO-${item.itemId}   ■${item.cloth}   ■${item.brandDataBeans.bName}   ■${item.material}<span>${item.num}枚</span></li>
 
 						</c:forEach>
 					</ol>
@@ -1370,64 +1371,12 @@
 						<tr>
 							<td><label for="t01"><span class="lgreen">■</span>郵便番号</label></td>
 							<td>
-								<input name="zip" type="text" maxlength="8" id="t01"><br>
+								<input name="zip" type="text" maxlength="8" id="t01" onKeyUp="AjaxZip3.zip2addr(this,'','address','address');"><br>
 								<span class="red" id="zip_error"></span>
 							</td>
 						</tr>
 						<tr>
-							<td><span class="lgreen">■</span>ご住所都道府県</td>
-							<td><select name="pref" size="1">
-									<option value="1">北海道</option>
-									<option value="2">青森県</option>
-									<option value="3">岩手県</option>
-									<option value="4">宮城県</option>
-									<option value="5">秋田県</option>
-									<option value="6">山形県</option>
-									<option value="7">福島県</option>
-									<option value="8">茨城県</option>
-									<option value="9">栃木県</option>
-									<option value="10">群馬県</option>
-									<option value="11">埼玉県</option>
-									<option value="12">千葉県</option>
-									<option value="13">東京都</option>
-									<option value="14">神奈川県</option>
-									<option value="15">新潟県</option>
-									<option value="16">富山県</option>
-									<option value="17">石川県</option>
-									<option value="18">福井県</option>
-									<option value="19">山梨県</option>
-									<option value="20">長野県</option>
-									<option value="21">岐阜県</option>
-									<option value="22">静岡県</option>
-									<option value="23">愛知県</option>
-									<option value="24">三重県</option>
-									<option value="25">滋賀県</option>
-									<option value="26">京都府</option>
-									<option value="27">大阪府</option>
-									<option value="28">兵庫県</option>
-									<option value="29">奈良県</option>
-									<option value="30">和歌山県</option>
-									<option value="31">鳥取県</option>
-									<option value="32">島根県</option>
-									<option value="33">岡山県</option>
-									<option value="34">広島県</option>
-									<option value="35">山口県</option>
-									<option value="36">徳島県</option>
-									<option value="37">香川県</option>
-									<option value="38">愛媛県</option>
-									<option value="39">高知県</option>
-									<option value="40">福岡県</option>
-									<option value="41">佐賀県</option>
-									<option value="42">長崎県</option>
-									<option value="43">熊本県</option>
-									<option value="44">大分県</option>
-									<option value="45">宮崎県</option>
-									<option value="46">鹿児島県</option>
-									<option value="47">沖縄県</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td><label for="t02"><span class="lgreen">■</span>市町村、番地</label></td>
+							<td><label for="t02"><span class="lgreen">■</span>住所</label></td>
 							<td>
 								<input name="address" type="text" size="83"id="t02"><br>
 								<span class="red" id="address_error"></span>
@@ -1457,10 +1406,11 @@
 						</tr>
 						<tr>
 							<td>■性別</td>
-							<td><input type="radio" name="sex" value="1"  checked=""
-								id="t07"><label for="t07">男性</label>&nbsp; <input
-								type="radio" name="sex" value="2" id="t07"><label
-								for="t07">女性</label>&nbsp;</td>
+							<td><input type="radio" name="sex" value="1"  checked="" id="t07">
+								<label for="t07">男性</label>&nbsp;
+								<input type="radio" name="sex" value="2" id="t07">
+								<label for="t07">女性</label>&nbsp;
+							</td>
 						</tr>
 
 						<tr>

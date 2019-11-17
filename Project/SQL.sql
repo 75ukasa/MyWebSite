@@ -1,7 +1,44 @@
 CREATE DATABASE IF NOT EXISTS `Made_to_order` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `Made_to_order`;
 
-SELECT * FROM item;
+
+
+
+
+CREATE TABLE `user`(
+	`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`kana` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`login_id` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`password` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`zip` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`address` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`tel` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`gender` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`create_date` date DEFAULT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+CREATE TABLE `size` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`user_id` int(11) DEFAULT NULL,
+	`neck` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`shoulder` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+	`arm` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`sleeveRigt` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`sleeveLeft` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`bust` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`waist` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+ 	`hips` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`length` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`cuffsRigt` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`cuffsLeft` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	`height` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 CREATE TABLE `brand` (
@@ -368,74 +405,29 @@ INSERT INTO `button_thread` (`id`,`type`) VALUES
 
 
 
-
-CREATE TABLE `button_position` (
-	`id` int(11) PRIMARY KEY NOT NULL,
-	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
-	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
-	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `button_position` (`id`,`type`,`file`) VALUES
-	(1,'第二ボタン５．５㎝','55.jpg'),
-	(2,'第二ボタン７㎝','7.jpg'),
-	(3,'第二ボタン９㎝','9.jpg')
-
-
-
-
-
-CREATE TABLE `pref_select`(
-	`id` int(11) PRIMARY KEY NOT NULL,
-	`name` varchar(256) COLLATE utf8_unicode_ci
-	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-INSERT INTO `pref_select` (`id`,`name`) VALUES
-	(1,'北海道'),
-	(2,'青森県'),
-	(3,'岩手県'),
-	(4,'宮城県'),
-	(5,'秋田県'),
-	(6,'山形県'),
-	(7,'福島県'),
-	(8,'茨城県'),
-	(9,'栃木県'),
-	(10,'群馬県'),
-	(11,'埼玉県'),
-	(12,'千葉県'),
-	(13,'東京都'),
-	(14,'神奈川県'),
-	(15,'新潟県'),
-	(16,'富山県'),
-	(17,'石川県'),
-	(18,'福井県'),
-	(19,'山梨県'),
-	(20,'長野県'),
-	(21,'岐阜県'),
-	(22,'静岡県'),
-	(23,'愛知県'),
-	(24,'三重県'),
-	(25,'滋賀県'),
-	(26,'京都府'),
-	(27,'大阪府'),
-	(28,'兵庫県'),
-	(29,'奈良県'),
-	(30,'和歌山県'),
-	(31,'鳥取県'),
-	(32,'島根県'),
-	(33,'岡山県'),
-	(34,'広島県'),
-	(35,'山口県'),
-	(36,'徳島県'),
-	(37,'香川県'),
-	(38,'愛媛県'),
-	(39,'高知県'),
-	(40,'福岡県'),
-	(41,'佐賀県'),
-	(42,'長崎県'),
-	(43,'熊本県'),
-	(44,'大分県'),
-	(45,'宮崎県'),
-	(46,'鹿児島県'),
-	(47,'沖縄県');
-
+CREATE TABLE `buy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `total_price` int(11) DEFAULT NULL,
+  `silhouetteType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `collarType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `collarRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsButtonType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsWatchType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pocketDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pocketRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameMessage` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameSpelling` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameColor1` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameColor2` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `namePosition` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `buttonDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `buttonThread1` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `buttonThread2` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `otherRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

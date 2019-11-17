@@ -18,7 +18,7 @@ body a {
 
 .contents a {
 	/*color:#fefefe;*/
-	
+
 }
 
 .contents a:hover {
@@ -27,6 +27,10 @@ body a {
 
 body a:hover {
 	color: #ffc300;
+}
+
+body a.s:hover{
+	color: #76c5ff;
 }
 
 body a:hover img {

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,21 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.ItemDataBeans;
-import dao.ItemDAO;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class DetailServlet
+ * Servlet implementation class index
  */
-@WebServlet("/DetailServlet")
-public class DetailServlet extends HttpServlet {
+@WebServlet("/Index")
+public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailServlet() {
+    public Index() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +29,13 @@ public class DetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 
-		//選択された商品をint型に変換し利用
-		int Data = Integer.parseInt(request.getParameter("id"));
-		try {
-			//選択されたアイテムの情報を取得
-			ItemDataBeans item = ItemDAO.getItemDetail(Data);
 
-			//商品をリクエストパラメータにセット
-			request.setAttribute("item",item );
+		RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TOP_PAGE);
+		dispatcher.forward(request,response);
 
-				//取得したアイテム情報をjspにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_DETAIL_PAGE);
-			dispatcher.forward(request, response);
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
 	}
 
 	/**

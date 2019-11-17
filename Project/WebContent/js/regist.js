@@ -2,38 +2,6 @@
  *
  */
 
-//----ネーム欄の非表示用----
-$(function(){
-	$('[name="nameDo_Not"]:radio').change( function() {
-		if ($('[id="m1"]').prop('checked')) {
-			$('.nametbl select,.nametbl textarea').val("");
-			$('.nametbl').slideUp(300);
-		}else if ($('[id="m2"]').prop('checked')) {
-	    	$('.nametbl').slideDown();
-	    	$('.nameColorC1,.nameColorC2,#nameColorC').hide();
-		}
-	});
-});
-
-
-//ネームカラー選択欄の表示用
-$(function(){
-	$('[name="nameDesing"]').change( function() {
-		 var r = $('[name="nameDesing"]').val()
-		 $('.nameColorC1 select,.nameColorC2 select').val("");
-		 if(r==1 || r==2 || r==3 || r==4 || r==5 || r==9 || r==10){
-			 $('.nameColorC1,#nameColorC').slideDown();
-			 $('.nameColorC2').slideUp();
-		 }else if(r==6 || r==7 || r==8){
-			 $('.nameColorC1,.nameColorC2,#nameColorC').slideDown();
-		 }else{
-			 $('.nameColorC1,.nameColorC2,#nameColorC').slideUp();
-		 }
-	});
-});
-
-
-
 
 //----オーダーフォームのEntreキー操作----
 $(function() {
@@ -53,16 +21,49 @@ $(function() {
 });
 
 
+//----パスワードの表示----
+$(function() {
+    $('#passcheck1').change(function(){
+        if ( $(this).prop('checked') ) {
+            $('#pw01').attr('type','text');
+        } else {
+            $('#pw01').attr('type','password');
+        }
+    });
+});
+//----パスワード確認の表示----
+$(function() {
+    $('#passcheck2').change(function(){
+        if ( $(this).prop('checked') ) {
+            $('#pw02').attr('type','text');
+        } else {
+            $('#pw02').attr('type','password');
+        }
+    });
+});
+
+
+
 //----個人情報のバリデーション----
 $(function(){
-	$("input[type='text']").blur(function(){
+	$("input[type='text'],input[type='password']").blur(function(){
 		if(!input_check()){
 			return false;
 		}
 	});
 });
 
-//オーダーフォーム入力内容チェックのための関数
+
+
+$(function(){
+	$('form').on('submit',function() {
+		if(!input_check()){
+			return false;
+		}
+	});
+});
+
+//ユーザー情報入力内容チェックのための関数
 function input_check(){
 	var result = true;
 
@@ -72,6 +73,9 @@ function input_check(){
 	$("#name_error").empty();
 	$("#kana_error").empty();
 	$("#tel_error").empty();
+	$("#loginID_error").empty();
+	$("#password1_error").empty();
+	$("#password2_error").empty();
 
 	// 入力内容セット
 	var zip = $('[name="zip"]').val();
@@ -79,6 +83,9 @@ function input_check(){
 	var furigana  = $('[name="kana"]').val();
 	var address  = $('[name="address"]').val();
 	var tel  = $('[name="tel"]').val().replace(/[━.*‐.*―.*－.*\–.*ー.*\-]/gi,'');
+	var loginID  = $('[name="login_id"]').val();
+	var password1  = $('[name="password"]').val();
+	var password2  = $('[name="confirm_password"]').val();
 
 
 	//郵便番号
@@ -99,15 +106,13 @@ function input_check(){
 	// お名前
 	if(name == ""){
 		$("#name_error").html("※お名前は必須です");
-		//$("#name").addClass("inp_error");
 		result = false;
 	}else if(name.length > 25){
 		$("#name_error").html("※お名前は25文字以内で入力してください");
-		//$("#name").addClass("inp_error");
 		result = false;
 	}
 
-	// フリガナ
+	// ふりがな
 	if(furigana == ""){
 		$("#kana_error").html("※「ふりがな」は必須です。");
 		result = false;
@@ -128,5 +133,33 @@ function input_check(){
 		$('#tel_error').html(" ※正しい電話番号を入力してください。");
 		result = false;
 	}
+
+	//ログインID
+	if(loginID == ""){
+		$("#loginID_error").html(" ※ログインIDは必須です。");
+		result = false;
+	}else if(!loginID.match(/^[a-z\d]+$/i)){
+		$('#loginID_error').html(" ※ログインIDは半角英数字で入力してください。");
+		result = false;
+	}
+
+	//パスワード
+	if(password1 == ""){
+		$("#password1_error").html(" ※パスワードは必須です。");
+		result = false;
+	}else if(!password1.match(/^[a-z\d]+$/i)){
+		$('#password1_error').html(" ※パスワードは半角英数字で入力してください。");
+		result = false;
+	}
+
+	//確認パスワード
+	if(password2 == ""){
+		$("#password2_error").html(" ※パスワード確認は必須です。");
+		result = false;
+	}else if(password2 !== password1){
+		$("#password2_error").html(" ※パスワードと一致しません。");
+		result = false;
+	}
+	return result;
 };
 

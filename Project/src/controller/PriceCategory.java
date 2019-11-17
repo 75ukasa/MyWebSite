@@ -41,7 +41,7 @@ public class PriceCategory extends HttpServlet {
 			request.setAttribute("itemList",itemList);
 			request.setAttribute("Name",Name);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 			dispatcher.forward(request, response);
 
 		} catch (SQLException e) {

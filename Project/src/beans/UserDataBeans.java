@@ -6,13 +6,12 @@ public class UserDataBeans implements Serializable{
 	private int id;
 	private String loginId;
 	private String password;
-	private String userName;
 	private String name;
 	private String kana;
 	private String zip;
-	private String pref;
 	private String address;
 	private String tel;
+	private String gender;
 
 
 
@@ -41,14 +40,6 @@ public class UserDataBeans implements Serializable{
 	}
 
 
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-
 	public String getName() {
 		return name;
 	}
@@ -73,14 +64,6 @@ public class UserDataBeans implements Serializable{
 	}
 
 
-	public String getPref() {
-		return pref;
-	}
-	public void setPref(String pref) {
-		this.pref = pref;
-	}
-
-
 	public String getAddress() {
 		return address;
 	}
@@ -94,5 +77,13 @@ public class UserDataBeans implements Serializable{
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }

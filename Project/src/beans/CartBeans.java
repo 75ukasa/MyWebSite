@@ -3,7 +3,7 @@ package beans;
 import java.io.Serializable;
 
 public class CartBeans implements Serializable{
-	private int id;
+	private int itemId;
 	private int brandId;
 	private String material;
 	private String remark;
@@ -17,13 +17,13 @@ public class CartBeans implements Serializable{
 
 
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
 
 	public int getBrandId() {
 		return brandId;

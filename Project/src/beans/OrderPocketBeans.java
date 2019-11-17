@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderPocketBeans implements Serializable{
+public class OrderPocketBeans implements Serializable{
 	private String pocketType;
 	private int poketPrice;
 

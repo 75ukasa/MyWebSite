@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderPriceBeans implements Serializable{
+public class OrderPriceBeans implements Serializable{
 	private int subtotal;
 	private int total;
 

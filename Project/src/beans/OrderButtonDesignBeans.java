@@ -2,12 +2,20 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderButtonDesingBeans implements Serializable{
+public class OrderButtonDesignBeans implements Serializable{
+	private int buttonId;
 	private String buttonTyupe;
 	private int buttonPrice;
 
 
 
+
+	public int getButtonId() {
+		return buttonId;
+	}
+	public void setButtonId(int buttonId) {
+		this.buttonId = buttonId;
+	}
 
 	public String getButtonTyupe() {
 		return buttonTyupe;
@@ -23,7 +31,4 @@ public class OderButtonDesingBeans implements Serializable{
 	public void setButtonPrice(int buttonPrice) {
 		this.buttonPrice = buttonPrice;
 	}
-
-
-
 }

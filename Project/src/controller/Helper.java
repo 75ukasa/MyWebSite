@@ -1,17 +1,37 @@
 package controller;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import beans.OderPriceBeans;
+import javax.servlet.http.HttpSession;
+
+import beans.OrderPriceBeans;
 
 public class Helper {
-
-
-	static final String BUY_PAGE = "/WEB-INF/jsp/order.jsp";
 
 	public static Helper getInstance() {
 		return new Helper();
 	}
+
+	public static String getSha256(String target) {
+		MessageDigest md = null;
+		StringBuffer buffer = new StringBuffer();
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(target.getBytes());
+			byte[] digest = md.digest();
+			for (int i = 0; i < digest.length; i++) {
+				buffer.append(String.format("%02x", digest[i]));
+			}
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return buffer.toString();
+
+	}
+
+
 	/**
 	 * 測定値のバリデーション
 	 *
@@ -74,16 +94,32 @@ public class Helper {
 	 * @param priceList [List<Integer>]
 	 * @return oderPrice [OderPriceBeans] : 料金情報を持つBeans
 	 */
-	public static OderPriceBeans getTotalPrice(List<Integer> priceList) {
-		OderPriceBeans oderPrice = new OderPriceBeans();
+	public static OrderPriceBeans getTotalPrice(List<Integer> priceList) {
+		OrderPriceBeans oderPrice = new OrderPriceBeans();
 		//配送料
 		int delivary = 500;
+		//消費税
+		double tax = 0.10;
+
 		//小計
 		int subtotal = priceList.stream().mapToInt(price -> price).sum();
 		oderPrice.setSubtotal(subtotal + delivary);;
 
 		//税込み価格
-		oderPrice.setTotal((int) (subtotal * 1.10));
+		oderPrice.setTotal((int) (oderPrice.getSubtotal() * (1 + tax)));
 		return oderPrice;
+	}
+
+	/**
+	 * セッションから指定データを取得（削除も一緒に行う）
+	 *
+	 * @param session
+	 * @param str
+	 * @return
+	 */
+	public static Object cutSessionAttribute(HttpSession session, String str) {
+		Object test = session.getAttribute(str);
+		session.removeAttribute(str);
+		return test;
 	}
 }

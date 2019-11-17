@@ -75,7 +75,7 @@ public class ItemAdd extends HttpServlet {
 			//更新メッセージ
 			request.setAttribute("cartActionMessage", "商品を追加しました");
 			//フォワード
-			request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);;
+			request.getRequestDispatcher(Forward.CART_PAGE).forward(request, response);
 
 		}
 		catch (Exception e){

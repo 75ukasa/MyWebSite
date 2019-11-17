@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class OderSizeBeanse implements Serializable{
+public class OrderSizeBeanse implements Serializable{
 	private String neck;
 	private String shoulder;
 	private String arm;

@@ -42,7 +42,7 @@ public class ColorCategoty extends HttpServlet {
 				request.setAttribute("itemList",itemList);
 				request.setAttribute("Name",Data);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 				dispatcher.forward(request, response);
 
 			} catch (SQLException e) {
@@ -56,7 +56,7 @@ public class ColorCategoty extends HttpServlet {
 				request.setAttribute("itemList",itemList);
 				request.setAttribute("Name",Data);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 				dispatcher.forward(request, response);
 
 			} catch (SQLException e) {
@@ -70,7 +70,7 @@ public class ColorCategoty extends HttpServlet {
 				request.setAttribute("itemList",itemList);
 				request.setAttribute("Name",Data);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 				dispatcher.forward(request, response);
 
 			} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class ColorCategoty extends HttpServlet {
 				request.setAttribute("itemList",itemList);
 				request.setAttribute("Name",Data);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 				dispatcher.forward(request, response);
 
 			} catch (SQLException e) {
@@ -98,7 +98,7 @@ public class ColorCategoty extends HttpServlet {
 				request.setAttribute("itemList",itemList);
 				request.setAttribute("Name",Data);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 				dispatcher.forward(request, response);
 
 			} catch (SQLException e) {
@@ -112,7 +112,7 @@ public class ColorCategoty extends HttpServlet {
 				request.setAttribute("itemList",itemList);
 				request.setAttribute("Name",Data);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clothList.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.ITEM_PAGE);
 				dispatcher.forward(request, response);
 
 			} catch (SQLException e) {
