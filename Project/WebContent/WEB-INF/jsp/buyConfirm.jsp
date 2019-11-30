@@ -64,7 +64,7 @@
 						<dd>小計  :   ${orderData.pocketBeans.poketPrice}円＋税</dd>
 					</c:if>
 
-					<c:if test = "${orderData.nameDsingBeans.designType != null}">
+					<c:if test = "${orderData.nameDesignBeans.designType != null}">
 						<dt>ネームの種類   : 【${orderData.nameDesignBeans.designType}】</dt>
 						<dd>小計  :   ${orderData.nameDesignBeans.designPrice}円＋税</dd>
 					</c:if>
@@ -211,15 +211,15 @@
 				<h3>お客様情報</h3>
 				<dl class="orderlist">
 					<dt>郵便番号</dt>
-					<dd>${orderData.userDataBeans.zip}</dd>
+					<dd>${orderData.personalInfo.zip}</dd>
 					<dt>住所</dt>
-					<dd>${orderData.userDataBeans.address}</dd>
+					<dd>${orderData.personalInfo.address}</dd>
 					<dt>お名前</dt>
-					<dd>${oderData.userDataBeans.name}</dd>
+					<dd>${orderData.personalInfo.name}</dd>
 					<dt>ふりがな</dt>
-					<dd>${orderData.userDataBeans.kana}</dd>
+					<dd>${orderData.personalInfo.kana}</dd>
 					<dt>お電話番号</dt>
-					<dd>${orderData.userDataBeans.tel}</dd>
+					<dd>${orderData.personalInfo.tel}</dd>
 					<dt>性別</dt>
 					<dd>男性</dd>
 					<dt>配送金額</dt>

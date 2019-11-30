@@ -34,7 +34,7 @@ public class Forward {
 		static final String BUY_CONFIRM_PAGE = "/WEB-INF/jsp/buyConfirm.jsp";
 
 		// 購入完了
-		static final String BUY_RESULT_PAGE = "/WEB-INF/jsp/buyresult.jsp";
+		static final String BUY_RESULT_PAGE = "/WEB-INF/jsp/buyResult.jsp";
 
 		// ユーザー情報
 		static final String USER_DATA_PAGE = "/WEB-INF/jsp/userData.jsp";

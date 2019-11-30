@@ -22,8 +22,8 @@ import beans.OrderNameColorBeans;
 import beans.OrderNameDesignBeans;
 import beans.OrderPocketBeans;
 import beans.OrderRequestBeans;
-import beans.OrderSizeBeanse;
-import beans.UserDataBeans;
+import beans.PersonalInfoBeans;
+import beans.SizeBeanse;
 import dao.OrderDAO;
 
 
@@ -78,7 +78,7 @@ public class BuyConfirm extends HttpServlet {
 
 				/* == サイズ情報の処理  == */
 				//各サイズ用beans
-				OrderSizeBeanse orderSize = new OrderSizeBeanse();
+				SizeBeanse orderSize = new SizeBeanse();
 				//サイズの値をまとめて取得
 				String[] size = request.getParameterValues("size");
 				for(int i = 0 ; i < size.length; i++) {
@@ -219,7 +219,7 @@ public class BuyConfirm extends HttpServlet {
 					if(!nameDesignId.isEmpty()) {
 						OrderNameDesignBeans nameDesign = OrderDAO.getOrderNameDesign(nameDesignId);
 						//ネームデザインのオプション料金をpriceListに追加
-						price.add(nameDesign.getDesingPrice());
+						price.add(nameDesign.getDesignPrice());
 						//ネームデザイン情報をオーダーbeansにセット
 						orderData.setNameDesignBeans(nameDesign);
 					}else {
@@ -277,11 +277,11 @@ public class BuyConfirm extends HttpServlet {
 
 				/* == ボタン情報の取得 == */
 				//--ボタンデザイン情報処理--
-				int buttonDesindId = Integer.parseInt(request.getParameter("button"));
-				OrderButtonDesignBeans buttonDesing = OrderDAO.getOrderButtonDesign(buttonDesindId);
+				int buttonDesignId = Integer.parseInt(request.getParameter("button"));
+				OrderButtonDesignBeans buttonDesing = OrderDAO.getOrderButtonDesign(buttonDesignId);
 				//ボタンデザインのオプション料金をpriceListに追加
 				price.add(buttonDesing.getButtonPrice());
-				orderData.setButtonDesingBeans(buttonDesing);
+				orderData.setButtonDesignBeans(buttonDesing);
 
 				//--ボタン糸情報処理--
 				int buttonThreadId1 = Integer.parseInt(request.getParameter("buttonThread"));
@@ -304,12 +304,12 @@ public class BuyConfirm extends HttpServlet {
 				String kana = request.getParameter("kana");
 				String tel = request.getParameter("tel");
 
-				UserDataBeans UserData = new UserDataBeans();
+				PersonalInfoBeans personal = new PersonalInfoBeans();
 
 				//郵便番号処理
 				if(!StringUtils.isBlank(zip)) {
 					if(Helper.inputZipValidasion(zip)) {
-						UserData.setZip(zip);
+						personal.setZip(zip);
 					}else {
 						ActionMessage.add("郵便番号を正しく入力してください");
 					}
@@ -319,14 +319,14 @@ public class BuyConfirm extends HttpServlet {
 
 				//住所処理
 				if(!StringUtils.isBlank(address)) {
-					UserData.setAddress(address);
+					personal.setAddress(address);
 				}else {
 					ActionMessage.add("市町村を記入してください");
 				}
 
 				//名前処理
 				if(!StringUtils.isBlank(name)) {
-					UserData.setName(name);
+					personal.setName(name);
 				}else {
 					ActionMessage.add("名前を記入してください");
 				}
@@ -334,7 +334,7 @@ public class BuyConfirm extends HttpServlet {
 				//ふりがな処理
 				if(!StringUtils.isBlank(kana)) {
 					if(Helper.inputKanaValidasion(kana)) {
-						UserData.setKana(kana);
+						personal.setKana(kana);
 					}else {
 						ActionMessage.add("ふりがなを正しく記入してください");
 					}
@@ -346,15 +346,15 @@ public class BuyConfirm extends HttpServlet {
 				//電話番号処理
 				if(!StringUtils.isBlank(tel)) {
 					if(Helper.inputTelValidasion(tel)) {
-						UserData.setTel(tel);
+						personal.setTel(tel);
 					}else {
 						ActionMessage.add("電話番号を正しく記入してください");
 					}
 				}else {
 					ActionMessage.add("電話番号を記入してください");
 				}
-				//ユーザー情報をOderBeansにセット
-				orderData.setUserDataBeans(UserData);
+				//個人情報をOderBeansにセット
+				orderData.setPersonalInfo(personal);
 
 				//合計金額
 				orderData.setPrice(Helper.getTotalPrice(price));

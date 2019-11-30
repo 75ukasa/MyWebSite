@@ -228,13 +228,14 @@ public class OrderDAO {
 
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT type, price FROM pocket_design WHERE id = ?");
+			st = con.prepareStatement("SELECT * FROM pocket_design WHERE id = ?");
 			st.setObject(1,pocketId);
 
 			ResultSet rs = st.executeQuery();
 			OrderPocketBeans poketData = new OrderPocketBeans();
 
 			if(rs.next()) {
+				poketData.setPoketId(rs.getInt("id"));
 				poketData.setPocketType(rs.getString("type"));
 				poketData.setPoketPrice(rs.getInt("price"));
 			}
@@ -265,15 +266,16 @@ public class OrderDAO {
 
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT type,price FROM name_design WHERE id = ?");
+			st = con.prepareStatement("SELECT * FROM name_design WHERE id = ?");
 			st.setString(1, nameDesignId);
 
 			ResultSet rs = st.executeQuery();
 			OrderNameDesignBeans nDesignData = new OrderNameDesignBeans();
 
 			if(rs.next()) {
-				nDesignData.setDesingType(rs.getString("type"));
-				nDesignData.setDesingPrice(rs.getInt("price"));
+				nDesignData.setDesignId(rs.getInt("id"));
+				nDesignData.setDesignType(rs.getString("type"));
+				nDesignData.setDesignPrice(rs.getInt("price"));
 			}
 			System.out.println("OrderNameDesign()によるnameDesignId検索は完了しました");
 			return nDesignData;
@@ -304,13 +306,14 @@ public class OrderDAO {
 
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT type,price FROM name_color WHERE id = ?");
+			st = con.prepareStatement("SELECT * FROM name_color WHERE id = ?");
 			st.setString(1, nameColorId);
 
 			ResultSet rs = st.executeQuery();
 			OrderNameColorBeans nColorData = new OrderNameColorBeans();
 
 			if(rs.next()) {
+				nColorData.setColorId(rs.getInt("id"));
 				nColorData.setColorType(rs.getString("type"));
 				nColorData.setColorPrice(rs.getInt("price"));
 			}
@@ -378,13 +381,14 @@ public class OrderDAO {
 
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT type,price FROM button_design WHERE id = ?");
+			st = con.prepareStatement("SELECT * FROM button_design WHERE id = ?");
 			st.setInt(1,buttonDesignId);
 
 			ResultSet rs = st.executeQuery();
 			OrderButtonDesignBeans bDesignData = new OrderButtonDesignBeans();
 
 			if(rs.next()) {
+				bDesignData.setButtonId(rs.getInt("id"));
 				bDesignData.setButtonTyupe(rs.getString("type"));
 				bDesignData.setButtonPrice(rs.getInt("price"));
 			}

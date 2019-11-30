@@ -49,6 +49,9 @@
 			<article>
 				<h2>新規会員登録</h2>
 			</article>
+			<c:if test="${registMessage != null}">
+				<P class="red-text">${registMessage}</P>
+			</c:if>
 			<div class="container">
 				<div class="row">
 					<div class="section">
@@ -59,7 +62,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="name_error"></span>
-												<input  name="name" type="text" size="45" id="t01"  value=${orderData.userDataBeans.name}>
+												<input  name="name" type="text" size="45" id="t01"  value=${orderData.personalInfo.name}>
 												<label class="active">名前 </label>
 											</div>
 										</div>
@@ -67,7 +70,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="kana_error"></span>
-												<input  name="kana" type="text" size="45" id="t02" value=${orderData.userDataBeans.kana}>
+												<input  name="kana" type="text" size="45" id="t02" value=${orderData.personalInfo.kana}>
 												<label class="active">ふりがな</label>
 											</div>
 										</div>
@@ -100,7 +103,7 @@
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="zip_error"></span>
 												<input name="zip" type="text" maxlength="8" id="t04" onKeyUp="AjaxZip3.zip2addr(this,'','address','address');"
-												value=${orderData.userDataBeans.zip}>
+												value=${orderData.personalInfo.zip}>
 												<label class="active">郵便番号</label>
 											</div>
 										</div>
@@ -108,7 +111,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="address_error"></span>
-												<input name="address" type="text" size="83"id="t05" value=${orderData.userDataBeans.address}>
+												<input name="address" type="text" size="83"id="t05" value=${orderData.personalInfo.address}>
 												<label class="active">住所</label>
 											</div>
 										</div>
@@ -116,7 +119,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="tel_error"></span>
-												<input name="tel" type="text" size="45" id="t06" value=${orderData.userDataBeans.tel}>
+												<input name="tel" type="text" size="45" id="t06" value=${orderData.personalInfo.tel}>
 												<label class="active">電話番号</label>
 											</div>
 										</div>

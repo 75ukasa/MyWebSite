@@ -3,24 +3,40 @@ package beans;
 import java.io.Serializable;
 
 public class UserDataBeans implements Serializable{
-	private int id;
+	private int userId;
+	private int personalId;
+	private int sizeId;
 	private String loginId;
 	private String password;
-	private String name;
-	private String kana;
-	private String zip;
-	private String address;
-	private String tel;
-	private String gender;
+	//PersonalInfoBeansと結合
+	private PersonalInfoBeans personalInfo;
+	//SizeBeanseと結合
+	private SizeBeanse size;
 
 
 
 
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+
+	public int getPersonalId() {
+		return personalId;
+	}
+	public void setPersonalId(int personalId) {
+		this.personalId = personalId;
+	}
+
+
+	public int getSizeId() {
+		return sizeId;
+	}
+	public void setSizeId(int sizeId) {
+		this.sizeId = sizeId;
 	}
 
 
@@ -40,50 +56,18 @@ public class UserDataBeans implements Serializable{
 	}
 
 
-	public String getName() {
-		return name;
+	public PersonalInfoBeans getPersonalInfo() {
+		return personalInfo;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getKana() {
-		return kana;
-	}
-	public void setKana(String kana) {
-		this.kana = kana;
+	public void setPersonalInfo(PersonalInfoBeans personalInfo) {
+		this.personalInfo = personalInfo;
 	}
 
 
-	public String getZip() {
-		return zip;
+	public SizeBeanse getSize() {
+		return size;
 	}
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
-
-
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setSize(SizeBeanse size) {
+		this.size = size;
 	}
 }

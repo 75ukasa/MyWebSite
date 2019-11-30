@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
+import beans.PersonalInfoBeans;
 import beans.UserDataBeans;
 import dao.UserDAO;
 
@@ -55,13 +56,8 @@ public class RegistConfirm extends HttpServlet {
 			String userGender = request.getParameter("gender");
 
 			UserDataBeans udb = new UserDataBeans();
-			udb.setName(userName);
-			udb.setKana(userKana);
 			udb.setLoginId(loginId);
 			udb.setPassword(password);
-			udb.setZip(userZip);
-			udb.setAddress(userAddress);
-			udb.setTel(userTel);
 
 			String registMessage = "";
 
@@ -70,12 +66,22 @@ public class RegistConfirm extends HttpServlet {
 				registMessage = "ほかのユーザーが使用中のログインIDです";
 			}
 
+			PersonalInfoBeans personal = new PersonalInfoBeans();
+			personal.setName(userName);
+			personal.setKana(userKana);
+			personal.setZip(userZip);
+			personal.setAddress(userAddress);
+			personal.setTel(userTel);
+
 			//男女の判断
 			if(userGender.equals("1")) {
-				udb.setGender("男性");
+				personal.setGender("男性");
 			}else if(userGender.equals("2")) {
-				udb.setGender("女性");
+				personal.setGender("女性");
 			}
+
+			//個人情報をUserDataBeansにセット
+			udb.setPersonalInfo(personal);
 
 
 			//エラーメッセージがないなら確認画面へ
@@ -83,9 +89,9 @@ public class RegistConfirm extends HttpServlet {
 				request.setAttribute("udb", udb);
 				request.getRequestDispatcher(Forward.REGIST_CONFIRM_PAGE).forward(request, response);
 			}else {
-				session.setAttribute("udb", udb);
-				session.setAttribute("registMessage", registMessage);
-				response.sendRedirect("Regist");
+				request.setAttribute("udb", udb);
+				request.setAttribute("registMessage", registMessage);
+				request.getRequestDispatcher(Forward.REGIST_PAGE).forward(request, response);
 			}
 
 

@@ -5,18 +5,28 @@ USE `Made_to_order`;
 
 
 
-CREATE TABLE `user`(
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `personal_id` int(11) NOT NULL ,
+  `size_id` int(11) NOT NULL ,
+  `login_id` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+CREATE TABLE `personal_info`(
 	`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`user_id` int(11) DEFAULT NULL,
 	`name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
 	`kana` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-	`login_id` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-	`password` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
 	`zip` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
 	`address` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
 	`tel` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-	`gender` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-	`create_date` date DEFAULT NULL
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+	`gender` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -124,7 +134,7 @@ INSERT INTO `item` (`id`,`brand_id`,`material`,`price`,`color`,`remark`,`depth`,
 
 
 
-CREATE TABLE `silhouette_oder` (
+CREATE TABLE `silhouette_design` (
   `id` int(11) NOT NULL,
   `style` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `file` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
@@ -132,7 +142,7 @@ CREATE TABLE `silhouette_oder` (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-INSERT INTO `silhouette_oder` (`id`,`style`,`file`) VALUES
+INSERT INTO `silhouette_design` (`id`,`type`,`file`) VALUES
 	(1,'モードスタイル','style1.jpg'),
 	(2,'イタリアンスタイ','style2.jpg'),
 	(3,'セミソフトスタイル','style3.jpg'),
@@ -142,7 +152,7 @@ INSERT INTO `silhouette_oder` (`id`,`style`,`file`) VALUES
 
 
 
-CREATE TABLE `collar_oder` (
+CREATE TABLE `collar_design` (
   `id` int(11) NOT NULL,
   `type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `file` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
@@ -150,7 +160,7 @@ CREATE TABLE `collar_oder` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 
 
-INSERT INTO `cuffs_oder` (`id`,`type`,`file`) VALUES
+INSERT INTO `collar_design` (`id`,`type`,`file`) VALUES
 	(1,'レギュラーカラー','cs1.jpg'),
 	(2,'ショートカラー','cs2.jpg'),
 	(3,'ロングポイント','cs3.jpg'),
@@ -182,14 +192,14 @@ INSERT INTO `cuffs_oder` (`id`,`type`,`file`) VALUES
 
 
 
-CREATE TABLE `cuffs_oder` (
+CREATE TABLE `cuffs_design` (
 	`id` int(11) PRIMARY KEY NOT NULL,
 	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
 	`file` varchar(256) COLLATE utf8_unicode_ci NOT NULL
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-INSERT INTO `cuffs_oder` (`id`,`type`,`file`) VALUES
+INSERT INTO `cuffs_design` (`id`,`type`,`file`) VALUES
 	(1,'スタンダードカフス','ks1.jpg'),
 	(2,'ラウンドカフス(中丸)','ks2.jpg'),
 	(3,'ラウンドカフス(大丸)','ks3.jpg'),
@@ -262,7 +272,7 @@ INSERT INTO `pocket_oder` (`id`,`type`,`price`) VALUES
 
 
 
-CREATE TABLE `name_desing` (
+CREATE TABLE `name_design` (
 	`id` int(11) PRIMARY KEY NOT NULL,
 	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
 	`price` int(11) NOT NULL,
@@ -270,7 +280,7 @@ CREATE TABLE `name_desing` (
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-INSERT INTO `name_desing` (`id`,`type`,`price`,`file`) VALUES
+INSERT INTO `name_design` (`id`,`type`,`price`,`file`) VALUES
 	(1,'ドイツ文字','550','doitsu.jpg'),
 	(2,'イタリック','550','italic.jpg'),
 	(3,'ゴシック体','550','goshic.jpg'),
@@ -339,7 +349,7 @@ INSERT INTO `name_position` (`id`,`type`,`file`) VALUES
 
 
 
-CREATE TABLE `button_desing` (
+CREATE TABLE `button_design` (
 	`id` int(11) PRIMARY KEY NOT NULL,
 	`type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
 	`price` int(11) NOT NULL,
@@ -347,7 +357,7 @@ CREATE TABLE `button_desing` (
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-INSERT INTO `button_desing` (`id`,`type`,`price`,`file`) VALUES
+INSERT INTO `button_design` (`id`,`type`,`price`,`file`) VALUES
 	(1,'プラスチック　ホワイト　２つ穴ボタン',0,'PRS.jpg'),
 	(2,'プラスチック　ホワイト　４つ穴ボタン(２㎜厚)',0,'P2S.jpg'),
 	(3,'プラスチック　ホワイト　４つ穴ボタン(２．５㎜厚)',0,'P3S.jpg'),
@@ -431,3 +441,46 @@ CREATE TABLE `buy` (
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+CREATE TABLE `buy2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `total_price` int(11) DEFAULT NULL,
+  `silhouetteType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `collarType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `collarRequest` text COLLATE utf8_unicode_ci,
+  `cuffsDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsButtonType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsWatchType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cuffsRequest` text COLLATE utf8_unicode_ci,
+  `pocketDesign_id` int(11) DEFAULT NULL,
+  `pocketRequest` text COLLATE utf8_unicode_ci,
+  `nameMessage` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameDesign_id` int(11) DEFAULT NULL,
+  `nameSpelling` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nameColor1_id` int(11) DEFAULT NULL,
+  `nameColor2_id` int(11) DEFAULT NULL,
+  `namePosition` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `buttonDesign_id` int(11) DEFAULT NULL,
+  `buttonThread1` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `buttonThread2` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `otherRequest` text COLLATE utf8_unicode_ci,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+
+
+
+CREATE TABLE `buy_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `buy_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_num` int(11) NOT NULL,
+  `personal_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

@@ -14,29 +14,28 @@ public class UserDAO {
 
 	/**
 	 * データの挿入処理を行う。現在時刻は挿入直前に生成
+	 * @param sizeId
+	 * @param personalId
 	 *
 	 * @param user
 	 *            対応したデータを保持しているJavaBeans
 	 * @throws SQLException
 	 *             呼び出し元にcatchさせるためにスロー
 	 */
-	public static void insertUser(UserDataBeans userData) throws SQLException {
+	public static void insertUser(UserDataBeans userData, int personalId, int sizeId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try{
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO user (name,kana,login_id,password,zip,address,tel,gender,create_date) VALUES(?,?,?,?,?,?,?,?,?)");
-			st.setString(1,userData.getName());
-			st.setString(2,userData.getKana());
+			st = con.prepareStatement("INSERT INTO user (personal_id, size_id, login_id, password, create_date) VALUES(?,?,?,?,?)");
+			st.setInt(1, personalId);
+			st.setInt(2, sizeId);
 			st.setString(3,userData.getLoginId());
 			st.setString(4,Helper.getSha256(userData.getPassword()));
-			st.setString(5,userData.getZip());
-			st.setString(6,userData.getAddress());
-			st.setString(7,userData.getTel());
-			st.setString(8,userData.getGender());
-			st.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
+			st.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 			st.executeUpdate();
 			System.out.println("ユーザー情報の登録は完了しました。");
+
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
@@ -116,12 +115,53 @@ public class UserDAO {
 			while(rs.next()) {
 				if(Helper.getSha256(password).equals(rs.getString("password"))) {
 					userId = rs.getInt("id");
-					System.out.println("userIdを取得しました。");
+					System.out.println("ユーザーデータIDを取得しました。");
 					break;
 				}
 			}
 			System.out.println("login_idによるuserIdの検索は終了しました。");
 			return userId;
+
+		}catch(SQLException e) {
+			System.out.println();
+			throw new SQLException(e);
+		}finally {
+			if(con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * サイズ情報IDと個人情報IDを取得
+	 *
+	 * @param userId ユーザーID
+	 *
+	 * @return UserData [UserDataBeans] : 各情報のID
+	 *
+	 * @throws SQLException
+	 *             呼び出し元にスロー
+	 */
+
+	public static UserDataBeans getUserDataId(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try{
+			con = DBManager.getConnection();
+			st = con.prepareStatement("SELECT id, personal_id, size_id FROM user WHERE id = ?");
+			st.setInt(1, userId);
+
+			ResultSet rs = st.executeQuery();
+
+			UserDataBeans UserData = new UserDataBeans();
+			if (rs.next()) {
+				UserData.setUserId(userId);
+				UserData.setPersonalId(rs.getInt("personal_id"));
+				UserData.setSizeId(rs.getInt("size_id"));
+			}
+			System.out.println("ユーザーIDによる個人情報IDの検査は終了しました。");
+
+			return UserData;
 
 		}catch(SQLException e) {
 			System.out.println();

@@ -1,22 +1,22 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class BuyBeans implements Serializable{
-	private int userId;
 	private String silhouetteType;
 	private String collarType;
 	private String cuffsDesignType;
 	private String cuffsButtonType;
 	private String cuffsWatchType;
-	private String pocketDesign;
 	private String nameMessage;
 	private String nameSpelling;
 	private String namePosition;
 	private String buttonThread1;
 	private String buttonThread2;
+	private Date buyDate;
 	//OderSizeBeanseと結合
-	private OrderSizeBeanse sizeBeanse;
+	private SizeBeanse sizeBeanse;
 	//OderRequestBeansと結合
 	private OrderRequestBeans requestBeans;
 	// OderPocketBeansと結合
@@ -28,22 +28,17 @@ public class BuyBeans implements Serializable{
 	//OderNameColorBeans
 	private OrderNameColorBeans nameColorBeans2;
 	//OderButtonDesingと結合
-	private OrderButtonDesignBeans buttonDesingBeans;
-	//UserDataBeansと結合
-	private UserDataBeans userDataBeans;
+	private OrderButtonDesignBeans buttonDesignBeans;
 	//OderPriceBeansと結合
 	private OrderPriceBeans price;
+	//PersonalInfoBeansと結合
+	private PersonalInfoBeans personalInfo;
 
 
 
 
 
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
 
 
 	public String getSilhouetteType() {
@@ -83,14 +78,6 @@ public class BuyBeans implements Serializable{
 	}
 	public void setCuffsWatchType(String cuffsWatchType) {
 		this.cuffsWatchType = cuffsWatchType;
-	}
-
-
-	public String getPocketDesign() {
-		return pocketDesign;
-	}
-	public void setPocketDesing(String pocketDesign) {
-		this.pocketDesign = pocketDesign;
 	}
 
 
@@ -134,10 +121,10 @@ public class BuyBeans implements Serializable{
 	}
 
 
-	public OrderSizeBeanse getSizeBeanse() {
+	public SizeBeanse getSizeBeanse() {
 		return sizeBeanse;
 	}
-	public void setSizeBeanse(OrderSizeBeanse sizeBeanse) {
+	public void setSizeBeanse(SizeBeanse sizeBeanse) {
 		this.sizeBeanse = sizeBeanse;
 	}
 
@@ -182,19 +169,11 @@ public class BuyBeans implements Serializable{
 	}
 
 
-	public OrderButtonDesignBeans getButtonDesingBeans() {
-		return buttonDesingBeans;
+	public OrderButtonDesignBeans getButtonDesignBeans() {
+		return buttonDesignBeans;
 	}
-	public void setButtonDesingBeans(OrderButtonDesignBeans buttonDesingBeans) {
-		this.buttonDesingBeans = buttonDesingBeans;
-	}
-
-
-	public UserDataBeans getUserDataBeans() {
-		return userDataBeans;
-	}
-	public void setUserDataBeans(UserDataBeans userDataBeans) {
-		this.userDataBeans = userDataBeans;
+	public void setButtonDesignBeans(OrderButtonDesignBeans buttonDesignBeans) {
+		this.buttonDesignBeans = buttonDesignBeans;
 	}
 
 
@@ -203,5 +182,24 @@ public class BuyBeans implements Serializable{
 	}
 	public void setPrice(OrderPriceBeans price) {
 		this.price = price;
+	}
+	public PersonalInfoBeans getPersonalInfo() {
+		return personalInfo;
+	}
+
+
+	public void setPersonalInfo(PersonalInfoBeans personalInfo) {
+		this.personalInfo = personalInfo;
+	}
+	public void setCuffsDesignType(String cuffsDesignType) {
+		this.cuffsDesignType = cuffsDesignType;
+	}
+
+
+	public Date getBuyDate() {
+		return buyDate;
+	}
+	public void setBuyDate(Date buyDate) {
+		this.buyDate = buyDate;
 	}
 }

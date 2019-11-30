@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.BuyBeans;
+import beans.BuyDetailBeans;
 import beans.CartBeans;
+import beans.UserDataBeans;
 import dao.BuyDAO;
+import dao.UserDAO;
+import dao.UserInfoDAO;
 
 /**
  * Servlet implementation class BuyResult
@@ -45,23 +49,51 @@ public class BuyResult extends HttpServlet {
 			//カート情報の取得
 			ArrayList<CartBeans> cart = (ArrayList<CartBeans>) Helper.cutSessionAttribute(session,"cart");
 			//オーダー情報の取得
-			BuyBeans ordereDate = (BuyBeans) Helper.cutSessionAttribute(session,"orderData");
+			BuyBeans buyDate = (BuyBeans) Helper.cutSessionAttribute(session,"orderData");
 
 			//ログイン確認
 			boolean isLogin = session.getAttribute("isLogin") != null ? (boolean) session.getAttribute("isLogin") : false;
 
-			//非会員はユーザーID = 0 ： 会員は登録ID
-			int  userId = 0;
+			UserDataBeans UserData = new UserDataBeans();
 			if(isLogin) {
-				userId =  (int) session.getAttribute("userId");
+				//ユーザーIDをセッションから取得
+				UserData.setUserId((int) session.getAttribute("userId"));
+				//サイズIDと個人情報IDを取得
+				UserData = UserDAO.getUserDataId(UserData.getUserId());
+			}else {
+				//非会員の個人情報を登録
+				UserData.setPersonalId(UserInfoDAO.insertPersonal(buyDate.getPersonalInfo()));
 			}
 
-			ordereDate.setUserId(userId);
-
 			//購入データを登録
-			int buyId = BuyDAO.insertBuy(ordereDate);
+			int buyId = BuyDAO.insertBuy(buyDate,UserData.getUserId());
 
+			//サイズ情報を、非会員は登録：会員は更新
+			UserData.setSizeId(UserInfoDAO.BuySize(buyDate,UserData));
+
+			// 購入詳細情報を購入情報IDに紐づけして登録
+			for (CartBeans cartInItem : cart) {
+				BuyDetailBeans buyDetail = new BuyDetailBeans();
+				buyDetail.setBuyId(buyId);
+				buyDetail.setSizeId(UserData.getSizeId());
+				buyDetail.setPersonalId(UserData.getPersonalId());
+				buyDetail.setItemId(cartInItem.getItemId());
+				buyDetail.setItemNum(cartInItem.getNum());
+				BuyDAO.insertBuyDetail(buyDetail);
+			}
+
+			/* ====購入完了ページ表示用==== */
+			BuyBeans resultBuy = BuyDAO.getBuyBeansByBuyId(buyId);
+			request.setAttribute("resultBuy", resultBuy);
+
+			// 購入アイテム情報
+			ArrayList<CartBeans> buyItem = BuyDAO.getItemDataBeansListByBuyId(buyId);
+			request.setAttribute("buyItem", buyItem);
+
+			request.getRequestDispatcher(Forward.BUY_RESULT_PAGE).forward(request, response);
 		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
 
 		}
 	}

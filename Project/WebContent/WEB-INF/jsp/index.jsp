@@ -36,6 +36,7 @@
 		</header>
 
 		<jsp:include page="/baselayout/header.jsp"/>
+		<li><a href="test">ログイン</a></li>
 
 
 		<div class="contents wrap">

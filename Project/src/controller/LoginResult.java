@@ -42,7 +42,7 @@ public class LoginResult extends HttpServlet {
 			String password = request.getParameter("password");
 
 			//ユーザーIDを取得
-			int userId = UserDAO.getUserId(loginId,password);
+			int userId = UserDAO.getUserId(loginId, password);
 
 			//ユーザーIDの取得有無
 			if(userId != 0) {

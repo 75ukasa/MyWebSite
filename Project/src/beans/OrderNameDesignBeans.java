@@ -3,45 +3,49 @@ package beans;
 import java.io.Serializable;
 
 public class OrderNameDesignBeans implements Serializable{
-	private int desingId;
-	private String desingType;
-	private int desingPrice;
-	private String desingFile;
+	private int designId;
+	private String designType;
+	private int designPrice;
+	private String designFile;
 
 
 
 
 
-
-	public int getDesingId() {
-		return desingId;
+	public int getDesignId() {
+		return designId;
 	}
-	public void setDesingId(int desingId) {
-		this.desingId = desingId;
-	}
-
-
-	public String getDesingType() {
-		return desingType;
-	}
-	public void setDesingType(String desingType) {
-		this.desingType = desingType;
+	public void setDesignId(int designId) {
+		this.designId = designId;
 	}
 
 
-	public int getDesingPrice() {
-		return desingPrice;
+	public String getDesignType() {
+		return designType;
 	}
-	public void setDesingPrice(int desingPrice) {
-		this.desingPrice = desingPrice;
+	public void setDesignType(String designType) {
+		this.designType = designType;
 	}
 
 
-	public String getDesingFile() {
-		return desingFile;
+	public int getDesignPrice() {
+		return designPrice;
 	}
-	public void setDesingFile(String desingFile) {
-		this.desingFile = desingFile;
+	public void setDesignPrice(int designPrice) {
+		this.designPrice = designPrice;
 	}
+
+
+	public String getDesignFile() {
+		return designFile;
+	}
+	public void setDesignFile(String designFile) {
+		this.designFile = designFile;
+	}
+
+
+
+
+
 
 }

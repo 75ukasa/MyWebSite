@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.PersonalInfoBeans;
 import beans.UserDataBeans;
-import dao.SizeDAO;
 import dao.UserDAO;
+import dao.UserInfoDAO;
 
 
 /**
@@ -41,27 +42,29 @@ public class RegistResult extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try{
-			UserDataBeans userData = new UserDataBeans();
+			PersonalInfoBeans personal = new PersonalInfoBeans();
+			//PersonalInfoBeansに個人情報をセット
+			personal.setName(request.getParameter("name"));
+			personal.setKana(request.getParameter("kana"));
+			personal.setZip(request.getParameter("zip"));
+			personal.setAddress(request.getParameter("address"));
+			personal.setTel(request.getParameter("tel"));
+			personal.setGender(request.getParameter("gender"));
 
-			//beansに各ユーザー情報をセット
-			userData.setName(request.getParameter("name"));
-			userData.setKana(request.getParameter("kana"));
+			//個人情報の登録
+			int PersonalId = UserInfoDAO.insertPersonal(personal);
+			//ユーザーのサイズ情報をDBへ仮追加
+			int sizeId = UserInfoDAO.insertTemporarilyUserSize();
+
+			UserDataBeans userData = new UserDataBeans();
+			//UserDataBeansにユーザー情報をセット
 			userData.setLoginId(request.getParameter("login_id"));
 			userData.setPassword(request.getParameter("password"));
-			userData.setZip(request.getParameter("zip"));
-			userData.setAddress(request.getParameter("address"));
-			userData.setTel(request.getParameter("tel"));
-			userData.setGender(request.getParameter("gender"));
+			userData.setPersonalInfo(personal);
 
 			//ユーザー情報をDBへ追加
-			UserDAO.insertUser(userData);
+			UserDAO.insertUser(userData,PersonalId,sizeId);
 			request.setAttribute("udb",userData);
-
-			//ユーザーIDの取得
-			int userId = UserDAO.getUserId(userData.getLoginId(), userData.getPassword());
-
-			//ユーザーのサイズ情報をDBへ仮追加
-			SizeDAO.insertTemporarilyUserSize(userId);
 
 			request.getRequestDispatcher(Forward.REGIST_RESULT_PAGE).forward(request, response);
 

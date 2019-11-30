@@ -53,13 +53,13 @@
 									<form action="RegistResult" method="POST">
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="name" value="${udb.name}" readonly=""> <label class="active">名前</label>
+												<input type="text" name="name" value="${udb.personalInfo.name}" readonly=""> <label class="active">名前</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="kana" value="${udb.kana}" readonly=""> <label class="active">ふりがな</label>
+												<input type="text" name="kana" value="${udb.personalInfo.kana}" readonly=""> <label class="active">ふりがな</label>
 											</div>
 										</div>
 
@@ -71,31 +71,31 @@
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="password" name="password" value="a" readonly=""> <label class="active">パスワード</label>
+												<input type="password" name="password" value="${udb.password}" readonly=""> <label class="active">パスワード</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="zip" value="${udb.zip}" readonly=""> <label class="active">郵便番号</label>
+												<input type="text" name="zip" value="${udb.personalInfo.zip}" readonly=""> <label class="active">郵便番号</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="address" value="${udb.address}" readonly=""> <label class="active">住所</label>
+												<input type="text" name="address" value="${udb.personalInfo.address}" readonly=""> <label class="active">住所</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="tel" value="${udb.tel}" readonly=""> <label class="active">電話番号</label>
+												<input type="text" name="tel" value="${udb.personalInfo.tel}" readonly=""> <label class="active">電話番号</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="gender" value="${udb.gender}" readonly=""> <label class="active">性別</label>
+												<input type="text" name="gender" value="${udb.personalInfo.gender}" readonly=""> <label class="active">性別</label>
 											</div>
 										</div>
 										<article>
