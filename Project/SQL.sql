@@ -157,7 +157,7 @@ CREATE TABLE `collar_design` (
   `type` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `file` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 INSERT INTO `collar_design` (`id`,`type`,`file`) VALUES
@@ -209,7 +209,7 @@ INSERT INTO `cuffs_design` (`id`,`type`,`file`) VALUES
 	(7,'ダブルカフス　折り返しラウンド','ks7.jpg'),
 	(8,'ダブルカフス　折り返し直角','ks8.jpg'),
 	(9,'ターンナップカフス　ボタン1個','ks9.jpg'),
-	(10,'ターンナップカフス　ボタン2個','ks10.jpg')
+	(10,'ターンナップカフス　ボタン2個','ks10.jpg');
 
 
 
@@ -419,36 +419,7 @@ CREATE TABLE `buy` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `total_price` int(11) DEFAULT NULL,
-  `silhouetteType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `collarType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `collarRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cuffsDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cuffsButtonType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cuffsWatchType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cuffsRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pocketDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pocketRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nameMessage` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nameDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nameSpelling` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nameColor1` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nameColor2` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `namePosition` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `buttonDesign` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `buttonThread1` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `buttonThread2` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `otherRequest` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-
-
-CREATE TABLE `buy2` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `total_price` int(11) DEFAULT NULL,
+  `total_num` int(11) DEFAULT NULL,
   `silhouetteType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `collarType` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `collarRequest` text COLLATE utf8_unicode_ci,
@@ -470,7 +441,7 @@ CREATE TABLE `buy2` (
   `otherRequest` text COLLATE utf8_unicode_ci,
   `create_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 

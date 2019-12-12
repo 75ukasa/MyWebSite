@@ -1,9 +1,14 @@
+
+
 package beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BuyBeans implements Serializable{
+	private int buyId;
+	private int totalNum;
 	private String silhouetteType;
 	private String collarType;
 	private String cuffsDesignType;
@@ -38,7 +43,20 @@ public class BuyBeans implements Serializable{
 
 
 
+	public int getBuyId() {
+		return buyId;
+	}
+	public void setBuyId(int buyId) {
+		this.buyId = buyId;
+	}
 
+
+	public int getTotalNum() {
+		return totalNum;
+	}
+	public void setTotalNum(int totalNum) {
+		this.totalNum = totalNum;
+	}
 
 
 	public String getSilhouetteType() {
@@ -60,7 +78,7 @@ public class BuyBeans implements Serializable{
 	public String getCuffsDesignType() {
 		return cuffsDesignType;
 	}
-	public void setCuffsDesingType(String cuffsDesignType) {
+	public void setCuffsDesignType(String cuffsDesignType) {
 		this.cuffsDesignType = cuffsDesignType;
 	}
 
@@ -183,16 +201,13 @@ public class BuyBeans implements Serializable{
 	public void setPrice(OrderPriceBeans price) {
 		this.price = price;
 	}
+
+
 	public PersonalInfoBeans getPersonalInfo() {
 		return personalInfo;
 	}
-
-
 	public void setPersonalInfo(PersonalInfoBeans personalInfo) {
 		this.personalInfo = personalInfo;
-	}
-	public void setCuffsDesignType(String cuffsDesignType) {
-		this.cuffsDesignType = cuffsDesignType;
 	}
 
 
@@ -201,5 +216,11 @@ public class BuyBeans implements Serializable{
 	}
 	public void setBuyDate(Date buyDate) {
 		this.buyDate = buyDate;
+	}
+
+
+	public String getFormatDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
+		return sdf.format(buyDate);
 	}
 }

@@ -135,30 +135,36 @@ function input_check(){
 	}
 
 	//ログインID
-	if(loginID == ""){
-		$("#loginID_error").html(" ※ログインIDは必須です。");
-		result = false;
-	}else if(!loginID.match(/^[a-z\d]+$/i)){
-		$('#loginID_error').html(" ※ログインIDは半角英数字で入力してください。");
-		result = false;
+	if(password1 != null){
+		if(loginID == ""){
+			$("#loginID_error").html(" ※ログインIDは必須です。");
+			result = false;
+		}else if(!loginID.match(/^[a-z\d]+$/i)){
+			$('#loginID_error').html(" ※ログインIDは半角英数字で入力してください。");
+			result = false;
+		}
 	}
 
 	//パスワード
-	if(password1 == ""){
-		$("#password1_error").html(" ※パスワードは必須です。");
-		result = false;
-	}else if(!password1.match(/^[a-z\d]+$/i)){
-		$('#password1_error').html(" ※パスワードは半角英数字で入力してください。");
-		result = false;
+	if(password1 != null){
+		if(password1 == ""){
+			$("#password1_error").html(" ※パスワードは必須です。");
+			result = false;
+		}else if(!password1.match(/^[a-z\d]+$/i)){
+			$('#password1_error').html(" ※パスワードは半角英数字で入力してください。");
+			result = false;
+		}
 	}
 
 	//確認パスワード
-	if(password2 == ""){
-		$("#password2_error").html(" ※パスワード確認は必須です。");
-		result = false;
-	}else if(password2 !== password1){
-		$("#password2_error").html(" ※パスワードと一致しません。");
-		result = false;
+	if(password1 != null){
+		if(password2 == ""){
+			$("#password2_error").html(" ※パスワード確認は必須です。");
+			result = false;
+		}else if(password2 !== password1){
+			$("#password2_error").html(" ※パスワードと一致しません。");
+			result = false;
+		}
 	}
 	return result;
 };

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.CartBeans;
+import beans.BuyItemBeans;
 import dao.ItemDAO;
 
 /**
@@ -54,16 +54,16 @@ public class ItemAdd extends HttpServlet {
 			int Data = Integer.parseInt(request.getParameter("id"));
 
 			//アイテム情報の取得
-			CartBeans cartItem = ItemDAO.getCartItemDetail(Data,Integer.parseInt(num));
+			BuyItemBeans cartItem = ItemDAO.getCartItemDetail(Data,Integer.parseInt(num));
 
 			//アイテム情報をリクエストパラメータにセット
 			request.setAttribute("item",cartItem );
 			//カートを取得
-			ArrayList<CartBeans> cart = (ArrayList<CartBeans>) session.getAttribute("cart");
+			ArrayList<BuyItemBeans> cart = (ArrayList<BuyItemBeans>) session.getAttribute("cart");
 
 			//セッションにカートが無い場合カートを作成
 			if(cart == null) {
-				cart = new ArrayList<CartBeans>();
+				cart = new ArrayList<BuyItemBeans>();
 			}
 
 			//カートにアイテムを追加

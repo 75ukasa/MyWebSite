@@ -24,31 +24,20 @@
 	</head>
 
 	<body>
-
-			<!--wrap-->
-			<!--head-->
+		<div class="container">
 			<div class="gmenu">
-                <h2>
-                    <a href="Index">
-                    Made-To-Order
-                    </a>
-                </h2>
-            </div>
-
-		<nav class="gmenu">
-			<ul id="gmenu">
-				<li><a href="Index">HOME</a></li>
-				<li><a href="ClothServlet">シャツ一覧</a></li>
-				<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-				<li><a href="ForwardServlet?id=4">カートを見る</a></li>
-			</ul>
-		</nav>
-
+				<h2>
+					<a href="Index">Made-To-Order</a>
+				</h2>
+			</div>
+		</div>
 
 		<div class="contents wrap">
-			<article>
-				<h2>新規会員登録</h2>
-			</article>
+			<div class="row center">
+				<article>
+					<h2>新規会員登録</h2>
+				</article>
+			</div>
 			<c:if test="${registMessage != null}">
 				<P class="red-text">${registMessage}</P>
 			</c:if>
@@ -148,6 +137,9 @@
 					</div>
 				</div>
 			</div>
+			<p class="gotop wrap">
+				<a onclick="window.history.back()">戻る</a>
+			</p>
 		</div>
 	</body>
 </html>

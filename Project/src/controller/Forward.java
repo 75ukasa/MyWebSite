@@ -9,14 +9,11 @@ public class Forward {
 		// TOPページ
 		static final String TOP_PAGE = "/WEB-INF/jsp/index.jsp";
 
-		// デザイン集ページ
-		static final String DESING_PAGE = "/WEB-INF/jsp/design.jsp";
-
 		// 商品ページ
-		static final String ITEM_PAGE = "/WEB-INF/jsp/clothList.jsp";
+		static final String ITEM_PAGE = "/WEB-INF/jsp/itemList.jsp";
 
 		// 商品詳細ページ
-		static final String ITEM_DETAIL_PAGE = "/WEB-INF/jsp/clothDetail.jsp";
+		static final String ITEM_DETAIL_PAGE = "/WEB-INF/jsp/itemDetail.jsp";
 
 		// エラーページ
 		static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
@@ -40,13 +37,13 @@ public class Forward {
 		static final String USER_DATA_PAGE = "/WEB-INF/jsp/userData.jsp";
 
 		// ユーザー情報更新確認
-		static final String USER_DATA_UPDATE_CONFIRM_PAGE = "/WEB-INF/jsp/userdataupdateconfirm.jsp";
+		static final String USER_DATA_UPDATE_CONFIRM_PAGE = "/WEB-INF/jsp/userDataUpdateConfirm.jsp";
 
 		// ユーザー情報更新完了
-		static final String USER_DATA_UPDATA_RESULT_PAGE = "/WEB-INF/jsp/userdataupdateresult.jsp";
+		static final String USER_DATA_UPDATA_RESULT_PAGE = "/WEB-INF/jsp/userDataUpdateResult.jsp";
 
 		// ユーザー購入履歴
-		static final String USER_BUY_HISTORY_DETAIL_PAGE = "/WEB-INF/jsp/userbuyhistorydetail.jsp";
+		static final String USER_BUY_HISTORY_DETAIL_PAGE = "/WEB-INF/jsp/userBuyHistoryDetail.jsp";
 
 		// ログイン
 		static final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";

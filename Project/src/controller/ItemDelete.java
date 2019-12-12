@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import beans.CartBeans;
+import beans.BuyItemBeans;
 
 /**
  * Servlet implementation class ItemDelete
@@ -47,7 +47,7 @@ public class ItemDelete extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
-			ArrayList<CartBeans> cart = (ArrayList<CartBeans>) session.getAttribute("cart");
+			ArrayList<BuyItemBeans> cart = (ArrayList<BuyItemBeans>) session.getAttribute("cart");
 			//nullチェック
 			if(!CollectionUtils.isEmpty(cart)) {
 				int Id  = Integer.parseInt(request.getParameter("id"));
@@ -56,7 +56,7 @@ public class ItemDelete extends HttpServlet {
 				if(Id == 1) {
 					//カートアイテムの消去
 					int DeleteItemID = Integer.parseInt(request.getParameter("delete_id"));
-					for(CartBeans cartItem : cart) {
+					for(BuyItemBeans cartItem : cart) {
 						if(cartItem.getItemId() == DeleteItemID) {
 							cart.remove(cartItem);
 							break;
@@ -75,7 +75,7 @@ public class ItemDelete extends HttpServlet {
 						int num = Integer.parseInt(request.getParameter("num"));
 						int ChangeItemID = Integer.parseInt(request.getParameter("Change_id"));
 
-						for(CartBeans cartItem : cart) {
+						for(BuyItemBeans cartItem : cart) {
 							if(cartItem.getItemId() == ChangeItemID) {
 								cartItem.setNum(num);
 								break;

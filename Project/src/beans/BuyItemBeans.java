@@ -2,9 +2,10 @@ package beans;
 
 import java.io.Serializable;
 
-public class CartBeans implements Serializable{
+public class BuyItemBeans implements Serializable{
 	private int itemId;
 	private int brandId;
+	private String itemFile;
 	private String material;
 	private String remark;
 	private String cloth;
@@ -12,7 +13,7 @@ public class CartBeans implements Serializable{
 	private int unitPrice;
 	private int subPrice;
 	// brandDataBeansと結合
-	private brandDataBeans brandDataBeans;
+	private BrandDataBeans brandDataBeans;
 
 
 
@@ -30,6 +31,14 @@ public class CartBeans implements Serializable{
 	}
 	public void setBrandId(int brandId) {
 		this.brandId = brandId;
+	}
+
+
+	public String getItemFile() {
+		return itemFile;
+	}
+	public void setItemFile(String itemFile) {
+		this.itemFile = itemFile;
 	}
 
 
@@ -81,10 +90,10 @@ public class CartBeans implements Serializable{
 	}
 
 
-	public brandDataBeans getBrandDataBeans() {
+	public BrandDataBeans getBrandDataBeans() {
 		return brandDataBeans;
 	}
-	public void setBrandDataBeans(brandDataBeans brandDataBeans) {
+	public void setBrandDataBeans(BrandDataBeans brandDataBeans) {
 		this.brandDataBeans = brandDataBeans;
 	}
 }

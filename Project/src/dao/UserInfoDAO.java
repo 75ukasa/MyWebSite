@@ -9,6 +9,7 @@ import java.sql.Statement;
 import base.DBManager;
 import beans.BuyBeans;
 import beans.PersonalInfoBeans;
+import beans.SizeBeanse;
 import beans.UserDataBeans;
 
 /**
@@ -59,13 +60,10 @@ public class UserInfoDAO {
 	/**
 	 * 個人情報の登録処理
 	 * @param personal 個人情報がセットされたBeans
-	 *		   userId ユーザーのID（userId=0:非会員）
+	 *
 	 * @return personalId 登録した個人情報ID
-	 *
 	 * @throws SQLException 呼び出し元にスローさせるため
-	 *
 	 */
-
 	public static int insertPersonal(PersonalInfoBeans personal) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -182,5 +180,133 @@ public class UserInfoDAO {
 				con.close();
 			}
 		}
+	}
+
+	/**
+	 * ユーザーIDから個人情報を取得する
+	 *
+	 * @param useId
+	 *            ユーザーID
+	 * @return PersonalInfoBeans ユーザーの個人情報を格納したBeans
+	 * @throws SQLException
+	 *             呼び出し元にcatchさせるためスロー
+	 */
+	public static PersonalInfoBeans getUserData(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try{
+			con = DBManager.getConnection();
+			st = con.prepareStatement("SELECT * FROM user" +
+											"	JOIN personal_info ON user.personal_id = personal_info.id" +
+											"	WHERE user.id=?");
+			st.setInt(1, userId);
+			ResultSet rs = st.executeQuery();
+
+			PersonalInfoBeans personal = new PersonalInfoBeans();
+			if(rs.next()) {
+				personal.setName(rs.getString("name"));
+				personal.setKana(rs.getString("kana"));
+				personal.setZip(rs.getString("zip"));
+				personal.setAddress(rs.getString("address"));
+				personal.setTel(rs.getString("tel"));
+				personal.setGender(rs.getString("gender"));
+			}
+			System.out.println("ユーザーIDによる個人情報の検索は完了しました。");
+
+			return personal;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * ユーザーIDからサイズ情報を取得する
+	 *
+	 * @param useId
+	 *            ユーザーID
+	 * @return SizeBeanse  ユーザーのサイズ情報を格納したBeanse
+	 * @throws SQLException
+	 *             呼び出し元にcatchさせるためスロー
+	 */
+	public static SizeBeanse getSizeData(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try{
+			con = DBManager.getConnection();
+			st = con.prepareStatement("SELECT * FROM size WHERE user_id=?");
+			st.setInt(1, userId);
+			ResultSet rs = st.executeQuery();
+
+			SizeBeanse size = new SizeBeanse();
+			if(rs.next()) {
+				size.setNeck(rs.getString("neck"));
+				size.setShoulder(rs.getString("shoulder"));
+				size.setArm(rs.getString("arm"));
+				size.setSleeveRigt(rs.getString("sleeveRigt"));
+				size.setSleeveLeft(rs.getString("sleeveLeft"));
+				size.setBust(rs.getString("bust"));
+				size.setWaist(rs.getString("waist"));
+				size.setHips(rs.getString("hips"));
+				size.setLength(rs.getString("length"));
+				size.setCuffsRigt(rs.getString("cuffsRigt"));
+				size.setCuffsLeft(rs.getString("cuffsLeft"));
+				size.setHeight(rs.getString("height"));
+
+			}
+			System.out.println("ユーザーIDによるサイズ情報の検索は完了しました。");
+
+			return size;
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * 個人情報の更新処理。
+	 *
+	 * @param userId
+	 * @param personal 個人情報をセットしたBeans
+	 * @throws SQLException
+	 *             呼び出し元にcatchさせるためにスロー
+	 */
+	public static void updateUser(int userId, PersonalInfoBeans personal) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("UPDATE personal_info SET user_id=?, name=?, kana=?, zip=?, address=?, tel=?, gender=? WHERE id=?;");
+			st.setInt(1, userId);
+			st.setString(2, personal.getName());
+			st.setString(3, personal.getKana());
+			st.setString(4, personal.getZip());
+			st.setString(5, personal.getAddress());
+			st.setString(6, personal.getTel());
+			st.setString(7, personal.getGender());
+			st.setInt(8, userId);
+			st.executeUpdate();
+
+			System.out.println("個人情報の更新は完了しました。");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+
 	}
 }

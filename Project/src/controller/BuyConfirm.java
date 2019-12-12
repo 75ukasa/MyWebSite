@@ -16,7 +16,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import beans.BuyBeans;
-import beans.CartBeans;
+import beans.BuyItemBeans;
 import beans.OrderButtonDesignBeans;
 import beans.OrderNameColorBeans;
 import beans.OrderNameDesignBeans;
@@ -34,49 +34,41 @@ import dao.OrderDAO;
 public class BuyConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public BuyConfirm() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 		//文字化け対策
 		request.setCharacterEncoding("UTF-8");
 		//セッション
 		HttpSession session = request.getSession();
 
 		try {
-			List<Integer> price = new ArrayList<Integer>();
 			//カートアイテムの取得
-			List<CartBeans> cart = (ArrayList<CartBeans>) session.getAttribute("cart");
+			List<BuyItemBeans> cart = (ArrayList<BuyItemBeans>) session.getAttribute("cart");
 
 			if(!CollectionUtils.isEmpty(cart)) {
-				//カートアイテムの値段を取得
-				price = cart.stream().map(item -> item.getSubPrice()).collect(Collectors.toList());
 
 				//各オーダー情報用beans
 				BuyBeans orderData = new BuyBeans();
-				//エラーメッセージ用
+				//エラーメッセージ用Beans
 				List<String> ActionMessage = new ArrayList<String>();
-				//その他の要望用
+				//その他の要望用Beans
 				OrderRequestBeans orderRequest = new OrderRequestBeans();
 
-				/* == サイズ情報の処理  == */
+				List<Integer> price = new ArrayList<Integer>();
+				//カート内商品の各値段をListにセット
+				price = cart.stream().map(item -> item.getSubPrice()).collect(Collectors.toList());
+
+				//カート内商品の総枚数を取得
+				int totalNum = cart.stream().mapToInt(item -> item.getNum()).sum();
+				orderData.setTotalNum(totalNum);
+
+				/* ===== サイズ情報の処理  =====*/
 				//各サイズ用beans
 				SizeBeanse orderSize = new SizeBeanse();
 				//サイズの値をまとめて取得
@@ -151,7 +143,7 @@ public class BuyConfirm extends HttpServlet {
 
 				if(!StringUtils.isBlank(cuffsDesingId)) {
 					//カフスデザイン情報をオーダーbeansにセット
-					orderData.setCuffsDesingType(OrderDAO.getOrderCuffsDesing(cuffsDesingId));
+					orderData.setCuffsDesignType(OrderDAO.getOrderCuffsDesing(cuffsDesingId));
 				}else {
 					ActionMessage.add("カフスのデザインを選択してください");
 				}
@@ -186,7 +178,7 @@ public class BuyConfirm extends HttpServlet {
 				if(!StringUtils.isBlank(pocketId)) {
 					OrderPocketBeans orderPocket = OrderDAO.getOrderPocket(pocketId);
 					//ポケットのオプション料金をpriceListに追加
-					price.add(orderPocket.getPoketPrice());
+					price.add(orderPocket.getPoketPrice() * totalNum);
 					//ポケットデザイン情報をオーダーbeansにセット
 					orderData.setPocketBeans(orderPocket);
 				}else {
@@ -219,7 +211,7 @@ public class BuyConfirm extends HttpServlet {
 					if(!nameDesignId.isEmpty()) {
 						OrderNameDesignBeans nameDesign = OrderDAO.getOrderNameDesign(nameDesignId);
 						//ネームデザインのオプション料金をpriceListに追加
-						price.add(nameDesign.getDesignPrice());
+						price.add(nameDesign.getDesignPrice() * totalNum);
 						//ネームデザイン情報をオーダーbeansにセット
 						orderData.setNameDesignBeans(nameDesign);
 					}else {
@@ -241,7 +233,7 @@ public class BuyConfirm extends HttpServlet {
 						if(!nameColorId1.isEmpty()) {
 							OrderNameColorBeans nameColor1 = OrderDAO.getOrderNameColor(nameColorId1);
 							//ネームカラーのオプション料金をpriceListに追加
-							price.add(nameColor1.getColorPrice());
+							price.add(nameColor1.getColorPrice() * totalNum);
 							orderData.setNameColorBeans1(nameColor1);
 						}else {
 							ActionMessage.add("ネームのカラーを選択してください");
@@ -253,12 +245,12 @@ public class BuyConfirm extends HttpServlet {
 						if(!nameColorId1.isEmpty() && !nameColorId2.isEmpty()) {
 							OrderNameColorBeans nameColor1 = OrderDAO.getOrderNameColor(nameColorId1);
 							//ネームカラーのオプション料金をpriceListに追加
-							price.add(nameColor1.getColorPrice());
+							price.add(nameColor1.getColorPrice() * totalNum);
 							orderData.setNameColorBeans1(nameColor1);
 
 							OrderNameColorBeans nameColor2 = OrderDAO.getOrderNameColor(nameColorId2);
 							//ネームカラーのオプション料金をpriceListに追加
-							price.add(nameColor2.getColorPrice());
+							price.add(nameColor2.getColorPrice() * totalNum);
 							orderData.setNameColorBeans2(nameColor2);
 						}else {
 							ActionMessage.add("ネームの種類 6) 7) 8)を選択された方はカラーを2種類選択してください");
@@ -280,7 +272,7 @@ public class BuyConfirm extends HttpServlet {
 				int buttonDesignId = Integer.parseInt(request.getParameter("button"));
 				OrderButtonDesignBeans buttonDesing = OrderDAO.getOrderButtonDesign(buttonDesignId);
 				//ボタンデザインのオプション料金をpriceListに追加
-				price.add(buttonDesing.getButtonPrice());
+				price.add(buttonDesing.getButtonPrice() * totalNum);
 				orderData.setButtonDesignBeans(buttonDesing);
 
 				//--ボタン糸情報処理--
@@ -296,67 +288,80 @@ public class BuyConfirm extends HttpServlet {
 				//各種の要望メッセージをOderBeansにセット
 				orderData.setRequestBeans(orderRequest);
 
+				//ログインチェック
+				Boolean isLogin = session.getAttribute("isLogin") != null ? (Boolean) session.getAttribute("isLogin") : false;
+				//非ログインの場合は個人情報処理
+				if(!isLogin) {
+					/* == 個人情報の取得 == */
+					String zip = request.getParameter("zip");
+					String address = request.getParameter("address");
+					String name = request.getParameter("name");
+					String kana = request.getParameter("kana");
+					String tel = request.getParameter("tel");
+					String gender = request.getParameter("gender");
 
-				/* == 個人情報の取得 == */
-				String zip = request.getParameter("zip");
-				String address = request.getParameter("address");
-				String name = request.getParameter("name");
-				String kana = request.getParameter("kana");
-				String tel = request.getParameter("tel");
+					PersonalInfoBeans personal = new PersonalInfoBeans();
 
-				PersonalInfoBeans personal = new PersonalInfoBeans();
-
-				//郵便番号処理
-				if(!StringUtils.isBlank(zip)) {
-					if(Helper.inputZipValidasion(zip)) {
-						personal.setZip(zip);
+					//郵便番号処理
+					if(!StringUtils.isBlank(zip)) {
+						if(Helper.inputZipValidasion(zip)) {
+							personal.setZip(zip);
+						}else {
+							ActionMessage.add("郵便番号を正しく入力してください");
+						}
 					}else {
-						ActionMessage.add("郵便番号を正しく入力してください");
-					}
-				}else {
-					ActionMessage.add("郵便番号を記入してください");
-				}
-
-				//住所処理
-				if(!StringUtils.isBlank(address)) {
-					personal.setAddress(address);
-				}else {
-					ActionMessage.add("市町村を記入してください");
-				}
-
-				//名前処理
-				if(!StringUtils.isBlank(name)) {
-					personal.setName(name);
-				}else {
-					ActionMessage.add("名前を記入してください");
-				}
-
-				//ふりがな処理
-				if(!StringUtils.isBlank(kana)) {
-					if(Helper.inputKanaValidasion(kana)) {
-						personal.setKana(kana);
-					}else {
-						ActionMessage.add("ふりがなを正しく記入してください");
+						ActionMessage.add("郵便番号を記入してください");
 					}
 
-				}else {
-					ActionMessage.add("ふりがなを記入してください");
-				}
-
-				//電話番号処理
-				if(!StringUtils.isBlank(tel)) {
-					if(Helper.inputTelValidasion(tel)) {
-						personal.setTel(tel);
+					//住所処理
+					if(!StringUtils.isBlank(address)) {
+						personal.setAddress(address);
 					}else {
-						ActionMessage.add("電話番号を正しく記入してください");
+						ActionMessage.add("市町村を記入してください");
 					}
-				}else {
-					ActionMessage.add("電話番号を記入してください");
-				}
-				//個人情報をOderBeansにセット
-				orderData.setPersonalInfo(personal);
 
-				//合計金額
+					//名前処理
+					if(!StringUtils.isBlank(name)) {
+						personal.setName(name);
+					}else {
+						ActionMessage.add("名前を記入してください");
+					}
+
+					//ふりがな処理
+					if(!StringUtils.isBlank(kana)) {
+						if(Helper.inputKanaValidasion(kana)) {
+							personal.setKana(kana);
+						}else {
+							ActionMessage.add("ふりがなを正しく記入してください");
+						}
+
+					}else {
+						ActionMessage.add("ふりがなを記入してください");
+					}
+
+					//電話番号処理
+					if(!StringUtils.isBlank(tel)) {
+						if(Helper.inputTelValidasion(tel)) {
+							personal.setTel(tel);
+						}else {
+							ActionMessage.add("電話番号を正しく記入してください");
+						}
+					}else {
+						ActionMessage.add("電話番号を記入してください");
+					}
+
+					//男女の判断
+					if(gender.equals("1")) {
+						personal.setGender("男性");
+					}else if(gender.equals("2")) {
+						personal.setGender("女性");
+					}
+
+					//個人情報をOderBeansにセット
+					orderData.setPersonalInfo(personal);
+				}
+
+				//合計金額の取得
 				orderData.setPrice(Helper.getTotalPrice(price));
 
 

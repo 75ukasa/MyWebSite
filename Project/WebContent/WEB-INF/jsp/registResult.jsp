@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
 	<head>
@@ -18,18 +17,11 @@
 
 
 	<body>
-		<!--wrap-->
-		<!--head-->
-        <div class="gmenu">
-            <h2>
-                <a href="Index">
-                Made-To-Order
-                </a>
-            </h2>
-        </div>
-
-		<jsp:include page="/baselayout/header.jsp" />
-
+		<div class="gmenu">
+ 			<h2>
+				<a href="Index">Made-To-Order</a>
+			</h2>
+		</div>
 		<div class="contents wrap">
 			<div class="container">
 				<div class="row center">

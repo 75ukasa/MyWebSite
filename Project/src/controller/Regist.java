@@ -12,19 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Servlet implementation class Regist
+ *
  */
 @WebServlet("/Regist")
 public class Regist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Regist() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 
 	/**
@@ -45,12 +37,7 @@ public class Regist extends HttpServlet {
 		request.getRequestDispatcher(Forward.REGIST_PAGE).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

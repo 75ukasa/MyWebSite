@@ -6,8 +6,7 @@
 		<% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false; %>
 
 		<li><a href="Index">HOME</a></li>
-		<li><a href="ClothServlet">シャツ一覧</a></li>
-		<li><a href="DetailServlet">デザイン集</a></li>
+		<li><a href="ItemList">シャツ一覧</a></li>
 		<li><a href="CartServlet">カートを見る</a></li>
 
 		<% if(isLogin){ %>

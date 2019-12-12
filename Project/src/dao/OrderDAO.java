@@ -27,7 +27,6 @@ public class OrderDAO {
 	 * @return silhouetteType [String] : シルエットのタイプ
 	 * @throws SQLException
 	 */
-
 	public static String getOrderSilhouette(int silhouetteId)  throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -40,13 +39,13 @@ public class OrderDAO {
 
 			ResultSet rs = st.executeQuery();
 
-			String silhouetteType = "";
+			String silhouette = "";
 			if(rs.next()) {
-				silhouetteType = rs.getString("type");
+				silhouette = rs.getString("type");
 			}
 
 			System.out.println("OrderSilhouette()によるsilhouetteId検索は完了しました");
-			return silhouetteType;
+			return silhouette;
 
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
@@ -55,9 +54,7 @@ public class OrderDAO {
 			if(con != null) {
 				con.close();
 			}
-
 		}
-
 	}
 
 	/**
@@ -67,7 +64,6 @@ public class OrderDAO {
 	 * @return collarType [Strig] : 襟のタイプ
 	 * @throws SQLException
 	 */
-
 	public static String getOrderColler(CharSequence collerId) throws SQLException {
 
 		Connection con = null;
@@ -106,7 +102,6 @@ public class OrderDAO {
 	 * @return cuffsDesingType [String] : カフスのデザインタイプ
 	 * @throws SQLException
 	 */
-
 	public static String getOrderCuffsDesing(CharSequence cuffsDesignId) throws SQLException {
 
 		Connection con =null;
@@ -134,7 +129,6 @@ public class OrderDAO {
 				con.close();
 			}
 		}
-
 	}
 
 
@@ -145,7 +139,6 @@ public class OrderDAO {
 	 * @return cuffsButtonType [String] : カフスのボタンタイプ
 	 * @throws SQLException
 	 */
-
 	public static String getOrderCuffsButton(CharSequence cuffsButtonId) throws SQLException{
 
 		Connection con = null;
@@ -173,7 +166,6 @@ public class OrderDAO {
 				con.close();
 			}
 		}
-
 	}
 
 
@@ -184,7 +176,6 @@ public class OrderDAO {
 	 * @return cuffsWatchType [String] : カフスの時計仕様
 	 * @throws SQLException
 	 */
-
 	public static String getOrderCuffsWatch(CharSequence cuffsWatchId) throws SQLException{
 
 		Connection con = null;
@@ -221,7 +212,6 @@ public class OrderDAO {
 	 * @return poketData [OrderPocketBeans] : カフスの情報を持つBeans
 	 * @throws SQLException
 	 */
-
 	public static OrderPocketBeans getOrderPocket(CharSequence pocketId) throws SQLException{
 		Connection con = null;
 		PreparedStatement st = null;
@@ -259,7 +249,6 @@ public class OrderDAO {
 	 * @return nDsingData [OrderNameDesignBeans] : ネームデザインの情報を持つBeans
 	 * @throws SQLException
 	 */
-
 	public static OrderNameDesignBeans getOrderNameDesign(String nameDesignId) throws SQLException{
 		Connection con = null;
 		PreparedStatement st = null;
@@ -288,8 +277,6 @@ public class OrderDAO {
 					con.close();
 				}
 			}
-
-
 		}
 
 	/**
@@ -299,7 +286,6 @@ public class OrderDAO {
 	 * @return nColorData [OrderNameColorBeans] : ネームカラーの情報を持つBeans
 	 * @throws SQLException
 	 */
-
 	 public static OrderNameColorBeans getOrderNameColor(String nameColorId) throws SQLException{
 		Connection con = null;
 		PreparedStatement st = null;
@@ -328,7 +314,6 @@ public class OrderDAO {
 				con.close();
 			}
 		}
-
 	}
 
 	 /**
@@ -338,7 +323,6 @@ public class OrderDAO {
 	 * @return namePositionType [String]
 	 * @throws SQLException
 	 */
-
 	public static String getOrderNamePosition(String namePositionId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -374,7 +358,6 @@ public class OrderDAO {
 	 * @return namePositionType [OrderButtonDesignBeans] : ネームポジションの情報を持つBeans
 	 * @throws SQLException
 	 */
-
 	public static OrderButtonDesignBeans getOrderButtonDesign(int buttonDesignId) throws SQLException{
 		Connection con = null;
 		PreparedStatement st = null;
@@ -412,7 +395,6 @@ public class OrderDAO {
 	 * @return bThreadData [String]
 	 * @throws SQLException
 	 */
-
 	public static String getOrderButtonThread(int buttonThreadId) throws SQLException {
 
 		Connection con = null;

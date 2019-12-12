@@ -153,12 +153,10 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- main -->
 	</div>
-
 	<p class="gotop wrap">
-		<a href="#">PAGETOP</a>
+		<a onclick="window.history.back()">戻る</a>
+	</p>
 </body>
 </html>

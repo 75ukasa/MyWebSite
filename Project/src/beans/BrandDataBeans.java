@@ -1,6 +1,6 @@
 package beans;
 
-public class brandDataBeans {
+public class BrandDataBeans {
 	private int id;
 	private String bName;
 	private String cName;

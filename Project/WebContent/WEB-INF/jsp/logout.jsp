@@ -18,8 +18,6 @@
 
 
 	<body>
-		<!--wrap-->
-		<!--head-->
         <div class="gmenu">
             <h2>
                 <a href="Index">

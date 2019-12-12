@@ -21,22 +21,10 @@
 
 	<body>
 		<header>
-			<!--wrap-->
-			<!--head-->
 			<figure>
 				<img src="./img/PageTop/gr167_d01.jpg">
 			</figure>
-
-
 		</header>
-		<nav class="gmenu">
-			<ul id="gmenu">
-				<li><a href="Index">HOME</a></li>
-				<li><a href="ClothServlet">シャツ一覧</a></li>
-				<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-				<li><a href="ForwardServlet?id=4">カートを見る</a></li>
-			</ul>
-		</nav>
 
 		<div class="contents wrap">
 			<div class="container">
@@ -115,5 +103,8 @@
 				</div>
 			</div>
 		</div>
+		<p class="gotop wrap">
+			<a onclick="window.history.back()">戻る</a>
+		</p>
 	</body>
 </html>

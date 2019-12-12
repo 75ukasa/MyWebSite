@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.BuyBeans;
 import beans.BuyDetailBeans;
-import beans.CartBeans;
+import beans.BuyItemBeans;
 import beans.UserDataBeans;
 import dao.BuyDAO;
 import dao.UserDAO;
@@ -47,7 +47,7 @@ public class BuyResult extends HttpServlet {
 
 		try{
 			//カート情報の取得
-			ArrayList<CartBeans> cart = (ArrayList<CartBeans>) Helper.cutSessionAttribute(session,"cart");
+			ArrayList<BuyItemBeans> cart = (ArrayList<BuyItemBeans>) Helper.cutSessionAttribute(session,"cart");
 			//オーダー情報の取得
 			BuyBeans buyDate = (BuyBeans) Helper.cutSessionAttribute(session,"orderData");
 
@@ -72,7 +72,7 @@ public class BuyResult extends HttpServlet {
 			UserData.setSizeId(UserInfoDAO.BuySize(buyDate,UserData));
 
 			// 購入詳細情報を購入情報IDに紐づけして登録
-			for (CartBeans cartInItem : cart) {
+			for (BuyItemBeans cartInItem : cart) {
 				BuyDetailBeans buyDetail = new BuyDetailBeans();
 				buyDetail.setBuyId(buyId);
 				buyDetail.setSizeId(UserData.getSizeId());
@@ -87,7 +87,7 @@ public class BuyResult extends HttpServlet {
 			request.setAttribute("resultBuy", resultBuy);
 
 			// 購入アイテム情報
-			ArrayList<CartBeans> buyItem = BuyDAO.getItemDataBeansListByBuyId(buyId);
+			ArrayList<BuyItemBeans> buyItem = BuyDAO.getItemDataBeansListByBuyId(buyId);
 			request.setAttribute("buyItem", buyItem);
 
 			request.getRequestDispatcher(Forward.BUY_RESULT_PAGE).forward(request, response);

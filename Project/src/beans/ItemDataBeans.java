@@ -15,7 +15,7 @@ public class ItemDataBeans implements Serializable{
 	private String fileName1;
 	private String fileName2;
 	// brandDataBeansと結合
-	private brandDataBeans brandDataBeans;
+	private BrandDataBeans brandDataBeans;
 
 
 
@@ -108,10 +108,10 @@ public class ItemDataBeans implements Serializable{
 	}
 
 
-	public brandDataBeans getBrandDataBeans() {
+	public BrandDataBeans getBrandDataBeans() {
 		return brandDataBeans;
 	}
-	public void setBrandDataBeans(brandDataBeans brandDataBeans) {
+	public void setBrandDataBeans(BrandDataBeans brandDataBeans) {
 		this.brandDataBeans = brandDataBeans;
 	}
 
