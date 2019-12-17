@@ -68,26 +68,24 @@ public class RegistConfirm extends HttpServlet {
 				personal.setGender("女性");
 			}
 
-			//個人情報をUserDataBeansにセット
-			udb.setPersonalInfo(personal);
-
 
 			//エラーメッセージがないなら確認画面へ
 			if(StringUtils.isBlank(registMessage)) {
 				request.setAttribute("udb", udb);
+				request.setAttribute("personal", personal);
 				request.getRequestDispatcher(Forward.REGIST_CONFIRM_PAGE).forward(request, response);
 			}else {
 				request.setAttribute("udb", udb);
+				request.setAttribute("personal", personal);
 				request.setAttribute("registMessage", registMessage);
 				request.getRequestDispatcher(Forward.REGIST_PAGE).forward(request, response);
 			}
 
 
 		}catch(Exception e) {
-				e.printStackTrace();
-				session.setAttribute("errorMessage", e.toString());
-				response.sendRedirect("Error");
+			e.printStackTrace();
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
-
 }

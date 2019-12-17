@@ -37,10 +37,11 @@
 				<article>
 					<h2>新規会員登録</h2>
 				</article>
+
+				<c:if test="${registMessage != null}">
+					<P class="red-text">${registMessage}</P>
+				</c:if>
 			</div>
-			<c:if test="${registMessage != null}">
-				<P class="red-text">${registMessage}</P>
-			</c:if>
 			<div class="container">
 				<div class="row">
 					<div class="section">
@@ -51,7 +52,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="name_error"></span>
-												<input  name="name" type="text" size="45" id="t01"  value=${orderData.personalInfo.name}>
+												<input  name="name" type="text" size="45" id="t01"  value=${personal.name}>
 												<label class="active">名前 </label>
 											</div>
 										</div>
@@ -59,7 +60,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="kana_error"></span>
-												<input  name="kana" type="text" size="45" id="t02" value=${orderData.personalInfo.kana}>
+												<input  name="kana" type="text" size="45" id="t02" value=${personal.kana}>
 												<label class="active">ふりがな</label>
 											</div>
 										</div>
@@ -67,7 +68,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="loginID_error"></span>
-												<input name="login_id" type="text" maxlength="8" id="t03">
+												<input name="login_id" type="text" maxlength="8" id="t03" value=${udb.loginId}>
 												<label class="active">ログインID</label>
 											</div>
 										</div>
@@ -75,7 +76,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="password1_error"></span>
-												<input type="password" name="password" maxlength="8"  id="pw01">
+												<input type="password" name="password" maxlength="8"  id="pw01" value=${udb.password}>
 												<label class="active">パスワード  <input type="checkbox" id="passcheck1"></label>
 											</div>
 										</div>
@@ -83,7 +84,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="password2_error"></span>
-												<input type="password" name="confirm_password" maxlength="8"  id="pw02"  >
+												<input type="password" name="confirm_password" maxlength="8"  id="pw02" value=${udb.password}>
 												<label class="active">パスワード確認 <input type="checkbox" id="passcheck2"></label>
 											</div>
 										</div>
@@ -92,7 +93,7 @@
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="zip_error"></span>
 												<input name="zip" type="text" maxlength="8" id="t04" onKeyUp="AjaxZip3.zip2addr(this,'','address','address');"
-												value=${orderData.personalInfo.zip}>
+												value=${personal.zip}>
 												<label class="active">郵便番号</label>
 											</div>
 										</div>
@@ -100,7 +101,7 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="address_error"></span>
-												<input name="address" type="text" size="83"id="t05" value=${orderData.personalInfo.address}>
+												<input name="address" type="text" size="83"id="t05" value=${personal.address}>
 												<label class="active">住所</label>
 											</div>
 										</div>
@@ -108,16 +109,18 @@
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
 												<span class="red-text" id="tel_error"></span>
-												<input name="tel" type="text" size="45" id="t06" value=${orderData.personalInfo.tel}>
+												<input name="tel" type="text" size="45" id="t06" value=${personal.tel}>
 												<label class="active">電話番号</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="radio" name="gender" value="1"  checked="" id="t07">
+												<input type="radio" name="gender" value="1"  checked="" id="t07"
+												${personal.gender == "男性"?"checked":""}>
 												<label for="t07">男性</label>&nbsp;
-												<input type="radio" name="gender" value="2" id="t07">
+												<input type="radio" name="gender" value="2" id="t07"
+												${personal.gender == "女性"?"checked":""}>
 												<label for="t07">女性</label>&nbsp;
 												<label class="active">性別</label>
 											</div>

@@ -187,7 +187,7 @@
 						<dd>${orderData. buttonDesignBeans.buttonTyupe}</dd>
 
 						<dt>ボタン付け糸</dt>
-						<dd>>${orderData. buttonThread1}</dd>
+						<dd>${orderData. buttonThread1}</dd>
 
 						<dt>ボタンホール糸</dt>
 						<dd>${orderData. buttonThread2}</dd>
@@ -212,7 +212,7 @@
 							<dt>お電話番号</dt>
 							<dd>${orderData.personalInfo.tel}</dd>
 							<dt>性別</dt>
-							<dd>男性</dd>
+							<dd>${orderData.personalInfo.gender}</dd>
 							<dt>配送金額</dt>
 							<dd>全国一律\500+税とさせて頂きます。</dd>
 						</dl>
@@ -236,18 +236,28 @@
 						</ul>
 					</div>
 				</c:if>
-				<form action="BuyResult" method="POST">
+
 					<div class="note">
 						<p>上記の内容に間違いがなければ「ご注文完了」ボタンをクリックして下さい。</p>
 					</div>
 
 					<div>
 						<ul class="conbtn" >
-							<li><button type="button" onclick="window.history.back()">ご注文内容の修正</button></li>
-							<li><button type="submit">ご注文完了</button></li>
+							<li>
+								<a href="Order">
+									<button type="button">ご注文内容の修正</button>
+								</a>
+							</li>
+
+
+							<li>
+								<form action="BuyResult" method="POST">
+									<button type="submit">ご注文完了</button>
+								</form>
+							</li>
 						</ul>
 					</div>
-				</form>
+
 			</article>
 		</div>
 		<p class="gotop wrap">

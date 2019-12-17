@@ -2,34 +2,63 @@
  *
  */
 
-//----ネーム欄の非表示用----
+//ネーム欄の表示用(ロード後)
 $(function(){
-	$('[name="nameDo_Not"]:radio').change( function() {
-		if ($('[id="m1"]').prop('checked')) {
+	$('[name="nameDo_Not"]').on('load change', function(){
+		var inputValue = $('[name="nameDo_Not"]:checked').val();
+
+		if(inputValue === '1'){
 			$('.nametbl select,.nametbl textarea').val("");
 			$('.nametbl').slideUp(300);
-		}else if ($('[id="m2"]').prop('checked')) {
+		}else if(inputValue === '2'){
 	    	$('.nametbl').slideDown();
-	    	$('.nameColorC1,.nameColorC2,#nameColorC').hide();
+	    	$('#nameColorC1,#nameColorC2,#nameColorC,#nemePosi').hide();
 		}
 	});
 });
+//ネーム欄の表示用(ロード時)
+$(function(){
+	var inputValue = $('[name="nameDo_Not"]:checked').val();
+	if(inputValue === '1'){
+		$('.nametbl select,.nametbl textarea').val("");
+		$('.nametbl').slideUp(300);
+	}else if(inputValue === '2'){
+    	$('.nametbl').slideDown();
+    	$('#nameColorC1,#nameColorC2,#nameColorC,#nemePosi').hide();
+	}
+});
 
 
-//ネームカラー選択欄の表示用
+//ネームカラー選択欄の表示用(ロード後)
 $(function(){
 	$('[name="nameDesing"]').change( function() {
 		 var r = $('[name="nameDesing"]').val()
-		 $('.nameColorC1 select,.nameColorC2 select').val("");
+
 		 if(r==1 || r==2 || r==3 || r==4 || r==5 || r==9 || r==10){
-			 $('.nameColorC1,#nameColorC').slideDown();
-			 $('.nameColorC2').slideUp();
+			 $('#nameColorC1,#nameColorC,#nemePosi').slideDown();
+			 $('#nameColorC2').slideUp();
+			 $('#nameColorC2 select').val("");
 		 }else if(r==6 || r==7 || r==8){
-			 $('.nameColorC1,.nameColorC2,#nameColorC').slideDown();
+			 $('#nameColorC1,#nameColorC2,#nameColorC,#nemePosi').slideDown();
 		 }else{
-			 $('.nameColorC1,.nameColorC2,#nameColorC').slideUp();
+			 $('#nameColorC1,#nameColorC2,#nameColorC,#nemePosi').slideUp();
+			 $('#nameColorC1 select,#nameColorC2 select,#nameColorC select,#nameColorC textarea,#nemePosi select').val("");
 		 }
 	});
+});
+//ネームカラー選択欄の表示用(ロード時)
+$(function(){
+	 var r = $('[name="nameDesing"]').val()
+	 if(r==1 || r==2 || r==3 || r==4 || r==5 || r==9 || r==10){
+		 $('#nameColorC1,#nameColorC,#nemePosi').slideDown();
+		 $('#nameColorC2').slideUp();
+		 $('#nameColorC2 select').val("");
+	 }else if(r==6 || r==7 || r==8){
+		 $('#nameColorC1,#nameColorC2,#nameColorC,#nemePosi').slideDown();
+	 }else{
+		 $('#nameColorC1,#nameColorC2,#nameColorC,#nemePosi').slideUp();
+		 $('#nameColorC1 select,#nameColorC2 select,#nameColorC select,#nameColorC textarea,#nemePosi select').val("");
+	 }
 });
 
 

@@ -42,7 +42,7 @@ public class ItemDAO {
 				item.setPrice(rs.getInt("price"));
 				item.setColor(rs.getString("color"));
 				item.setRemark(rs.getString("remark"));
-				item.setDepth(rs.getString("depth"));
+				item.setDepth(rs.getInt("depth"));
 				item.setCloth(rs.getString("cloth"));
 				item.setDetail(rs.getString("detail"));
 				item.setFileName1(rs.getString("file_name1"));

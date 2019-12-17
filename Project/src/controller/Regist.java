@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
+import beans.BuyBeans;
+
 /**
  *
  */
@@ -28,10 +30,15 @@ public class Regist extends HttpServlet {
 
 		//前ページ情報の取得
 		String returnUrl = request.getParameter("url");
-
 		if(!StringUtils.isBlank(returnUrl)) {
 			//Sessionにリターンページ情報を書き込む
 			session.setAttribute("returnUrl", returnUrl);
+		}
+
+		//購入確認ページからのアクセスの場合はオーダー情報をセッションから取得
+		BuyBeans orderData = (BuyBeans) session.getAttribute("orderData");
+		if(orderData != null) {
+			request.setAttribute("personal", orderData.getPersonalInfo());
 		}
 
 		request.getRequestDispatcher(Forward.REGIST_PAGE).forward(request, response);

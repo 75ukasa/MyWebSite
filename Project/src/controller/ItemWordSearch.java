@@ -64,8 +64,8 @@ public class ItemWordSearch extends HttpServlet {
 			request.getRequestDispatcher(Forward.ITEM_PAGE).forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
-			session.setAttribute("errorMessage", e.toString());
-
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
 

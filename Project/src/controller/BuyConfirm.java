@@ -371,6 +371,9 @@ public class BuyConfirm extends HttpServlet {
 				if(!CollectionUtils.isEmpty(ActionMessage)){
 					//エラーメッセージを確認した場合はオーダーフォームへフォワード
 					request.setAttribute("ActionMessage", ActionMessage);
+					request.setAttribute("personal", orderData.getPersonalInfo());
+					request.setAttribute("size", orderData.getSizeBeanse());
+					request.setAttribute("order", orderData);
 					request.getRequestDispatcher(Forward.ORDER_PAGE).forward(request, response);
 				}else {
 					session.setAttribute("orderData",orderData);
@@ -386,8 +389,8 @@ public class BuyConfirm extends HttpServlet {
 
 		}catch(Exception e) {
 			e.printStackTrace();
-			session.setAttribute("errorMessage", e.toString());
-			response.sendRedirect("Error");
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 
 	}

@@ -47,17 +47,9 @@ public class CartServlet extends HttpServlet {
 
 		}
 		 catch (Exception e) {
-			e.printStackTrace();
-			session.setAttribute("errorMessage", e.toString());
-			response.sendRedirect("Error");
+			 e.printStackTrace();
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
-	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 }

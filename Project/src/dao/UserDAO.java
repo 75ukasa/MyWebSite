@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
 import base.DBManager;
@@ -27,7 +28,8 @@ public class UserDAO {
 		PreparedStatement st = null;
 		try{
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO user (personal_id, size_id, login_id, password, create_date) VALUES(?,?,?,?,?)");
+			st = con.prepareStatement("INSERT INTO user (personal_id, size_id, login_id, password, create_date) VALUES(?,?,?,?,?)",
+										Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, personalId);
 			st.setInt(2, sizeId);
 			st.setString(3,userData.getLoginId());
@@ -35,6 +37,20 @@ public class UserDAO {
 			st.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 			st.executeUpdate();
 			System.out.println("ユーザー情報の登録は完了しました。");
+
+			ResultSet rs = st.getGeneratedKeys();
+
+			int userId = 0;
+			if (rs != null && rs.next()) {
+				userId = rs.getInt(1);
+			}
+
+			//登録したユーザーIDを個人情報テーブルのuser_idカラムに登録
+			st = con.prepareStatement("UPDATE personal_info SET user_id= ? WHERE id = ?");
+			st.setInt(1, userId);
+			st.setInt(2,personalId);
+			st.executeUpdate();
+			System.out.println("個人情報テーブルのuser_id登録は完了しました。");
 
 		}catch(SQLException e){
 			System.out.println(e.getMessage());

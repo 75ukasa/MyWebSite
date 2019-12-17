@@ -24,7 +24,7 @@ public class UserDataUpdateResult extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 *
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*文字化け対策*/
@@ -52,7 +52,8 @@ public class UserDataUpdateResult extends HttpServlet {
 			request.getRequestDispatcher(Forward.USER_DATA_UPDATA_RESULT_PAGE).forward(request, response);
 		}catch(Exception e) {
 			e.printStackTrace();
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
-
 }

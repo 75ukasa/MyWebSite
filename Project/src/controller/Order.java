@@ -10,27 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyBeans;
 import beans.ItemDataBeans;
+import beans.SizeBeanse;
+import dao.UserInfoDAO;
 /**
- * Servlet implementation class Buy
+ * オーダー画面
  */
 @WebServlet("/Order")
 public class Order extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Order() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 *
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//セッション
 		HttpSession session = request.getSession();
 
@@ -48,7 +42,26 @@ public class Order extends HttpServlet {
 
 			//カートの中身を確認
 			if(cart.size() != 0) {
-				request.getRequestDispatcher(Forward.ORDER_PAGE).forward(request, response);
+				BuyBeans orderData = (BuyBeans) Helper.cutSessionAttribute(session, "orderData");
+				//オーダー内容修正ボタンからのアクセス
+				if(orderData != null) {
+					request.setAttribute("personal", orderData.getPersonalInfo());
+					request.setAttribute("size", orderData.getSizeBeanse());
+					request.setAttribute("order", orderData);
+					request.getRequestDispatcher(Forward.ORDER_PAGE).forward(request, response);
+				}else {
+					//ログイン状態の場合
+					Boolean isLogin = session.getAttribute("isLogin") != null ? (Boolean) session.getAttribute("isLogin") : false;
+					if(isLogin) {
+						//サイズ情報の取得
+						SizeBeanse size = UserInfoDAO.getSizeData((int)session.getAttribute("userId"));
+
+						request.setAttribute("size", size);
+						request.getRequestDispatcher(Forward.ORDER_PAGE).forward(request, response);
+					}else {
+						request.getRequestDispatcher(Forward.ORDER_PAGE).forward(request, response);
+					}
+				}
 			}else {
 				request.setAttribute("cartActionMessage", "購入する商品がありません");
 				request.getRequestDispatcher(Forward.CART_PAGE).forward(request, response);
@@ -56,8 +69,8 @@ public class Order extends HttpServlet {
 
 		}catch (Exception e) {
 			e.printStackTrace();
-			session.setAttribute("errorMessage", e.toString());
-			response.sendRedirect("Error");
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
 

@@ -34,7 +34,8 @@ public class UserInfoDAO {
 		try{
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("INSERT INTO size VALUE()", Statement.RETURN_GENERATED_KEYS);
+			st = con.prepareStatement("INSERT INTO size (neck, shoulder, arm, sleeveRigt, sleeveLeft, bust, waist, hips, length, cuffsRigt, cuffsLeft, height)" +
+												" VALUES('','','','','','','','','','','','')", Statement.RETURN_GENERATED_KEYS);
 			st.executeUpdate();
 
 			ResultSet rs = st.getGeneratedKeys();
@@ -58,13 +59,14 @@ public class UserInfoDAO {
 	}
 
 	/**
-	 * 個人情報の登録処理
+	 * 個人情報の登録処理（会員登録者）
 	 * @param personal 個人情報がセットされたBeans
 	 *
 	 * @return personalId 登録した個人情報ID
 	 * @throws SQLException 呼び出し元にスローさせるため
 	 */
-	public static int insertPersonal(PersonalInfoBeans personal) throws SQLException {
+
+	public static int insertuUserPersonal(PersonalInfoBeans personal) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		int personalId = -1;
@@ -72,13 +74,59 @@ public class UserInfoDAO {
 		try{
 			con = DBManager.getConnection();
 			st = con.prepareStatement("INSERT INTO personal_info(name, kana, zip, address, tel, gender) VALUES(?,?,?,?,?,?)",
-													Statement.RETURN_GENERATED_KEYS);
+											Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, personal.getName());
 			st.setString(2, personal.getKana());
 			st.setString(3, personal.getZip());
 			st.setString(4, personal.getAddress());
 			st.setString(5, personal.getTel());
 			st.setString(6, personal.getGender());
+			st.executeUpdate();
+
+			ResultSet rs = st.getGeneratedKeys();
+
+			if (rs != null && rs.next()) {
+				personalId = rs.getInt(1);
+			}
+
+			System.out.println("個人情報の登録は完了しました。");
+
+			return personalId;
+
+		}catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * 個人情報の登録処理（未会員者）
+	 * @param personal 個人情報がセットされたBeans
+	 * @param userId
+	 *
+	 * @return personalId 登録した個人情報ID
+	 * @throws SQLException 呼び出し元にスローさせるため
+	 */
+	public static int insertPersonal(PersonalInfoBeans personal, int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		int personalId = -1;
+
+		try{
+			con = DBManager.getConnection();
+			st = con.prepareStatement("INSERT INTO personal_info(user_id, name, kana, zip, address, tel, gender) VALUES(?,?,?,?,?,?,?)",
+													Statement.RETURN_GENERATED_KEYS);
+			st.setInt(1, userId);
+			st.setString(2, personal.getName());
+			st.setString(3, personal.getKana());
+			st.setString(4, personal.getZip());
+			st.setString(5, personal.getAddress());
+			st.setString(6, personal.getTel());
+			st.setString(7, personal.getGender());
 			st.executeUpdate();
 
 			ResultSet rs = st.getGeneratedKeys();

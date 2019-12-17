@@ -41,9 +41,10 @@ public class RegistResult extends HttpServlet {
 			personal.setAddress(request.getParameter("address"));
 			personal.setTel(request.getParameter("tel"));
 			personal.setGender(request.getParameter("gender"));
-
 			//個人情報の登録
-			int PersonalId = UserInfoDAO.insertPersonal(personal);
+			int PersonalId = UserInfoDAO.insertuUserPersonal(personal);
+
+
 			//ユーザーのサイズ情報をDBへ仮追加
 			int sizeId = UserInfoDAO.insertTemporarilyUserSize();
 
@@ -59,11 +60,10 @@ public class RegistResult extends HttpServlet {
 
 			request.getRequestDispatcher(Forward.REGIST_RESULT_PAGE).forward(request, response);
 
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-
+		}catch(Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
-
-
+}

@@ -9,6 +9,9 @@ public class Forward {
 		// TOPページ
 		static final String TOP_PAGE = "/WEB-INF/jsp/index.jsp";
 
+		// 寸法方法ページ
+		static final String SIZING_PAGE = "/WEB-INF/jsp/size.jsp";
+
 		// 商品ページ
 		static final String ITEM_PAGE = "/WEB-INF/jsp/itemList.jsp";
 

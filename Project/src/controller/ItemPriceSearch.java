@@ -63,6 +63,8 @@ public class ItemPriceSearch extends HttpServlet {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
 

@@ -12,27 +12,14 @@ import javax.servlet.http.HttpSession;
 import dao.UserDAO;
 
 /**
- * Servlet implementation class LoginResult
+ * ログイン結果
  */
 @WebServlet("/LoginResult")
 public class LoginResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginResult() {
-        super();
-    }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 *
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -63,7 +50,8 @@ public class LoginResult extends HttpServlet {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
 

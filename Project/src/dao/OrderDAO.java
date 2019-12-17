@@ -229,7 +229,7 @@ public class OrderDAO {
 				poketData.setPocketType(rs.getString("type"));
 				poketData.setPoketPrice(rs.getInt("price"));
 			}
-			System.out.println("OrderPocket()によるpocketId検索は完了しました");
+			System.out.println("pocketIdによるポケット情報検索は完了しました");
 			return poketData;
 
 		}catch(SQLException e) {

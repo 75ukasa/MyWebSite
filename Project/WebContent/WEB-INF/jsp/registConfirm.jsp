@@ -41,13 +41,13 @@
 									<form action="RegistResult" method="POST">
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="name" value="${udb.personalInfo.name}" readonly=""> <label class="active">名前</label>
+												<input type="text" name="name" value="${personal.name}" readonly=""> <label class="active">名前</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="kana" value="${udb.personalInfo.kana}" readonly=""> <label class="active">ふりがな</label>
+												<input type="text" name="kana" value="${personal.kana}" readonly=""> <label class="active">ふりがな</label>
 											</div>
 										</div>
 
@@ -65,25 +65,25 @@
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="zip" value="${udb.personalInfo.zip}" readonly=""> <label class="active">郵便番号</label>
+												<input type="text" name="zip" value="${personal.zip}" readonly=""> <label class="active">郵便番号</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="address" value="${udb.personalInfo.address}" readonly=""> <label class="active">住所</label>
+												<input type="text" name="address" value="${personal.address}" readonly=""> <label class="active">住所</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="tel" value="${udb.personalInfo.tel}" readonly=""> <label class="active">電話番号</label>
+												<input type="text" name="tel" value="${personal.tel}" readonly=""> <label class="active">電話番号</label>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="input-field col s10 offset-s1">
-												<input type="text" name="gender" value="${udb.personalInfo.gender}" readonly=""> <label class="active">性別</label>
+												<input type="text" name="gender" value="${personal.gender}" readonly=""> <label class="active">性別</label>
 											</div>
 										</div>
 										<article>

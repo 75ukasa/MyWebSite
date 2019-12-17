@@ -62,7 +62,7 @@ public class BuyResult extends HttpServlet {
 				UserData = UserDAO.getUserDataId(UserData.getUserId());
 			}else {
 				//非会員の個人情報を登録
-				UserData.setPersonalId(UserInfoDAO.insertPersonal(buyDate.getPersonalInfo()));
+				UserData.setPersonalId(UserInfoDAO.insertPersonal(buyDate.getPersonalInfo(),UserData.getUserId()));
 			}
 
 			//購入データを登録
@@ -93,8 +93,8 @@ public class BuyResult extends HttpServlet {
 			request.getRequestDispatcher(Forward.BUY_RESULT_PAGE).forward(request, response);
 		}catch(Exception e) {
 			e.printStackTrace();
-			session.setAttribute("errorMessage", e.toString());
-
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
 

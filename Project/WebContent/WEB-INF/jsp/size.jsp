@@ -15,27 +15,14 @@
 
 <body>
 	<header>
-		<!--wrap-->
-		<!--head-->
 		<figure>
 			<img src="./img/PageTop/topimg (1).jpg">
 		</figure>
 
-		<div class="topimg">
-			<ul>
-				<li><a href="http://www.kinkodo.jp/shirting/cart.php"> <img
-						src="./img/cart.png" alt="cart">
-				</a></li>
-			</ul>
-		</div>
-
 	</header>
 	<nav class="gmenu">
 		<ul id="menu">
-			<li><a href="IndexServlet">HOME</a></li>
-			<li><a href="ClothServlet">シャツ一覧</a></li>
-			<li><a href="ForwardServlet?id=1">デザイン集</a></li>
-			<li><a href="ForwardServlet?id=4">カートを見る</a></li>
+			<jsp:include page="/baselayout/header.jsp"/>
 		</ul>
 	</nav>
 

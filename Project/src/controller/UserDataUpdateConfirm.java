@@ -52,6 +52,8 @@ public class UserDataUpdateConfirm extends HttpServlet {
 			request.getRequestDispatcher(Forward.USER_DATA_UPDATE_CONFIRM_PAGE).forward(request, response);
 		}catch(Exception e) {
 			e.printStackTrace();
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 	}
 }

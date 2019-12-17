@@ -14,33 +14,21 @@ import beans.BuyItemBeans;
 import dao.ItemDAO;
 
 /**
- * Servlet implementation class ItemAdd
+ * 商品追加画面
  */
 @WebServlet("/ItemAdd")
 public class ItemAdd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ItemAdd() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-		// TODO Auto-generated method stub
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		/*文字化け対策*/
 		request.setCharacterEncoding("UTF-8");
@@ -80,9 +68,8 @@ public class ItemAdd extends HttpServlet {
 		}
 		catch (Exception e){
 			e.printStackTrace();
-			session.setAttribute("errorMessarge", e.toString());
-			response.sendRedirect("Error");
-
+			request.setAttribute("errorMessarge", e.toString());
+			request.getRequestDispatcher(Forward.ERROR_PAGE).forward(request, response);
 		}
 
 	}

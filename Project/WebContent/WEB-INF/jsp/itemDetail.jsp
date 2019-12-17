@@ -87,14 +87,7 @@
 								<tr>
 									<th>生地の厚さ</th>
 									<td>生地の厚さ
-										<ul class="kijisize">
-											<li class="add">薄い</li>
-											<li class="add">やや薄い</li>
-											<li class="add">普通</li>
-											<li>やや厚い</li>
-											<li>厚い</li>
-										</ul>
-
+										<jsp:include page="/baselayout/itemDepth.jsp"/>
 									</td>
 								</tr>
 							</tbody>

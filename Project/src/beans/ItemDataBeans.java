@@ -9,7 +9,7 @@ public class ItemDataBeans implements Serializable{
 	private int price;
 	private String color;
 	private String remark;
-	private String depth;
+	private int depth;
 	private String cloth;
 	private String detail;
 	private String fileName1;
@@ -68,10 +68,10 @@ public class ItemDataBeans implements Serializable{
 	}
 
 
-	public String getDepth() {
+	public int getDepth() {
 		return depth;
 	}
-	public void setDepth(String depth) {
+	public void setDepth(int depth) {
 		this.depth = depth;
 	}
 

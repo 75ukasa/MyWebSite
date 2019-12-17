@@ -10,12 +10,14 @@
 		<link rel="stylesheet" href="css/top.css" media="all">
 		<link rel="stylesheet" href="css/layout.css" media="all">
 		<link rel="stylesheet" href="css/marker.css" media="all">
+
+		<script src="js/jquery-3.4.1.min.js"></script>
 	</head>
 
 	<body>
 		<header>
 			<div class="head">
-				<p >オーダーシャツ通販金港堂は世界で一枚しかないフルオーダーシャツをお作りします。</p>
+				<p >世界で一枚しかないフルオーダーシャツをお作りします。</p>
 				</div>
 			<div class="f_r">
 				<div id="header_search" class="clearfix">
@@ -30,14 +32,13 @@
 				<img src="img/PageTop/1486370887.jpg">
 			</figure>
 		</header>
-
 		<jsp:include page="/baselayout/header.jsp"/>
 
-		<li><a href="test">会員登録</a></li>
 		<div class="contents wrap">
 			<h2>
-				クリック一つで速やかにお好みの生地へ。生地の選択方法を <span style="font-size: 32pt"> <font
-					color="#ff0000">3</font>
+				クリック一つで速やかにお好みの生地へ。生地の選択方法を
+				<span style="font-size: 32pt">
+					<font color="#ff0000">3</font>
 				</span>通り用意いたしました。
 			</h2>
 			<p align="center">
@@ -49,13 +50,13 @@
 					<div class="tside">
 						<aside>
 							<nav>
-								<script type="text/javascript" src="/com/js/accord.js"></script>
+								<script src="js/index.js"></script>
 								<ul>
 									<li>
 										<p>
-											<a class="accord" data-target="accrd01">ブランドで選ぶ</a>
+											<a class="accord" data-target="accrd01" id="brand">ブランドで選ぶ</a>
 										</p>
-										<ul class="accrd01" style="display: block;">
+										<ul class="accrd01" style="display: block;" id="brandS">
 											<li class="canclini">
 												<a href="ItemBrandSearch?id=1&name=カンクリーニ" alt="オーダーシャツ生地カンクリーニ">Canclini</a>
 											</li>
@@ -79,9 +80,9 @@
 
 									<li>
 										<p>
-											<a class="accord" data-target="accrd02">カラーで選ぶ</a>
+											<a class="accord" data-target="accrd02"id="color">カラーで選ぶ</a>
 										</p>
-										<ul class="accrd02" style="display: block;">
+										<ul class="accrd02" style="display: block;" id="colorS">
 											<li>
 												<a href="ItemColorSearch?id=ホワイト">
 												<img src="./img/colorSelect/side_whites.jpg" alt="オーダーシャツ生地ホワイト">ホワイト</a>
@@ -110,9 +111,9 @@
 									</li>
 									<li>
 										<p>
-											<a class="accord" data-target="accrd04">価格帯で選ぶ</a>
+											<a class="accord" data-target="accrd04" id="price">価格帯で選ぶ</a>
 										</p>
-										<ul class="accrd04" style="display: block;">
+										<ul class="accrd04" style="display: block;" id="priceS">
 											<li>
 												<a href="ItemPriceSearch?id=1&name=￥18,000までの" alt="オーダーシャツ生地18,000円まで">
 												<b>18,000</b>+税 まで</a>
@@ -140,7 +141,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="ForwardServlet?id=2">
+									<a href="Sizing">
 										<img src="./img/saisun_1.jpg" style="margin-right: 2px;">
 									</a>
 								</td>
